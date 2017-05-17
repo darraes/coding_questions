@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>7a0283fd-2585-4cc8-a0f3-2ece5c86debe</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>Search\servers_capacity.py</StartupFile>
+    <SearchPath>_Package\</SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>PythonAlgorithms</Name>
+    <RootNamespace>PythonAlgorithms</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Arrays\array_alternate_signal.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Arrays\array_gexe_5_point_inside_most_intervals.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Arrays\array_move_duplicated_to_end.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Arrays\array_biggest_inc_path.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Arrays\array_biggest_subarray_sum.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Arrays\array_equals_sum.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_linkedin_paint_houses.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LinkedLists\faccis_log_array.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Arrays\array_facebook_remove_duplicates_inplace.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Arrays\array_group_anagrams.py" />
+    <Compile Include="Arrays\array_in_place_swap.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Arrays\array_non_zeros_tothefront.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Arrays\array_no_groups_bigger_M.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Arrays\array_products_of_all_except_i.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Arrays\array_shuffle.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bit\sum.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_add_up_combinations.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_alphabet_mapping.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_boxes_stack.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_egg_drop.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_find_ips.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_make_change.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_mc_nuggets.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_missed_words.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_parenthesis_combinations.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_positive_sum_to_number.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LinkedLists\add_operation.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LinkedLists\add_operation_backwards.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LinkedLists\is_palindrome.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LinkedLists\merge_ordered.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LinkedLists\mirror_subtraction.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Math\gcd.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Math\is_factorial_divisible.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Math\is_prime.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Math\nth_uggly_number.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Math\rational_number.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Matrix\rotate_90_degrees.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\alpha_ordering_numbers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\check_word_in_matrix.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\closest_binary_search.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\amazon_find_islands.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\facebook_find_tickets.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\find_largest_connected_component.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\google_find_composing_words.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\search_gexe_1_paint_fill.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\matrix_adjacent_sequencial.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\search_gexe_2_paint_edge.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\search_is_composed_by_words.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\servers_capacity.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\walk_with_bombs.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Set\set_gexe_6_intersection.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sorting\Mergesort.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sorting\Quicksort.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Sorting\TopologicalSort.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\sort_inplace.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Strings\atof.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Strings\edit_distance.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Strings\find_common_subsequences_within.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Strings\ftoa.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Strings\k_palindrome.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Strings\longest_palindrome.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Strings\lcs.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Strings\print_non_comments.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Strings\remove_extra_spaces.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Strings\suffix_tree.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Strings\words_reversal.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Threading\SpinLock.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\common_ancestor.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\count_numbers_in_between.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\friendly_build.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\in_order_listfy.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\tree_gexe_7_max_height.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\rebuild.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\swap_nodes.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\tree_gexe_4_reverse_binary_tree.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\tree_gexe_8_is_balanced.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\tree_transversal.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_API\find_inconsistent_calls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Base\arranjos.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Base\BitVector.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Base\PriorityQueue.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Threading\Dispatchers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_best_snack.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\biggest_number_kwap_digits.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__TODO\LRUCache.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__TODO\UNKNOWN\reverse_alternated_levels.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Base\combinations.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\predecessor_matrix.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\lower_2_right.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__TODO\UNKNOWN\reverse_polish_notation.py" />
+    <Compile Include="Graph\statue_rotations.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__TODO\UNKNOWN\max_area.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\knight_on_board.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DinamicProgramming\dp_lead_changes.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\roles_mice.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\rotated_binary_search.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Strings\one_edit.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\sorted_matrix.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Math\simple_expression.py" />
+    <Compile Include="DinamicProgramming\dp_expression_explosion.py" />
+    <Compile Include="Strings\subsets.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\sink_zeros.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tree\tree_deserialize.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Backtrack\sudoku.py" />
+    <Compile Include="_Base\permutations.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Graph\wine_bottle_pouring.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Backtrack\" />
+    <Folder Include="DinamicProgramming\" />
+    <Folder Include="Math\" />
+    <Folder Include="Arrays\" />
+    <Folder Include="Matrix\" />
+    <Folder Include="Bit\" />
+    <Folder Include="Graph\" />
+    <Folder Include="LinkedLists\" />
+    <Folder Include="Set\" />
+    <Folder Include="_API\" />
+    <Folder Include="Threading\" />
+    <Folder Include="Sorting\" />
+    <Folder Include="Stack\" />
+    <Folder Include="__TODO\" />
+    <Folder Include="_Base\" />
+    <Folder Include="Strings\" />
+    <Folder Include="Tree\" />
+    <Folder Include="Search\" />
+    <Folder Include="__TODO\UNKNOWN\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <Import Condition="Exists($(PtvsTargetsFile))" Project="$(PtvsTargetsFile)" />
+  <Import Condition="!Exists($(PtvsTargetsFile))" Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
