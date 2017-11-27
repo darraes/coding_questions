@@ -7,13 +7,6 @@ t2: "SFO"  "LAX"
 t3: "LAX"  "BOS"
 
 Result => SFO LAX BOS NYC
-
-Expectations
- - Find a O(n) solution
- - Understand the complexity of the solution
- - Question about what is the input data structure and if the tickets list
- is complete and has only tickets from the same trip
- - Break the solution is proper functions
 '''
 
 def _find_start(tickets):

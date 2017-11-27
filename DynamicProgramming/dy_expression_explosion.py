@@ -1,14 +1,5 @@
 '''Problem
 Given a expression string with numbers and the operators '+' and/or '*', find all possible results of the expression assuming you can add parenthesis to the expression as you may.
-Expectations
-- Identify that the problem is basically the computation of all possible expression trees.
-- Think about how to tokenize
-- Split problem into well defined functions, eg. add and mul, to provide a simpler more readable solution
-- Provide a runnable solution (well, duh)
-- Eliminate duplicates
-- Mention something about overflow
-- Identify the need for a cache to avoid recomputations (memoization)
-- Discuss complexity
 '''
 
 from dy_utils import collection_equals
