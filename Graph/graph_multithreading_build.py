@@ -12,10 +12,10 @@ class Builder(object):
         self._dependants = {}
         self._available = []
         
-        self.prepare()
-        self.mark_ready_as_available()
+        self._prepare()
+        self._mark_ready_as_available()
 
-    def prepare(self):
+    def _prepare(self):
         # build the dictionaries that will be use to track who can be built
         # # TODO find circular dependencies
         for target in self._targets:
@@ -27,10 +27,15 @@ class Builder(object):
 
     def build(self):
         while len(self._available) > 0:
-            next_target = self.get_next_available()
-            self.build_target(next_target)
+            next_target = self._get_next_available()
+            self._build_target(next_target)
 
-    def mark_ready_as_available(self):
+    def _mark_ready_as_available(self):
+        ''' Looks through out the built dependencies and mark targets that are
+            ready to be built as "available".
+            In a multi-threaded scenario, we would tick idle threads every time
+            a new target is available to avoid polling loops
+        '''
         built = []
         for target, dependencies in self._unbuilt_deps.iteritems():
             if len(dependencies) == 0:
@@ -40,12 +45,16 @@ class Builder(object):
         for target in built:
             del self._unbuilt_deps[target]
 
-    def get_next_available(self):
+    def _get_next_available(self):
+        ''' Gets an available target to build.
+            If this was multi-threaded, threads would just get a target to build
+            by calling this method.
+        '''
         if len(self._available) == 0:
             return None
         return self._available.pop(0)
 
-    def build_target(self, target):
+    def _build_target(self, target):
         ''' Simulates building an individual target '''
         print "Building ", target
         if target not in self._dependants:
@@ -54,7 +63,7 @@ class Builder(object):
         for dependant in [d for d in self._dependants[target] if d in self._unbuilt_deps]:
             self._unbuilt_deps[dependant].remove(target)
 
-        self.mark_ready_as_available()
+        self._mark_ready_as_available()
         
 
 ###############################################################
