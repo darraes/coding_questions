@@ -1,8 +1,4 @@
 import unittest
-import logging
-
-logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.DEBUG)
-LOG = logging.getLogger()
 
 class Target(object):
     def __init__(self, name, dependencies):
@@ -51,7 +47,7 @@ class Builder(object):
 
     def build_target(self, target):
         ''' Simulates building an individual target '''
-        LOG.info("Building %s", target)
+        print "Building ", target
         if target not in self._dependants:
             return
 
@@ -73,6 +69,8 @@ class TestFunctions(unittest.TestCase):
         ]
         builder = Builder(targets)
         builder.build()
+
+        # TODO add tests
         self.assertEqual(True, True)
 
 
