@@ -79,9 +79,6 @@ class TestFunctions(unittest.TestCase):
         builder = Builder(targets)
         builder.build()
 
-        # TODO add tests
-        self.assertEqual(True, True)
-
 
 if __name__ == '__main__':
     unittest.main()
