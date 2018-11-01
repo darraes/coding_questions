@@ -1,4 +1,21 @@
 import unittest
+'''
+You are given a dependency list in the following format:
+  - A depends on B
+  - B depends on C and D
+  - C depends on D
+  - D has no dependencies
+
+  Let's assume those represent libraries that need to be built. To be able to
+  build a library X, we must first build its dependencies.
+
+  Please come-up with an abstraction of the building system that will build
+  those libraries properly.
+
+  == Extending the Problem ==
+  Let's assume you have multiple threads to build the targets, adjust your code
+  so you can leverage the threads to build some libraries in parallel
+'''
 
 class Target(object):
     def __init__(self, name, dependencies):
@@ -17,7 +34,7 @@ class Builder(object):
 
     def _prepare(self):
         # build the dictionaries that will be use to track who can be built
-        # # TODO find circular dependencies
+        # We could potentially validate against circular dependencies here
         for target in self._targets:
             self._unbuilt_deps[target.name] = set(target.dependencies)
             for dependency in target.dependencies:
@@ -29,6 +46,10 @@ class Builder(object):
         while len(self._available) > 0:
             next_target = self._get_next_available()
             self._build_target(next_target)
+
+        # If something is left unbuilt, we had a circular dependency
+        if len(self._unbuilt_deps) > 0:
+            print "Circular dependency detected"
 
     def _mark_ready_as_available(self):
         ''' Looks through out the built dependencies and mark targets that are
@@ -69,12 +90,32 @@ class Builder(object):
 ###############################################################
 class TestFunctions(unittest.TestCase):
     def test_1(self):
+        print "=== Starting new test === "
         targets = [
             Target("a", []),
             Target("b", ["a", "c"]),
             Target("d", ["a"]),
             Target("c", ["e"]),
             Target("e", [])
+        ]
+        builder = Builder(targets)
+        builder.build()
+
+    def test_2(self):
+        print "=== Starting new test === "
+        targets = [
+            Target("d", ["c"]),
+            Target("c", ["d"])
+        ]
+        builder = Builder(targets)
+        builder.build()
+
+    def test_3(self):
+        print "=== Starting new test === "
+        targets = [
+            Target("a", ["b"]),
+            Target("b", ["c"]),
+            Target("c", [])
         ]
         builder = Builder(targets)
         builder.build()
