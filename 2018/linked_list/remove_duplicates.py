@@ -1,4 +1,4 @@
-# Remove duplicates - Cracking the code interview 1.1
+# Remove duplicates - Cracking the code interview - 2.1
 
 class Node:
     def __init__(self, next, value):
