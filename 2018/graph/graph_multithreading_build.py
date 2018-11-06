@@ -10,11 +10,9 @@ You are given a dependency list in the following format:
   build a library X, we must first build its dependencies.
 
   Please come-up with an abstraction of the building system that will build
-  those libraries properly.
-
-  == Extending the Problem ==
-  Let's assume you have multiple threads to build the targets, adjust your code
-  so you can leverage the threads to build some libraries in parallel
+  those libraries properly assuming you have multiple threads to build the
+  targets and that you must try to build the targets as soon as they become
+  available
 '''
 
 class Target(object):
