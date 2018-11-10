@@ -2,16 +2,16 @@ from collections import deque
 
 class TreeNode:
     def __init__(self, left, right, value):
-        self._left = left
-        self._right = right
-        self._value = value
+        self.left = left
+        self.right = right
+        self.value = value
 
 # Calculates the depth of the tree
 def depth(node):
     if node is None: return 0
     else: 
-        return max(depth(node._left),
-                   depth(node._right)) + 1
+        return max(depth(node.left),
+                   depth(node.right)) + 1
 
 # Compares 2 TreeNodes for equality
 def tree_equals(node1, node2):
@@ -19,11 +19,11 @@ def tree_equals(node1, node2):
         return True
 
     if (node1 and not node2) or (node2 and not node1) or \
-            node1._value != node2._value:
+            node1.value != node2.value:
         return False
 
-    return tree_equals(node1._left, node2._left) and \
-           tree_equals(node1._right, node2._right)
+    return tree_equals(node1.left, node2.left) and \
+           tree_equals(node1.right, node2.right)
 
 # Transforms a list of lists that represents the nodes into a Tree
 # This:
@@ -54,15 +54,15 @@ def friendly_build(lines):
             current_parent = parents.popleft()
             if root is None: root = current_parent
 
-            current_parent._left = build_node(lines[i][j])
+            current_parent.left = build_node(lines[i][j])
             j += 1
-            current_parent._right = build_node(lines[i][j])
+            current_parent.right = build_node(lines[i][j])
             j += 1
 
-            if  current_parent._left: 
-                next.append(current_parent._left)
-            if  current_parent._right: 
-                next.append(current_parent._right)
+            if  current_parent.left: 
+                next.append(current_parent.left)
+            if  current_parent.right: 
+                next.append(current_parent.right)
 
         if i != 0 and j != len(lines[i]): raise
 
@@ -92,14 +92,14 @@ def pretty_print(node):
         if not node:
             return c_pos
 
-        c_pos = impl(node._left, c_depth + 1, c_pos, writer)
+        c_pos = impl(node.left, c_depth + 1, c_pos, writer)
 
         c_pos += add_to(writer,
                         c_depth,
                         c_pos,
-                        node._value)
+                        node.value)
 
-        c_pos = impl(node._right, c_depth + 1, c_pos, writer)
+        c_pos = impl(node.right, c_depth + 1, c_pos, writer)
         return c_pos
 
     writer = []
