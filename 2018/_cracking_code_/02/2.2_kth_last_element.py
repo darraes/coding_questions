@@ -17,13 +17,13 @@ class Node:
 def kth_last_element(head, k):
     slow = fast = head
 
-    for i in range(k):
+    for i in range(k - 1):
         if not fast.next:
             return None
 
         fast = fast.next
 
-    while fast:
+    while fast.next:
         fast = fast.next
         slow = slow.next
 
@@ -48,6 +48,8 @@ class TestFunctions(unittest.TestCase):
         l1 = [Node(1), Node(2), Node(3), Node(4), Node(5), Node(6), Node(7)]
         
         self.assertEqual(Node(4), kth_last_element(from_list(l1), 4))
+        self.assertEqual(Node(7), kth_last_element(from_list(l1), 1))
+        self.assertEqual(Node(1), kth_last_element(from_list(l1), 7))
 
 
 if __name__ == '__main__':
