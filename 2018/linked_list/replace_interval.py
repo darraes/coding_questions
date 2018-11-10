@@ -41,6 +41,7 @@ def add_interval(head, interval):
             break
         node = node.next
 
+    # Corner case where the new interval is inside a single know interval
     if lower_intersect and upper_intersect and \
             lower_intersect == upper_intersect:
         after = IntervalNode(interval.upper, lower_intersect.upper)
@@ -52,9 +53,12 @@ def add_interval(head, interval):
 
         return head
 
+    # Lower and upper boundaries of the new interval don't intersect with the
+    # same known interval
     if lower_intersect:
         lower_intersect.upper = interval.lower
         lower_intersect.next = interval
+
     if upper_intersect:
         if upper_intersect == head:
             head = interval
