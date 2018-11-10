@@ -80,7 +80,6 @@ class TestFunctions(unittest.TestCase):
         p = [ListNode(1), ListNode(9), ListNode(3)]
         res = [ListNode(2), ListNode(1), ListNode(7)]
         
-        # 321 + 391 = 712
         self.assertTrue(equals(from_list(res),
                           s.addTwoNumbers(from_list(n), from_list(p))))
 
@@ -90,7 +89,15 @@ class TestFunctions(unittest.TestCase):
         p = [ListNode(4), ListNode(9)]
         res = [ListNode(5), ListNode(1), ListNode(4)]
         
-        # 321 + 94 = 415
+        self.assertTrue(equals(from_list(res),
+                          s.addTwoNumbers(from_list(n), from_list(p))))
+
+    def test_3(self):
+        s = Solution()
+        n = [ListNode(1), ListNode(2), ListNode(3)]
+        p = [ListNode(0)]
+        res = [ListNode(1), ListNode(2), ListNode(3)]
+        
         self.assertTrue(equals(from_list(res),
                           s.addTwoNumbers(from_list(n), from_list(p))))
 
