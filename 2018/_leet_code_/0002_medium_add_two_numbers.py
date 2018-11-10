@@ -7,22 +7,19 @@ class Solution:
         :type l2: ListNode
         :rtype: ListNode
         """
-        return self.sum_inverted(l1, l2)
-        
-    def sum_inverted(self, n, p):
         carry = 0
 
         head = None
         previous = None
 
-        while n or p:
+        while l1 or l2 or carry > 0:
             cur_sum = carry
             carry = 0
 
-            if n:
-                cur_sum += n.val
-            if p:
-                cur_sum += p.val
+            if l1:
+                cur_sum += l1.val
+            if l2:
+                cur_sum += l2.val
 
             if cur_sum >= 10:
                carry = 1 
@@ -37,8 +34,8 @@ class Solution:
                 head = node
                 previous = node
 
-            n = n.next if n else None
-            p = p.next if p else None
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
 
         return head
 
@@ -91,6 +88,8 @@ class TestFunctions(unittest.TestCase):
         
         self.assertTrue(equals(from_list(res),
                           s.addTwoNumbers(from_list(n), from_list(p))))
+        self.assertTrue(equals(from_list(res),
+                          s.addTwoNumbers(from_list(p), from_list(n))))
 
     def test_3(self):
         s = Solution()
@@ -101,6 +100,23 @@ class TestFunctions(unittest.TestCase):
         self.assertTrue(equals(from_list(res),
                           s.addTwoNumbers(from_list(n), from_list(p))))
 
+    def test_4(self):
+        s = Solution()
+        n = [ListNode(0)]
+        p = [ListNode(0)]
+        res = [ListNode(0)]
+        
+        self.assertTrue(equals(from_list(res),
+                          s.addTwoNumbers(from_list(n), from_list(p))))
+
+    def test_5(self):
+        s = Solution()
+        n = [ListNode(5)]
+        p = [ListNode(5)]
+        res = [ListNode(0), ListNode(1)]
+        
+        self.assertTrue(equals(from_list(res),
+                          s.addTwoNumbers(from_list(n), from_list(p))))
 
 if __name__ == '__main__':
     unittest.main()
