@@ -1,7 +1,3 @@
-''' Cracking the code Interview - Problem: 1.5
-'''
-import unittest
-
 def compress(input):
     result = ""
     i = 0
@@ -18,6 +14,8 @@ def compress(input):
    
 
 ###############################################################
+import unittest
+
 class TestFunctions(unittest.TestCase):
     def test_1(self):
         self.assertEquals("a2b1c5a3", compress("aabcccccaaa"))
