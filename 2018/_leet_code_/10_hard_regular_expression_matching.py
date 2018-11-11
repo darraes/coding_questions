@@ -30,7 +30,7 @@ class StarState(State):
             return transitions
 
         if self.char == State.ANY or input_text[cursor] == self.char:
-            transitions.append((self.state_idx + 1, cursor + 1))
+            # transitions.append((self.state_idx + 1, cursor + 1))
             transitions.append((self.state_idx, cursor + 1))
 
         return transitions
@@ -55,8 +55,10 @@ class StateMachine(object):
                 i += 1
             idx += 1
 
+
     def execute(self, input_text):
         return self._execute_impl(input_text, 0, 0, {})
+
 
     def _execute_impl(self, input_text, cursor, state_idx, memo):
         # print(state_idx, cursor)
