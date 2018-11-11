@@ -1,5 +1,3 @@
-# https://leetcode.com/problems/two-sum/description/
-
 class Solution(object):
     def twoSum(self, nums, target):
         """
@@ -7,22 +5,14 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        index = [(idx, num)for idx, num in enumerate(nums)]
+        complements = {}
+        for idx, num in enumerate(nums):
+            complement = target - num
+            if complement in complements:
+                return [complements[complement], idx]
+            complements[num] = idx
 
-        index.sort(key= lambda elem: elem[1])
-        start = 0
-        end = len(index) - 1
-
-        while (start <= end):
-            cur_sum = index[start][1] + index[end][1]
-            if cur_sum == target:
-                break
-            elif cur_sum < target:
-                start += 1
-            else:
-                end -= 1
-
-        return [index[start][0], index[end][0]]
+        return []
 
 
 s = Solution()
