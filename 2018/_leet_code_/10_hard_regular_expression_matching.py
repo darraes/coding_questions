@@ -24,13 +24,14 @@ class StarState(State):
 
     def execute(self, input_text, cursor):
         transitions = []
+        transitions.append((self.state_idx + 1, cursor))
+        
         if cursor >= len(input_text):
             return transitions
 
-        transitions.append((self.state_idx + 1, cursor))
         if self.char == State.ANY or input_text[cursor] == self.char:
-            transitions.append((self.state_idx, cursor + 1))
             transitions.append((self.state_idx + 1, cursor + 1))
+            transitions.append((self.state_idx, cursor + 1))
 
         return transitions
 
@@ -55,22 +56,37 @@ class StateMachine(object):
             idx += 1
 
     def execute(self, input_text):
-        return self._execute_impl(input_text, 0, 0)
+        return self._execute_impl(input_text, 0, 0, {})
 
-    def _execute_impl(self, input_text, cursor, state_idx):
+    def _execute_impl(self, input_text, cursor, state_idx, memo):
         # print(state_idx, cursor)
+        if (cursor, state_idx) in memo:
+            return memo[(cursor, state_idx)]
 
         if state_idx >= len(self.states) and cursor >= len(input_text):
             return True
-        if state_idx >= len(self.states) or cursor >= len(input_text):
+        if state_idx >= len(self.states):
             return False
 
         transitions = self.states[state_idx].execute(input_text, cursor)
         for next_state_id, next_cursor in transitions:
-            res = self._execute_impl(input_text, next_cursor, next_state_id)
+            res = self._execute_impl(
+                input_text, next_cursor, next_state_id, memo)
+            memo[(next_cursor, next_state_id)] = res
             if res:
                 return True
         return False
+
+class Solution:
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
+        state_machine = StateMachine()
+        state_machine.from_regex(p)
+        return state_machine.execute(s)
 
 
 ###############################################################
@@ -106,6 +122,28 @@ class TestFunctions(unittest.TestCase):
         self.assertTrue(s.execute("aabbbcd"))
         self.assertTrue(s.execute("a"))
         self.assertTrue(s.execute("bca"))
+
+    def test_4(self):
+        s = StateMachine()
+        s.from_regex("a*")
+        self.assertFalse(s.execute("abc"))
+        self.assertFalse(s.execute("c"))
+        self.assertFalse(s.execute("aabbbc"))
+        self.assertFalse(s.execute("aabbbcd"))
+        self.assertTrue(s.execute("a"))
+        self.assertTrue(s.execute("aa"))
+        self.assertTrue(s.execute("aaa"))
+        self.assertFalse(s.execute("bca"))
+
+    def test_5(self):
+        s = StateMachine()
+        s.from_regex("mis*is*p*.")
+        self.assertFalse(s.execute("mississippi"))
+
+    def test_6(self):
+        s = StateMachine()
+        s.from_regex("ab*")
+        self.assertTrue(s.execute("a"))
 
 
 if __name__ == '__main__':
