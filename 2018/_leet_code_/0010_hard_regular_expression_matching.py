@@ -36,7 +36,6 @@ class StarState(State):
         return transitions
 
 
-
 class StateMachine(object):
     def __init__(self):
         self.states = []
@@ -78,6 +77,7 @@ class StateMachine(object):
             if res:
                 return True
         return False
+
 
 class Solution:
     def isMatch(self, s, p):
