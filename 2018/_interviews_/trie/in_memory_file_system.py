@@ -147,12 +147,12 @@ class FileSystem(object):
 
 
     def _print_all(self, node, level):
-        print("".join([" "] * level), node.name)
-        
+        print("".join([" "] * level), "[", node.name, "]")
+
         for _, child in node.sub_dirs.items():
             self._print_all(child, level + 1)
         for file_name, _ in node.files.items():
-            print("".join([" "] * level), "|- ", file_name)
+            print("".join([" "] * level), "  |-", file_name)
 
 
 
@@ -166,6 +166,7 @@ class TestFunctions(unittest.TestCase):
         file_system.create_or_update_file("a/b/c/d", "daniel.pdf", "")
         file_system.create_or_update_file("a/b/c/d", "daniel2.pdf", "")
         file_system.create_or_update_file("a/b/e", "daniel3.pdf", "")
+        file_system.ensure_directory("a/b/c/f")
         file_system.print_all()
 
 
