@@ -132,12 +132,12 @@ class FileSystem(object):
             node = node.parent
 
 
-    def attach_watcher(self, dir_path, file_name, callback):
+    def attach_file_watcher(self, dir_path, file_name, callback):
         node = self.ensure_directory(dir_path)
         node.attach_file_watcher(file_name, callback)
 
 
-    def attach_watcher(self, dir_path, callback):
+    def attach_dir_watcher(self, dir_path, callback):
         node = self.ensure_directory(dir_path)
         node.attach_dir_watcher(callback)
 
@@ -167,6 +167,11 @@ class TestFunctions(unittest.TestCase):
         file_system.create_or_update_file("a/b/c/d", "daniel2.pdf", "")
         file_system.create_or_update_file("a/b/e", "daniel3.pdf", "")
         file_system.ensure_directory("a/b/c/f")
+        file_system.attach_file_watcher(
+            "a/b/e", "daniel3.pdf", lambda : print("in file"))
+        file_system.attach_dir_watcher("a/b", lambda : print("in b"))
+        file_system.attach_dir_watcher("a", lambda : print("in a"))
+        file_system.create_or_update_file("a/b/e", "daniel3.pdf", "")
         file_system.print_all()
 
 
