@@ -10,7 +10,7 @@ def m_in_n(N, M, i, j):
     left = ~0
     left = left << (i + 1)
 
-    right = (1 << (j + i)) - 1
+    right = (1 << j) - 1
 
     mask = left | right
 
