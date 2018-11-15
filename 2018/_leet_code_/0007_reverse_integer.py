@@ -5,7 +5,7 @@ class Solution:
         :rtype: int
         """
         max_int = 2**31-1
-        min_int = -2**31-1
+        min_int = -2**31
 
         res = 0
         signal = 1 if x >= 0 else -1
