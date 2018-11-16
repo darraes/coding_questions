@@ -65,6 +65,9 @@ import unittest
 class TestFunctions(unittest.TestCase):
     def test_1(self):
         self.assertEqual(2, median([1, 3], [2]))
+        self.assertEqual(2, median([1, 2], [3]))
+        self.assertEqual(2.5, median([1, 4], [2, 3]))
+        self.assertEqual(2, median([1, 2], [2, 3]))
         self.assertEqual(2.5, median([1, 3], [2, 4]))
         self.assertEqual(3, median([2, 4, 5], [1, 3]))
         self.assertEqual(3, median([1, 3], [2, 4, 5]))
