@@ -7,7 +7,7 @@ def median(l1, l2):
     # The element holding the median. Ex. 6 means the 6th element
     target = int((len(l1) + len(l2)) / 2) + 1
 
-    k = int(len(l2) / 2)
+    k = max(1, int(len(l2) / 2))
     i2 = k
     i1 = target - i2
 
@@ -23,20 +23,20 @@ def median(l1, l2):
             )
 
     while True:
-        print(i1, i2, k)
+        # print(i1, i2, k)
         found_in_1 = found_check(l1, i1, l2, i2)
         found_in_2 = found_check(l2, i2, l1, i1)
+        # print(found_in_1, found_in_2)
 
 
         if found_in_1 or found_in_2:
             break
 
-        if l1[i1 - 1] > l2[i2]:
+        if i2 < len(l2) and l1[i1 - 1] > l2[i2]:
             delta = min(k, len(l2) - i2)
             i2 += delta
             i1 -= delta
         else:
-            # k = 2, i1 = 4, i2 = 2
             delta = min(k, len(l1) - i1)
             i1 += delta
             i2 -= delta
@@ -64,8 +64,6 @@ import unittest
 
 class TestFunctions(unittest.TestCase):
     def test_1(self):
-        self.assertEqual(2, median([1, 3], [2]))
-        self.assertEqual(2, median([1, 2], [3]))
         self.assertEqual(2.5, median([1, 4], [2, 3]))
         self.assertEqual(2, median([1, 2], [2, 3]))
         self.assertEqual(2.5, median([1, 3], [2, 4]))
@@ -79,6 +77,8 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(5.5, median([1, 2, 3, 4, 5], [6, 7, 8, 9, 10]))
         self.assertEqual(5.5, median([1, 2], [3, 4, 5, 6, 7, 8, 9, 10]))
         self.assertEqual(5.5, median([1, 2, 3, 4, 5, 6, 7, 8], [9, 10]))
+        self.assertEqual(2, median([1, 2], [3]))
+        self.assertEqual(2, median([1, 3], [2]))
         self.assertEqual(2.5, median([3], [2]))
 
 
