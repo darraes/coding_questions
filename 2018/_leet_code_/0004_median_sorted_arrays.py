@@ -1,7 +1,8 @@
-def _median(l1, l2):
-    ''' l1: the larger array
-        l2: at most the same size of l1
-    '''
+def median(l1, l2):
+    if len(l2) > len(l1):
+        tmp = l1
+        l1 = l2
+        l2 = tmp
 
     # The element holding the median. Ex. 6 means the 6th element
     target = int((len(l1) + len(l2)) / 2) + 1
@@ -31,28 +32,31 @@ def _median(l1, l2):
             break
 
         if l1[i1 - 1] > l2[i2]:
-            delta = min(k, len(l2) - k, i1)
+            delta = min(k, len(l2) - i2)
             i2 += delta
             i1 -= delta
         else:
-            delta = min(k, len(l1) - k, i2)
+            # k = 2, i1 = 4, i2 = 2
+            delta = min(k, len(l1) - i1)
             i1 += delta
             i2 -= delta
 
         
         k = max(1, int(k / 2))
 
+    def previous(l_a, i_a, l_b, i_b):
+        if i_b == 0:
+            return l_a[i_a - 2]
+        elif i_a == 1:
+            return l_b[i_b - 1]
+        else:
+            return max(l_a[i_a - 2], l_b[i_b - 1])
+
+    odd = (len(l1) + len(l2)) % 2 == 1
     if found_in_1:
-        return l1[i1 - 1]
+        return l1[i1 - 1] if odd else (l1[i1 - 1] + previous(l1, i1, l2, i2))/2
     else:
-        return l2[i2 - 1]
-
-
-def median(l1, l2):
-    if len(l1) >= len(l2):
-        return _median(l1, l2)
-    else:
-        return _median(l2, l1)
+        return l2[i2 - 1]if odd else (l2[i2 - 1] + previous(l2, i2, l1, i1))/2
 
 
 ###############################################################
@@ -60,15 +64,19 @@ import unittest
 
 class TestFunctions(unittest.TestCase):
     def test_1(self):
-        #self.assertEqual(2, median([1, 3], [2]))
-        #self.assertEqual(3, median([2, 4, 5], [1, 3]))
-        #self.assertEqual(3, median([1, 3], [2, 4, 5]))
-        #self.assertEqual(4, median([2, 3, 4, 5], [1, 6, 7]))
+        self.assertEqual(2, median([1, 3], [2]))
+        self.assertEqual(2.5, median([1, 3], [2, 4]))
+        self.assertEqual(3, median([2, 4, 5], [1, 3]))
+        self.assertEqual(3, median([1, 3], [2, 4, 5]))
+        self.assertEqual(4, median([2, 3, 4, 5], [1, 6, 7]))
         self.assertEqual(6, median([1, 2, 3, 4, 5, 6, 7], [8, 9, 10, 11]))
         self.assertEqual(6, median([1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11]))
         self.assertEqual(6, median([1, 2, 3, 4], [5, 6, 7, 8, 9, 10, 11]))
         self.assertEqual(6, median([1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11]))
-        self.assertEqual(5.5, median([1, 2, 3, 4, 5, 6, 7], [8, 9, 10]))
+        self.assertEqual(5.5, median([1, 2, 3, 4, 5], [6, 7, 8, 9, 10]))
+        self.assertEqual(5.5, median([1, 2], [3, 4, 5, 6, 7, 8, 9, 10]))
+        self.assertEqual(5.5, median([1, 2, 3, 4, 5, 6, 7, 8], [9, 10]))
+        self.assertEqual(2.5, median([3], [2]))
 
 
 if __name__ == '__main__':
