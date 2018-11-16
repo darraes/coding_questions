@@ -1,10 +1,10 @@
 # Develop an in-memory structure to store files given their paths.
 # The methods that should be present are:
 # 
-# - create_or_update_file(dir_path, file_name, file_contents)
+# - save_file(dir_path, file_name, file_contents)
 # - create_directory(dir_path)
-# - attach_watcher(dir_path, file_name)
 # - attach_watcher(dir_path)
+# - print_all()
 # 
 # For the watcher, if the trigger is on node A, we must callback on the watcher
 # of all parent directories of node A. Only file add/update/remore trigger
@@ -15,8 +15,10 @@
 # already dealing with the broken down directory/file
 # 
 # Extra:
+# - attach_watcher(dir_path, file_name)
 # - remove_file(dir_path, file_name)
 # - remove_file(dir_path)
+from copy import copy
 
 class DirNode(object):
     def __init__(self, name, parent):
@@ -38,7 +40,7 @@ class DirNode(object):
             return True
         return False
 
-    def add_or_update_file(self, file_name, file_contents):
+    def save_file(self, file_name, file_contents):
         self.files[file_name] = file_contents
 
     def remove_file(self, file_name):
@@ -99,11 +101,11 @@ class FileSystem(object):
         return node.parent.remove_dir(dir_parts[-1])
 
 
-    def create_or_update_file(self, dir_path, file_name, file_contents):
+    def save_file(self, dir_path, file_name, file_contents):
         self.validate_file(file_name)
 
         node = self.ensure_directory(dir_path)
-        node.add_or_update_file(file_name, file_contents)
+        node.save_file(file_name, file_contents)
         self._fire_callback_chain(node, file_name)
 
 
@@ -143,16 +145,35 @@ class FileSystem(object):
 
 
     def print_all(self):
-        self._print_all(self.root, 0)
+        self._print_impl(self.root)
 
 
-    def _print_all(self, node, level):
-        print("".join([" "] * level), "[", node.name, "]")
+    def _print_impl(self, node, level = 0, connectors = set(), is_last = set()):
+        pad_count = 2 * level
+        padding = [" "] * pad_count
 
+        dir_line = padding + ["-"] + list(node.name) + [")"]
+        for connector in copy(connectors):
+            dir_line[connector + 1] = "|"
+            if connector in is_last:
+                connectors.remove(connector)
+                is_last.remove(connector)
+        print("".join(dir_line))
+
+        i = 0
         for _, child in node.sub_dirs.items():
-            self._print_all(child, level + 1)
+            if i < len(node.sub_dirs) - 1:
+                connectors.add(pad_count)
+            elif pad_count in connectors:
+                is_last.add(pad_count)
+            self._print_impl(child, level + 1, connectors, is_last)
+            i += 1
+
         for file_name, _ in node.files.items():
-            print("".join([" "] * level), "  |-", file_name)
+            file_line = padding + [" |_ "] + list(file_name)
+            for connector in connectors:
+                file_line[connector + 1] = "|"
+            print("".join(file_line))
 
 
 
@@ -163,15 +184,20 @@ import unittest
 class TestFunctions(unittest.TestCase):
     def test_1(self):
         file_system = FileSystem()
-        file_system.create_or_update_file("a/b/c/d", "daniel.pdf", "")
-        file_system.create_or_update_file("a/b/c/d", "daniel2.pdf", "")
-        file_system.create_or_update_file("a/b/e", "daniel3.pdf", "")
+        file_system.save_file("a/b/c/d", "daniel.pdf", "")
+        file_system.save_file("a/b/c/d", "daniel2.pdf", "")
+        file_system.save_file("a/b/e", "daniel3.pdf", "")
         file_system.ensure_directory("a/b/c/f")
         file_system.attach_file_watcher(
             "a/b/e", "daniel3.pdf", lambda : print("in file"))
         file_system.attach_dir_watcher("a/b", lambda : print("in b"))
         file_system.attach_dir_watcher("a", lambda : print("in a"))
-        file_system.create_or_update_file("a/b/e", "daniel3.pdf", "")
+        file_system.save_file("a/b/e", "daniel3.pdf", "")
+        file_system.ensure_directory("a/g")
+        file_system.ensure_directory("a/g/b")
+        file_system.save_file("a/g/b", "daniel2.pdf", "")
+        file_system.save_file("a/g/b", "daniel4.pdf", "")
+        file_system.ensure_directory("a/g/d")
         file_system.print_all()
 
 

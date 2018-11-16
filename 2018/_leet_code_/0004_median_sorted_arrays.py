@@ -1,4 +1,9 @@
 def _median(l1, l2):
+    ''' l1: the larger array
+        l2: at most the same size of l1
+    '''
+
+    # The element holding the median. Ex. 6 means the 6th element
     target = int((len(l1) + len(l2)) / 2) + 1
 
     k = int(len(l2) / 2)
@@ -8,8 +13,11 @@ def _median(l1, l2):
     def found_check(l_a, i_a, l_b, i_b):
         return i_a > 0 and i_a <= len(l_a) \
             and (
+                # all of B is bigger than median
                 (i_b == 0 and l_a[i_a - 1] <= l_b[i_b])
+                # all of B is smaller than median
                 or (i_b == len(l_b) and l_a[i_a - 1] >= l_b[i_b - 1])
+                # Median in between both A and B edges
                 or (l_a[i_a - 1] >= l_b[i_b - 1] and l_a[i_a - 1] <= l_b[i_b])
             )
 
@@ -60,6 +68,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(6, median([1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11]))
         self.assertEqual(6, median([1, 2, 3, 4], [5, 6, 7, 8, 9, 10, 11]))
         self.assertEqual(6, median([1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11]))
+        self.assertEqual(5.5, median([1, 2, 3, 4, 5, 6, 7], [8, 9, 10]))
 
 
 if __name__ == '__main__':
