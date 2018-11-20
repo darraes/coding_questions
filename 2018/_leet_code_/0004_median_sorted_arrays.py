@@ -7,7 +7,7 @@ def median(l1, l2):
     # The element holding the median. Ex. 6 means the 6th element
     target = int((len(l1) + len(l2)) / 2) + 1
 
-    k = max(1, int(len(l2) / 2))
+    k = max(1, int(len(l2) / 2)) if len(l2) > 0 else 0
     i2 = k
     i1 = target - i2
 
@@ -15,7 +15,7 @@ def median(l1, l2):
         return i_a > 0 and i_a <= len(l_a) \
             and (
                 # all of B is bigger than median
-                (i_b == 0 and l_a[i_a - 1] <= l_b[i_b])
+                (i_b == 0 and (len(l_b) == 0 or l_a[i_a - 1] <= l_b[i_b]))
                 # all of B is smaller than median
                 or (i_b == len(l_b) and l_a[i_a - 1] >= l_b[i_b - 1])
                 # Median in between both A and B edges
@@ -25,7 +25,7 @@ def median(l1, l2):
     while True:
         # print(i1, i2, k)
         found_in_1 = found_check(l1, i1, l2, i2)
-        found_in_2 = found_check(l2, i2, l1, i1)
+        found_in_2 = not found_in_1 and found_check(l2, i2, l1, i1)
         # print(found_in_1, found_in_2)
 
 
@@ -58,6 +58,15 @@ def median(l1, l2):
     else:
         return l2[i2 - 1]if odd else (l2[i2 - 1] + previous(l2, i2, l1, i1))/2
 
+class Solution:
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        return median(nums1, nums2)
+
 
 ###############################################################
 import unittest
@@ -80,6 +89,12 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(2, median([1, 2], [3]))
         self.assertEqual(2, median([1, 3], [2]))
         self.assertEqual(2.5, median([3], [2]))
+        self.assertEqual(2, median([1, 3], []))
+        self.assertEqual(2, median([1, 2, 3], []))
+        self.assertEqual(2, median([2], []))
+        self.assertEqual(2, median([], [1, 3]))
+        self.assertEqual(2, median([], [1, 2, 3]))
+        self.assertEqual(2, median([], [2]))
 
 
 if __name__ == '__main__':

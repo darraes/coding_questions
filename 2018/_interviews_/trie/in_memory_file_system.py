@@ -154,7 +154,10 @@ class FileSystem(object):
 
         dir_line = padding + ["-"] + list(node.name) + [")"]
         for connector in copy(connectors):
+            # For each connector request, print it on the right index
             dir_line[connector + 1] = "|"
+            # if this is suppose to the be last instance of this connector
+            # remove it from the request list
             if connector in is_last:
                 connectors.remove(connector)
                 is_last.remove(connector)
@@ -163,14 +166,24 @@ class FileSystem(object):
         i = 0
         for _, child in node.sub_dirs.items():
             if i < len(node.sub_dirs) - 1:
+                # if this is not the last directory tell all nodes below that
+                # they should print the '|' on the position @pad_count so the
+                # vertical line connecting to this node is rendered
                 connectors.add(pad_count)
             elif pad_count in connectors:
+                # This is will be the very last sub-directory, so we tell it to
+                # print the connector '|' and remove it from the @connectors
+                # printing list requests after that. Basically the next
+                # sub-directory print should be the last for this instance of
+                # the connector
                 is_last.add(pad_count)
             self._print_impl(child, level + 1, connectors, is_last)
             i += 1
 
         for file_name, _ in node.files.items():
+            # do the file printing
             file_line = padding + [" |_ "] + list(file_name)
+            # For each connector request, print it on the right index
             for connector in connectors:
                 file_line[connector + 1] = "|"
             print("".join(file_line))
