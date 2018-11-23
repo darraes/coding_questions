@@ -17,6 +17,7 @@ def ll_from_str(s):
 
 
 def trim_to_common(node, s):
+    head = node
     previous = None
 
     idx = 0
@@ -26,9 +27,12 @@ def trim_to_common(node, s):
             node = node.next
             idx += 1
         else:
-            if previous:
-                previous.next = None
             break
+    if previous:
+        previous.next = None
+    else:
+        head = None
+    return head
 
 
 class Solution:
@@ -37,9 +41,12 @@ class Solution:
         :type strs: List[str]
         :rtype: str
         """
+        if len(strs) == 0:
+            return ""
+
         node = ll_from_str(strs[0])
         for i in range(1, len(strs)):
-            trim_to_common(node, strs[i])
+            node = trim_to_common(node, strs[i])
 
         if not node:
             return ""
@@ -61,6 +68,18 @@ class TestFunctions(unittest.TestCase):
         s = Solution()
         self.assertEqual(
             "fl", s.longestCommonPrefix(["flower","flow","flight"]))
+        self.assertEqual(
+            "", s.longestCommonPrefix(["flower","flow","flight", "a"]))
+        self.assertEqual(
+            "", s.longestCommonPrefix(["dog","racecar","car"]))
+        self.assertEqual(
+            "", s.longestCommonPrefix([]))
+        self.assertEqual(
+            "dog", s.longestCommonPrefix(["dog"]))
+        self.assertEqual(
+            "dog", s.longestCommonPrefix(["dog", "dog", "dog"]))
+        self.assertEqual(
+            "a", s.longestCommonPrefix(["aa", "a"]))
 
 
 if __name__ == "__main__":
