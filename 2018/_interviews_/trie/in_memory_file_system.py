@@ -3,22 +3,20 @@
 # 
 # - save_file(dir_path, file_name, file_contents)
 # - create_directory(dir_path)
-# - attach_watcher(dir_path)
-# - print_all()
+# - list_files(dir_path, recurse)
+# - attach_watcher(dir_path, callback)
 # 
 # For the watcher, if the trigger is on node A, we must callback on the watcher
-# of all parent directories of node A. Only file add/update/remore trigger
+# of all parent directories of node A. Only file add/update/remove trigger
 # callbacks
 # 
 # Note that the dir_path is a path to the directory with the format "a/b/c".
 # For simplicity we are not passing the file name as part of the path and
 # already dealing with the broken down directory/file
-# 
-# Extra:
-# - attach_watcher(dir_path, file_name)
-# - remove_file(dir_path, file_name)
-# - remove_file(dir_path)
+
 from copy import copy
+from collections import deque
+from os import path
 
 class DirNode(object):
     def __init__(self, name, parent):
@@ -27,7 +25,6 @@ class DirNode(object):
         self.sub_dirs = {}
         self.files = {}
         self.dir_watcher_callback = None
-        self.file_watcher_callbacks = {}
 
     def ensure_sub_dir(self, dir_name):
         if dir_name not in self.sub_dirs:
@@ -51,9 +48,6 @@ class DirNode(object):
 
     def attach_dir_watcher(self, watcher_callback):
         self.dir_watcher_callback = watcher_callback
-
-    def attach_file_watcher(self, file_name, watcher_callback):
-        self.file_watcher_callbacks[file_name] = watcher_callback
 
 
 class FileSystem(object):
@@ -85,6 +79,27 @@ class FileSystem(object):
             node = node.ensure_sub_dir(sub_dir)
 
         return node
+
+
+    def list_files(self, dir_path, recurse):
+        node = self.ensure_directory(dir_path)
+        results = []
+        queue = deque()
+        queue.append((dir_path, node))
+
+        while len(queue) > 0:
+            cur_dir, cur_node = queue.popleft()
+            for file in cur_node.files:
+                results.append(path.join(cur_dir, file))
+
+            if not recurse:
+                break
+
+            for sub_name, sub_node in cur_node.sub_dirs.items():
+                queue.append((path.join(cur_dir, sub_name), sub_node))
+
+        return results
+
 
 
     def remove_directory(self, dir_path):
@@ -126,17 +141,10 @@ class FileSystem(object):
 
 
     def _fire_callback_chain(self, node, file_name):
-        if file_name in node.file_watcher_callbacks:
-            node.file_watcher_callbacks[file_name]()
         while node:
             if node.dir_watcher_callback:
                 node.dir_watcher_callback()
             node = node.parent
-
-
-    def attach_file_watcher(self, dir_path, file_name, callback):
-        node = self.ensure_directory(dir_path)
-        node.attach_file_watcher(file_name, callback)
 
 
     def attach_dir_watcher(self, dir_path, callback):
@@ -201,8 +209,6 @@ class TestFunctions(unittest.TestCase):
         file_system.save_file("a/b/c/d", "daniel2.pdf", "")
         file_system.save_file("a/b/e", "daniel3.pdf", "")
         file_system.ensure_directory("a/b/c/f")
-        file_system.attach_file_watcher(
-            "a/b/e", "daniel3.pdf", lambda : print("in file"))
         file_system.attach_dir_watcher("a/b", lambda : print("in b"))
         file_system.attach_dir_watcher("a", lambda : print("in a"))
         file_system.save_file("a/b/e", "daniel3.pdf", "")
@@ -212,6 +218,11 @@ class TestFunctions(unittest.TestCase):
         file_system.save_file("a/g/b", "daniel4.pdf", "")
         file_system.ensure_directory("a/g/d")
         file_system.print_all()
+
+        files = file_system.list_files("a", True)
+        print()
+        for f in files:
+            print(f)
 
 
 if __name__ == '__main__':
