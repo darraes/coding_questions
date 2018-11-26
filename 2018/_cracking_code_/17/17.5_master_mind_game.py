@@ -31,6 +31,7 @@ class TestFunctions(unittest.TestCase):
     def test_1(self):
         self.assertEqual((3, 0), figure_out("RGBY", "RGBR"))
         self.assertEqual((2, 2), figure_out("RGBY", "RGYB"))
+        self.assertEqual((0, 4), figure_out("RGBY", "YBRG"))
 
 
 if __name__ == "__main__":
