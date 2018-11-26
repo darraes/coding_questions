@@ -59,19 +59,7 @@ class FileSystem(object):
         return [d for d in path.split("/") if d != ""]
 
 
-    def validate_file(self, file_name):
-        # Represents the proper validations. No need for this solution.
-        pass
-
-
-    def validate_dir(self, dir_name):
-        # Represents the proper validations. No need for this solution.
-        pass
-
-
     def ensure_directory(self, dir_path):
-        self.validate_dir(dir_path)
-
         dir_parts = self.split_path(dir_path)
 
         node = self.root
@@ -101,10 +89,7 @@ class FileSystem(object):
         return results
 
 
-
     def remove_directory(self, dir_path):
-        self.validate_dir(dir_name)
-
         dir_parts = self.split_path(dir_path)
 
         node = self.root
@@ -117,16 +102,12 @@ class FileSystem(object):
 
 
     def save_file(self, dir_path, file_name, file_contents):
-        self.validate_file(file_name)
-
         node = self.ensure_directory(dir_path)
         node.save_file(file_name, file_contents)
         self._fire_callback_chain(node, file_name)
 
 
     def remove_file(self, dir_path, file_name):
-        self.validate_dir(dir_name)
-
         dir_parts = self.split_path(dir_path)
 
         node = self.root
