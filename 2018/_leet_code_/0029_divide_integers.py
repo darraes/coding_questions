@@ -42,6 +42,8 @@ class TestFunctions(unittest.TestCase):
         s = Solution()
         self.assertEqual(5, s.divide(15, 3))
         self.assertEqual(5, s.divide(17, 3))
+        self.assertEqual(-5, s.divide(17, -3))
+        self.assertEqual(-5, s.divide(-17, 3))
 
 
 if __name__ == "__main__":
