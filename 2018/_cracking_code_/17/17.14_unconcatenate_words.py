@@ -3,33 +3,36 @@ from copy import copy
 
 
 def unconcatenate(s, words):
-    sentence = list(unconcatenate_impl(s, words, 0, {})[1])
+    res = unconcatenate_impl(s, words, 0, {})
+    print(res)
+    sentence = list(res[2])
     return " ".join(sentence).strip()
 
 
 def unconcatenate_impl(s, words, start, cache):
     if start >= len(s):
-        return (0, deque())
+        return (0, 0, deque())
 
     if start in cache:
         return cache[start]
 
-    score, res = 0, deque()
+    score, mismatches, res = 0, 0, deque()
 
     for i in range(start + 1, len(s) + 1):
         if i - start > 10:
             break
 
-        _score, _res = unconcatenate_impl(s, words, i, cache)
         cur_word = s[start:i]
-        add_score = 1 if cur_word in words else 0
+        _score, _mismatches, _res = unconcatenate_impl(s, words, i, cache)
+        add_score, add_mismatches = (1, 0) if cur_word in words else (0, 1)
         if _score + add_score >= score:
             res = copy(_res)
             res.appendleft(cur_word)
             score = _score + add_score
+            mismatches = _mismatches + add_mismatches
 
-    cache[start] = (score, res)
-    return (score, res)
+    cache[start] = (score, mismatches, res)
+    return (score, mismatches, res)
 
 
 ###############################################################
