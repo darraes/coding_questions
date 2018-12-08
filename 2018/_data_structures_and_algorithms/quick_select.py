@@ -18,7 +18,6 @@ def quick_select(array, k):
         p += 1
 
     swap(array, c, -1)
-    # print(array, pivot, c, k)
 
     if c == k - 1:
         return array[k - 1]
