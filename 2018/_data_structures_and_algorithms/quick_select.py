@@ -34,7 +34,7 @@ import unittest
 
 
 class TestFunctions(unittest.TestCase):
-    def test_1(self):
+    def test_quickselect(self):
         array = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
         shuffle(array)
         self.assertEqual(17, quick_select(array, 7))

@@ -58,7 +58,6 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual([], s.combinationSum([], 3))
         self.assertEqual([[1, 1]], s.combinationSum([1], 2))
         self.assertEqual([[1, 1, 1, 1]], s.combinationSum([1], 4))
-        
 
 
 if __name__ == "__main__":
