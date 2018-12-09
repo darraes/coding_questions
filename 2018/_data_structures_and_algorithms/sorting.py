@@ -77,6 +77,23 @@ def quicksort(array):
     return array
 
 
+def countingsort(array):
+    counting = [0] * 25  # 20 is the celing
+
+    for e in array:
+        counting[e] += 1
+
+    for i in range(1, len(counting)):
+        counting[i] += counting[i - 1]
+
+    res = [None] * len(array)
+    for i in reversed(range(len(array))):
+        res[counting[array[i]] - 1] = array[i]
+        counting[array[i]] -= 1
+
+    return res
+
+
 ###############################################################
 
 
@@ -93,6 +110,17 @@ class TestFunctions(unittest.TestCase):
         array = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
         shuffle(array)
         self.assertEqual([11, 12, 13, 14, 15, 16, 17, 18, 19, 20], quicksort(array))
+
+    def test_qcountingsort(self):
+        array = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        shuffle(array)
+        self.assertEqual([11, 12, 13, 14, 15, 16, 17, 18, 19, 20], countingsort(array))
+
+        array = [11, 12, 13, 13, 14, 15, 16, 17, 18, 19, 20]
+        shuffle(array)
+        self.assertEqual(
+            [11, 12, 13, 13, 14, 15, 16, 17, 18, 19, 20], countingsort(array)
+        )
 
     def test_quickselect(self):
         array = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
