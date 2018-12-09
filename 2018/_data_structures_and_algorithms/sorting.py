@@ -1,13 +1,13 @@
 from random import shuffle
 
 
-def merge_sort(array):
+def mergesort(array):
     if len(array) <= 1:
         return array
 
     mid = int(len(array) / 2)
-    left = merge_sort(array[:mid])
-    right = merge_sort(array[mid:])
+    left = mergesort(array[:mid])
+    right = mergesort(array[mid:])
 
     # Merging
     res = []
@@ -31,24 +31,30 @@ def merge_sort(array):
     return res
 
 
-def quick_select(array, k):
-    def swap(array, i, j):
-        tmp = array[i]
-        array[i] = array[j]
-        array[j] = tmp
+def swap(array, i, j):
+    tmp = array[i]
+    array[i] = array[j]
+    array[j] = tmp
 
-    mid = int(len(array) / 2)
-    swap(array, mid, -1)
-    pivot = array[-1]
+
+def quick_partition(array, i, j):
+    mid = int((i + j) / 2)
+    swap(array, mid, j - 1)
+    pivot = array[j - 1]
 
     c = p = 0
-    while p < len(array):
+    while p < j:
         if array[p] < pivot:
             swap(array, c, p)
             c += 1
         p += 1
 
-    swap(array, c, -1)
+    swap(array, c, j - 1)
+    return c
+
+
+def quick_select(array, k):
+    c = quick_partition(array, 0, len(array))
 
     if c == k - 1:
         return array[k - 1]
@@ -58,8 +64,17 @@ def quick_select(array, k):
         return quick_select(array[c:], k - c)
 
 
-def quicksort(array, i, j):
-    pass
+def quicksort(array):
+    def _quicksort(array, i, j):
+        if i >= j:
+            return
+
+        c = quick_partition(array, i, j)
+        _quicksort(array, i, c)
+        _quicksort(array, c + 1, j)
+
+    _quicksort(array, 0, len(array))
+    return array
 
 
 ###############################################################
@@ -72,7 +87,12 @@ class TestFunctions(unittest.TestCase):
     def test_mergesort(self):
         array = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
         shuffle(array)
-        self.assertEqual([11, 12, 13, 14, 15, 16, 17, 18, 19, 20], merge_sort(array))
+        self.assertEqual([11, 12, 13, 14, 15, 16, 17, 18, 19, 20], mergesort(array))
+
+    def test_quicksort(self):
+        array = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        shuffle(array)
+        self.assertEqual([11, 12, 13, 14, 15, 16, 17, 18, 19, 20], quicksort(array))
 
     def test_quickselect(self):
         array = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
