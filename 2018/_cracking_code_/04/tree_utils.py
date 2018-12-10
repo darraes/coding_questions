@@ -7,6 +7,12 @@ class TreeNode:
         self.right = right
         self.value = value
 
+class TNode:
+    def __init__(self, value, left = None, right = None):
+        self.value = value
+        self.left = left
+        self.right = right
+
 
 # Calculates the depth of the tree
 def depth(node):
@@ -22,6 +28,7 @@ def tree_equals(node1, node2):
         return True
 
     if (node1 and not node2) or (node2 and not node1) or node1.value != node2.value:
+        print(node1.value, node2.value)
         return False
 
     return tree_equals(node1.left, node2.left) and tree_equals(node1.right, node2.right)
