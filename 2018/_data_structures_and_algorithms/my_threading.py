@@ -22,8 +22,8 @@ class MPMCQueue(object):
 
         self.buffer.append(task)
         print("putting ", task)
-
         self.not_empty.notify()
+
         self.lock.release()
         return True
 
@@ -39,6 +39,7 @@ class MPMCQueue(object):
         task = self.buffer.popleft()
         print("getting ", task)
         self.not_full.notify()
+
         self.lock.release()
         return task
 
@@ -83,7 +84,7 @@ import unittest
 
 class TestFunctions(unittest.TestCase):
     def test_mpmc_1(self):
-        mpmc = MPMCQueue(5)
+        mpmc = MPMCQueue(2)
 
         t1 = Thread(target=mpmc.put, args=(1,))
         t2 = Thread(target=mpmc.put, args=(2,))
@@ -100,7 +101,7 @@ class TestFunctions(unittest.TestCase):
         t3.start()
 
     def test_mpmc_2(self):
-        mpmc = MPMCSQueue(5)
+        mpmc = MPMCSQueue(2)
 
         t1 = Thread(target=mpmc.put, args=(1,))
         t2 = Thread(target=mpmc.put, args=(2,))
