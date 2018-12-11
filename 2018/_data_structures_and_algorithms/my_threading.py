@@ -7,12 +7,12 @@ class MPMCQueue(object):
         self.buffer = deque(maxlen=max_size)
         self.max_size = max_size
 
-        lock = RLock()
-        self.not_full = Condition(lock)
-        self.not_empty = Condition(lock)
+        self.lock = RLock()
+        self.not_full = Condition(self.lock)
+        self.not_empty = Condition(self.lock)
 
     def put(self, task, blocking=True):
-        self.not_full.acquire()
+        self.lock.acquire()
 
         while len(self.buffer) == self.max_size:
             if not blocking:
@@ -24,11 +24,11 @@ class MPMCQueue(object):
         print("putting ", task)
 
         self.not_empty.notify()
-        self.not_full.release()
+        self.lock.release()
         return True
 
     def get(self, blocking=True):
-        self.not_empty.acquire()
+        self.lock.acquire()
 
         while len(self.buffer) == 0:
             if not blocking:
@@ -39,7 +39,7 @@ class MPMCQueue(object):
         task = self.buffer.popleft()
         print("getting ", task)
         self.not_full.notify()
-        self.not_empty.release()
+        self.lock.release()
         return task
 
 
