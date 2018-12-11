@@ -15,7 +15,7 @@ class SpinLock(object):
         attempts = 0
         while True:
             attempts += 1
-            if self._compare_exchange(1, 0) == 0 \
+            if self._compare_exchange(value=1, comparand=0) == 0 \
               or self._owner_thread == threading.currentThread().ident:
 
                 self._owner_thread = threading.currentThread().ident
@@ -29,7 +29,7 @@ class SpinLock(object):
 
 
     def release(self):
-        if self._compare_exchange(0, 1) == 1:
+        if self._compare_exchange(value=0, comparand=1) == 1:
             print "Released by {}".format(threading.currentThread().ident)
             return
         else:
