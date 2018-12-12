@@ -48,7 +48,7 @@ class TestFunctions(unittest.TestCase):
         Y = "XMJAATZ"
         res = []
         diff(X, Y, len(X), len(Y), lcs_lookup(X, Y), res)
-        self.assertEqual("A B C D +E F G -H +I J -Q +K +R +X +Y Z", " ".join(res))
+        self.assertEqual("X M J -Y A -U +A +T Z", " ".join(res))
 
 
 if __name__ == "__main__":

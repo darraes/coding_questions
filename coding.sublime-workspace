@@ -1,0 +1,1357 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"not",
+				"not_full\tstatement"
+			],
+			[
+				"p",
+				"popleft\tfunction"
+			],
+			[
+				"not_",
+				"not_empty\tstatement"
+			],
+			[
+				"re",
+				"reverse\tfunction"
+			],
+			[
+				"ma",
+				"max_heapify\tfunction"
+			],
+			[
+				"app",
+				"append\tfunction"
+			],
+			[
+				"sub",
+				"sub_dirs"
+			],
+			[
+				"as",
+				"assertRaises\tfunction"
+			],
+			[
+				"time",
+				"timetuple"
+			],
+			[
+				"ass",
+				"assertEquals\tstatement"
+			],
+			[
+				"get_m",
+				"get_manifest\tfunction"
+			],
+			[
+				"assert",
+				"assertFalse\tfunction"
+			],
+			[
+				"_mani",
+				"_manifest"
+			],
+			[
+				"_sh",
+				"_shutdown\tstatement"
+			],
+			[
+				"sh",
+				"sha256\tfunction"
+			],
+			[
+				"TB",
+				"TBufferedTransportFactory"
+			],
+			[
+				"CNOS",
+				"ConstraintRegexNeq"
+			],
+			[
+				"before",
+				"before_end"
+			],
+			[
+				"bef",
+				"before_end"
+			],
+			[
+				"befo",
+				"before_prefixes"
+			],
+			[
+				"in",
+				"in_progress"
+			],
+			[
+				"mi",
+				"migration_mapping"
+			],
+			[
+				"so",
+				"softThresholdPercentage"
+			],
+			[
+				"res",
+				"resources"
+			],
+			[
+				"lb",
+				"lbSettings"
+			],
+			[
+				"serv",
+				"serviceName"
+			],
+			[
+				"servi",
+				"service_name"
+			],
+			[
+				"ser",
+				"serviceName"
+			],
+			[
+				"service",
+				"serviceName"
+			],
+			[
+				"prin",
+				"print_ex"
+			],
+			[
+				"u_sh",
+				"u_shard_start"
+			],
+			[
+				"micr",
+				"microShardRange"
+			],
+			[
+				"sor",
+				"sorted_on_u_shards"
+			],
+			[
+				"micro",
+				"microShardCount"
+			],
+			[
+				"compa",
+				"compact_mapping"
+			],
+			[
+				"shard",
+				"shardRange"
+			],
+			[
+				"__",
+				"__errorEntry"
+			],
+			[
+				"shar",
+				"shardPrefix"
+			],
+			[
+				"entr",
+				"entry_idx"
+			],
+			[
+				"Load",
+				"LoadBalancingType"
+			],
+			[
+				"resou",
+				"resources"
+			],
+			[
+				"stora",
+				"storageType"
+			],
+			[
+				"resource",
+				"resource_name"
+			],
+			[
+				"both",
+				"bothEnabled"
+			],
+			[
+				"sm",
+				"smSettings"
+			],
+			[
+				"dbN",
+				"dbNamesPattern"
+			],
+			[
+				"dbName",
+				"dbNamesPatterns"
+			],
+			[
+				"pa",
+				"patterns"
+			],
+			[
+				"iter",
+				"iterkeys"
+			],
+			[
+				"tier",
+				"tierSettings"
+			],
+			[
+				"foo_",
+				"foo_0"
+			],
+			[
+				"opt",
+				"option"
+			],
+			[
+				"op",
+				"options"
+			],
+			[
+				"pre",
+				"prefixCfg"
+			],
+			[
+				"prim",
+				"primaryLoadBalancing"
+			],
+			[
+				"test",
+				"testReplicaBalancingPolicy"
+			],
+			[
+				"remote",
+				"remote_views"
+			],
+			[
+				"cur",
+				"cur_dir"
+			],
+			[
+				"curr",
+				"current_dir"
+			],
+			[
+				"curre",
+				"current_file"
+			],
+			[
+				"contbuil",
+				"contbuildTestSummary"
+			],
+			[
+				"star",
+				"startBaseline"
+			],
+			[
+				"open",
+				"openRevs"
+			],
+			[
+				"status",
+				"status_id"
+			],
+			[
+				"change",
+				"changed_file"
+			],
+			[
+				"rele",
+				"relevantPaths"
+			],
+			[
+				"zipp",
+				"zippydb_pkg"
+			],
+			[
+				"regress",
+				"regressionStats"
+			],
+			[
+				"testR",
+				"testRevId"
+			],
+			[
+				"last",
+				"lastDiff"
+			],
+			[
+				"Diff",
+				"DiffTestingUtils"
+			],
+			[
+				"last_d",
+				"last_diff_date"
+			],
+			[
+				"date",
+				"dateModified"
+			],
+			[
+				"hiso",
+				"historySize"
+			],
+			[
+				"histo",
+				"historySize"
+			],
+			[
+				"disa",
+				"disabledSucceded"
+			],
+			[
+				"tim",
+				"timeout_ms"
+			],
+			[
+				"writeQ",
+				"writeQpsLimit"
+			],
+			[
+				"waitFor",
+				"waitForConfigeratorSLA"
+			],
+			[
+				"dfl",
+				"dflag"
+			],
+			[
+				"ensure",
+				"ensureThrottlingIsEnabled"
+			],
+			[
+				"ensur",
+				"ensureThrottlingIsDisabled"
+			],
+			[
+				"setDF",
+				"setDflagCmd"
+			],
+			[
+				"defa",
+				"defaultMaxQps"
+			],
+			[
+				"kTh",
+				"kThrottlingOn"
+			],
+			[
+				"throttli",
+				"throttlingDFlagName"
+			],
+			[
+				"unset",
+				"unsetDFlag"
+			],
+			[
+				"df",
+				"dflag"
+			],
+			[
+				"kT",
+				"kThrottlingOn"
+			],
+			[
+				"list",
+				"listDFlags"
+			],
+			[
+				"key",
+				"keyValue"
+			],
+			[
+				"foundK",
+				"foundKeys"
+			],
+			[
+				"rapi",
+				"rapidoResults"
+			],
+			[
+				"rai",
+				"rapidoResults"
+			],
+			[
+				"Key",
+				"KeyState"
+			],
+			[
+				"sna",
+				"snapshotResults"
+			],
+			[
+				"resp",
+				"response"
+			],
+			[
+				"print",
+				"printKeyHistory"
+			],
+			[
+				"acc",
+				"accessAllThreads"
+			],
+			[
+				"addHi",
+				"addHistoryEntryForKey"
+			],
+			[
+				"stri",
+				"stringstream"
+			],
+			[
+				"hist",
+				"history"
+			],
+			[
+				"KeyH",
+				"KeyHistory"
+			],
+			[
+				"KeyHi",
+				"KeyHistoryMap"
+			],
+			[
+				"thread",
+				"threadLocalKeyHistory_"
+			],
+			[
+				"exp",
+				"expectedKeys"
+			],
+			[
+				"foun",
+				"foundKeys"
+			],
+			[
+				"lastt",
+				"lastTotalOps"
+			],
+			[
+				"expec",
+				"expectedThrottled"
+			],
+			[
+				"actu",
+				"actualSuccess"
+			],
+			[
+				"actual",
+				"actualThrottled"
+			],
+			[
+				"expect",
+				"expectedThrottled"
+			],
+			[
+				"allo",
+				"allowedDistance"
+			],
+			[
+				"act",
+				"actualSuccess"
+			],
+			[
+				"unlo",
+				"unlockKey"
+			],
+			[
+				"ROck",
+				"RocksStatus"
+			],
+			[
+				"from",
+				"fromPause"
+			],
+			[
+				"ski",
+				"skipKeyValidation_"
+			],
+			[
+				"wait",
+				"waitForOutstandingCallsIfNeeded"
+			],
+			[
+				"skipe",
+				"skipKeyValidation_"
+			],
+			[
+				"atomi",
+				"atomic_bool"
+			],
+			[
+				"stop",
+				"stopServiceThread_"
+			],
+			[
+				"getTh",
+				"getThrottledOps"
+			],
+			[
+				"qpsC",
+				"qpsClientThread"
+			],
+			[
+				"Thr",
+				"Throttling"
+			],
+			[
+				"qpsc",
+				"qpsClientThread"
+			],
+			[
+				"skip",
+				"skipKeyValidation_"
+			],
+			[
+				"make",
+				"makeGuard"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "2014/Tree/rebuild_from_inorder_preorder.py",
+			"settings":
+			{
+				"buffer_size": 1158,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "2018/_data_structures_and_algorithms/lcs_stuff.py",
+			"settings":
+			{
+				"buffer_size": 4789,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "2018/_data_structures_and_algorithms/levenshtein_distance.py",
+			"settings":
+			{
+				"buffer_size": 1454,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "2018/_data_structures_and_algorithms/diff.py",
+			"settings":
+			{
+				"buffer_size": 1495,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "2014/Tree/tree_transversal.py",
+			"settings":
+			{
+				"buffer_size": 6916,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/Users/darraes/Dropbox (Facebook)/ThingsImWorking",
+			"settings":
+			{
+				"buffer_size": 21667,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"b",
+				"Black: Format"
+			],
+			[
+				"bla",
+				"Black: Format"
+			],
+			[
+				"blac",
+				"Black: Format"
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"projec",
+				"Project: Add Folder"
+			],
+			[
+				"proj",
+				"Project: Save As"
+			],
+			[
+				"reloa",
+				"Reload All Files"
+			],
+			[
+				"form",
+				"User: Python PEP8 Autoformat"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			],
+			[
+				"cle",
+				"Limebox: Clear lint erros"
+			],
+			[
+				"word ",
+				"Word Wrap: Toggle"
+			],
+			[
+				"c",
+				"Limebox: Clear lint erros"
+			],
+			[
+				"new pro",
+				"Limebox: Setup New Project"
+			],
+			[
+				"cl",
+				"Limebox: Clear lint erros"
+			],
+			[
+				"lime",
+				"Limebox: Open File List - Current Folder"
+			],
+			[
+				"Lime",
+				"Limebox: Open File List - Current Folder"
+			],
+			[
+				"lim",
+				"Limebox: Reload current file"
+			],
+			[
+				"clear",
+				"Limebox: Clear lint erros"
+			],
+			[
+				"Lim",
+				"Limebox: Clear lint erros"
+			],
+			[
+				"Scope",
+				"Scope Hunter: Toggle Instant Scoper"
+			],
+			[
+				"Sco",
+				"Scope Hunter: Toggle Instant Scoper"
+			],
+			[
+				"Setup",
+				"Limebox: Setup New Project"
+			],
+			[
+				"setup",
+				"Limebox: Setup New Project"
+			],
+			[
+				"Insta",
+				"Package Control: Install Package"
+			],
+			[
+				"SCOE",
+				"Scope Hunter: Toggle Instant Scoper"
+			],
+			[
+				"SCOPE",
+				"Scope Hunter: Toggle Instant Scoper"
+			],
+			[
+				"Doc",
+				"DocBlockr: Decorate line comment"
+			],
+			[
+				"Install",
+				"Package Control: Install Package"
+			],
+			[
+				"Scoe",
+				"Scope Hunter: Toggle Instant Scoper"
+			],
+			[
+				"Instal",
+				"Package Control: Install Package"
+			],
+			[
+				"scope",
+				"Scope Hunter: Toggle Instant Scoper"
+			],
+			[
+				"limeb",
+				"Limebox: Setup New Project"
+			],
+			[
+				"Scop",
+				"Scope Hunter: Toggle Instant Scoper"
+			],
+			[
+				"sco",
+				"Scope Hunter: Toggle Instant Scoper"
+			],
+			[
+				"scop",
+				"Scope Hunter: Show Scope Under Cursor(s)"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"hac",
+				"Hack: Color Clean"
+			],
+			[
+				"hach",
+				"Hack: Color Checked"
+			],
+			[
+				"",
+				"Limebox: Big Grep Search"
+			],
+			[
+				"Hack",
+				"Hack: Color Checked"
+			],
+			[
+				"add",
+				"Package Control: Add Repository"
+			],
+			[
+				"Snippet: ",
+				"Snippet: foreach …"
+			]
+		],
+		"width": 444.0
+	},
+	"console":
+	{
+		"height": 182.0,
+		"history":
+		[
+			"clear",
+			"window.run_command(\"left-column\")",
+			"window.run_command(\"left\")",
+			"window.run_command(\"left-column\")",
+			"window.active_view().run_command(\"left-column\")",
+			"view.run_command(\"left-column\")",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Strings/lcs.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/trie/in_memory_file_system.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/__TODO/max_area.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/sorting.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/my_threading.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/heap.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0040_combination_sum.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Tree/tree_deserialize.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0042_trapping_rain_water.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0039_combination_sum.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Threading/SpinLock.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Threading/Dispatchers.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/a_star.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/09/9.4_generate_subsets.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/09/9.3_magic_index.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/09/9.1_climb_stairs.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/09/9.2_robot_paths.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/09/9.8_represent_n_cents.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/04/4.7_tree_common_ancestor.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/04/4.2_graph_find_route.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/04/tree_utils.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/04/4.3_sorted_array_to_bst.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/04/4.1_tree_is_balanced.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Tree/tree_transversal.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Tree/in_order_listfy.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Tree/rebuild_from_inorder_preorder.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/03/3.2_stack_with_min.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/03/3.1_three_stacks_single_array.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/03/3.5_queue_using_two_stacks.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/03/3.3_set_of_stacks.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/02/2.5_linked_list_number_sum.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/02/2.4_list_partition.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/02/2.3_remove_no_access.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0023_merge_k_sorted_lists.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/02/2.2_kth_last_element.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/02/2.1_remove_duplicates.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/01/1.2_reverse_str.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/01/1.4_url_encoding.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/01/1.1_unique_characteres.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0037_sudoku_solver.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0036_valid_sudoku.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_career_cup_/bfs_statue_rotations.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_career_cup_/dfs_task_allocation.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_career_cup_/tree_sink_zeros.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0038_count_say.py",
+		"/Users/darraes/Dropbox (Facebook)/ThingsImWorking",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/quick_select.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/17/17.13_bst_to_list.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0033_search_rotated_array.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0035_search_insert.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0034_find_first_last.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/17/17.14_unconcatenate_words.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0031_next_permutation.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0032_longest_valid_parenthesis.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0029_divide_integers.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and _algorithms/a_star.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and _algorithms/heap.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/_Base/PriorityQueue.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0028_strstr.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0027_remove_in_place.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0026_remove_duplicates.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0030_subs_concat_all_words.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0012_integer_to_roman.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0020_easy_valid_parentheses.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0025_swap_k_nodes.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0024_swap_node_pairs.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0021_merge_sorted_lists.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0019_remove_kth_last.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0018_4sum.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0015_3sum.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0022_generate_parenthesis.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/17/17.7_numbers_in_english.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0010_hard_regular_expression_matching.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0017_phone_number_words.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/17/17.5_master_mind_game.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/17/17.6_indices_to_sort.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/17/17.2_tic_tac_toe.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/17/17.3_trailing_zeros.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0016_closest3Sum.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/17/17.1_in_place_swap.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0014_longest_common_prefix.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0016_closets3Sum.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0013_roman_to_int.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/12_integer_to_roman.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/13_roman_to_int.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0079_medium_word_exist_on_board.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/10/10.1_merge_sorted_arrays.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/10/10.2_sort_by_anagrams.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/07/7.4_all_methods_from_add.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/DynamicProgramming/dy_find_ips.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/07/7.7_kth_uggly_number.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/05/5.2_decimal_binary_representation.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/05/5.1_m_in_n.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/06/6.5_egg_drop.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Graph/graph_multithreading_build.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Graph/graph_shield_agents_msgs.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Graph/statue_rotations.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Graph/wine_bottle_pouring.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0011_container_with_most_water.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0009_is_n_palindrome.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0011_max_area_on_chart.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Search/find_tickets.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/01/1.3_is_permutation.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0004_median_sorted_arrays.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0007_reverse_integer.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0008_atoi.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0006_medium_zig_zag_conversion.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Math/nth_uggly_number.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/DynamicProgramming/dy_egg_drop.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0001_easy_two_sum.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/10_hard_regular_expression_matching.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0003_longest_unique_substring.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0005_longest_palindromic_sbstring.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0104_easy_max_depth_binary_tree.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/01/1.5_string_compress_string.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/linked_list/linked_list_number_sum.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/easy_two_sum.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/medium_add_two_numbers.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/medium_word_exist_on_board.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/easy_valid_parentheses.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/easy_max_depth_binary_tree.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/path_finding/task_allocation.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/DynamicProgramming/dy_linkedin_paint_houses.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Search/servers_capacity.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/tree/tree_utils.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/graph/graph_multithreading_build.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/linked_list/replace_interval.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/path_finding/a_star.py"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"distance_rec",
+			"- 1",
+			"print",
+			"||",
+			"lps",
+			"lcs_length_rec",
+			"- 1",
+			"len(Y)",
+			"len(X)",
+			"range",
+			"enumerate",
+			"\" \"",
+			"]]",
+			"[[",
+			"combinationSum",
+			"mpmc.",
+			"get",
+			"put",
+			"threading.",
+			"IntegerDispatcher",
+			"#",
+			"threading.",
+			"dispatcher",
+			"cfull",
+			"target",
+			"height",
+			"mid",
+			"find_magic_index",
+			"\"",
+			"build",
+			"idx",
+			"s.pop(",
+			"s.push(",
+			"StackTrio",
+			" ",
+			"print",
+			"merge_sort",
+			"res",
+			"level_use",
+			"[j]",
+			"[i]",
+			"r/3",
+			"[j/3]",
+			"[i/3]",
+			"enforce_authorization",
+			"100",
+			"authorization_sampling_ratio --value 100",
+			"  read --username=darraes",
+			"&&",
+			"input",
+			"valid",
+			"isValidSudoku",
+			"board[i][j]",
+			"[5, 7, 7, 8, 8, 10]",
+			"search",
+			"maintainers USER",
+			"maintainers",
+			"#        ",
+			"-1",
+			"mid",
+			"pivot",
+			"enable_soft_authorization",
+			"left",
+			"100",
+			"errors",
+			"1000",
+			"print(",
+			"# print",
+			"print",
+			"##",
+			"sidx, val",
+			"enforce_authorization",
+			"set_dflag",
+			"enable_soft_authorization",
+			"Soft ",
+			"enable_soft_authorization --value 1",
+			"Soft ",
+			"manifold_global_prn_2",
+			"&&",
+			"carry",
+			" ",
+			"#",
+			"start",
+			"#",
+			"_sum",
+			"divisor",
+			"dividend",
+			"numbers",
+			"print",
+			"swapPairs",
+			"# ",
+			"Node(",
+			"#",
+			"node",
+			"head",
+			" +",
+			"sub_res",
+			"n_res",
+			"value",
+			"print",
+			"base_convert",
+			"# ",
+			"#",
+			"sub_dir",
+			"file_watcher_callbacks",
+			"split_path",
+			"print",
+			"#",
+			"continue",
+			"multiply",
+			"subtraction",
+			"assertTrue",
+			"None"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "2014/Tree/rebuild_from_inorder_preorder.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1158,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "2018/_data_structures_and_algorithms/lcs_stuff.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4789,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								52,
+								0
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 61.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "2018/_data_structures_and_algorithms/levenshtein_distance.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1454,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								739,
+								739
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 285.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "2018/_data_structures_and_algorithms/diff.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1495,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								939,
+								939
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "2014/Tree/tree_transversal.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6916,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2814.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Users/darraes/Dropbox (Facebook)/ThingsImWorking",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21667,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								19156,
+								19156
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 5026.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"output.scope_viewer":
+	{
+		"height": 201.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"zippydb/server/QuickStackManager.h"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 218.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
