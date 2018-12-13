@@ -122,11 +122,11 @@ def lcsubstring(X, Y):
 
 
 #############################################
-######### Longest Palindromic Substring #####
+######### Longest Palindromic Subsequence ###
 #############################################
 
 
-def lps_length(X, i, j, cache):
+def lps_length_rec(X, i, j, cache):
     if i > j:
         return 0
     if i == j:
@@ -136,10 +136,10 @@ def lps_length(X, i, j, cache):
         return cache[(i, j)]
 
     if X[i] == X[j]:
-        cache[(i, j)] = 2 + lps_length(X, i + 1, j - 1, cache)
+        cache[(i, j)] = 2 + lps_length_rec(X, i + 1, j - 1, cache)
     else:
         cache[(i, j)] = max(
-            lps_length(X, i + 1, j, cache), lps_length(X, i, j - 1, cache)
+            lps_length_rec(X, i + 1, j, cache), lps_length_rec(X, i, j - 1, cache)
         )
 
     return cache[(i, j)]
@@ -177,13 +177,23 @@ class TestFunctions(unittest.TestCase):
 
     def test_lcsubstring_length(self):
         self.assertEqual(4, lcsubstring_length("ABABC", "BABCA"))
+        self.assertEqual(
+            10,
+            lcsubstring_length(
+                "forgeeksskeegfor", "".join(reversed("forgeeksskeegfor"))
+            ),
+        )
 
     def test_lcsubstring(self):
         self.assertEqual("BABC", lcsubstring("ABABC", "BABCA"))
+        self.assertEqual(
+            "geeksskeeg",
+            lcsubstring("forgeeksskeegfor", "".join(reversed("forgeeksskeegfor"))),
+        )
 
     def test_lps(self):
         s = "ABBDCACB"
-        self.assertEqual(5, lps_length(s, 0, len(s) - 1, {}))
+        self.assertEqual(5, lps_length_rec(s, 0, len(s) - 1, {}))
 
 
 if __name__ == "__main__":
