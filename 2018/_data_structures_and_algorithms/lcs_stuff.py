@@ -186,10 +186,6 @@ class TestFunctions(unittest.TestCase):
 
     def test_lcsubstring(self):
         self.assertEqual("BABC", lcsubstring("ABABC", "BABCA"))
-        self.assertEqual(
-            "geeksskeeg",
-            lcsubstring("forgeeksskeegfor", "".join(reversed("forgeeksskeegfor"))),
-        )
 
     def test_lps(self):
         s = "ABBDCACB"
