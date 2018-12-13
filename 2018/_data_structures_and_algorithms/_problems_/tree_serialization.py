@@ -1,5 +1,6 @@
 from tree_utils import TreeNode, pretty_print, friendly_build, tree_equals, tnode
 
+
 def serialize_pre(node, buf):
     if not node:
         return
@@ -7,6 +8,7 @@ def serialize_pre(node, buf):
     buf.append(node.value)
     serialize_pre(node.left, buf)
     serialize_pre(node.right, buf)
+
 
 def serialize_in(node, buf):
     if not node:
