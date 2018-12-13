@@ -1,4 +1,4 @@
-from tree_utils import TNode, pretty_print, friendly_build, tree_equals
+from tree_utils import tnode, pretty_print, friendly_build, tree_equals
 
 
 def build(array):
@@ -8,7 +8,7 @@ def build(array):
 
         mid = int((i + j) / 2)
 
-        node = TNode(array[mid])
+        node = tnode(array[mid])
         node.left = _build(array, i, mid - 1)
         node.right = _build(array, mid + 1, j)
 

@@ -7,12 +7,8 @@ class TreeNode:
         self.right = right
         self.value = value
 
-class TNode:
-    def __init__(self, value, left = None, right = None):
-        self.value = value
-        self.left = left
-        self.right = right
-
+def tnode(value, left = None, right = None):
+    return TreeNode(left, right, value)
 
 # Calculates the depth of the tree
 def depth(node):
