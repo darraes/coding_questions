@@ -124,6 +124,25 @@ class TestFunctions(unittest.TestCase):
         # self.assertTrue(trie.startsWith("th"))
         # self.assertFalse(trie.startsWith("fab"))
 
+    def test_2(self):
+        trie = CompressedTrie()
+
+        trie.insert("factory")
+        trie.insert("facing")
+        trie.insert("the")
+        trie.insert("then")
+        trie.insert("there")
+        trie.insert("this")
+        trie.insert("face")
+        trie.insert("facebook")
+
+        trie.print_trie()
+
+        # self.assertTrue(trie.search("there"))
+        # self.assertFalse(trie.search("therein"))
+        # self.assertTrue(trie.startsWith("th"))
+        # self.assertFalse(trie.startsWith("fab"))
+
 
 if __name__ == "__main__":
     unittest.main()
