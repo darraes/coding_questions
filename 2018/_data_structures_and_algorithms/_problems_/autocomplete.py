@@ -75,12 +75,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(["face", "facebook"], trie.starts_with("face"))
         self.assertEqual(["face", "facebook", "facing"], trie.starts_with("fac"))
         self.assertEqual([], trie.starts_with("worf"))
-        #self.assertEqual(trie.starts_with("fac"))
-        #self.assertEqual(trie.starts_with("faci"))
-        #self.assertEqual(trie.starts_with("face"))
-        #self.assertEqual(trie.starts_with("faceb"))
-        #self.assertEqual(trie.starts_with("wor"))
-        #self.assertEqual(trie.starts_with("wording"))
+        self.assertEqual(["facing"], trie.starts_with("faci"))
 
 
 if __name__ == "__main__":
