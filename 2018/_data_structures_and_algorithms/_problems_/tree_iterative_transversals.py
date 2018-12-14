@@ -75,8 +75,16 @@ class PreOrderIterator(Iterator):
         self.stack = []
         self.current = None
 
-    def next(self):
-        pass
+    def __next__(self):
+        while self.current or len(self.stack) > 0:
+            if self.current:
+                self.stack.append(self.current)
+                self.current = self.current.left
+                return self.current.value
+            else:
+                element = self.stack.pop()
+                self.current = element.right
+        raise StopIteration
 
 ########## END PRE ORDER ######################
 
@@ -145,6 +153,13 @@ class TestFunctions(unittest.TestCase):
         pre_buf = []
         pre_order(root, pre_buf)
         self.assertEqual(pre_buf, pre_order_iterative(root))
+
+        ite_res = []
+        ite = PreOrderIterator(root)
+        for value in ite: 
+            ite_res.append(value)
+
+        self.assertEqual(pre_buf, ite_res)
 
 
     def test_post_order(self):
