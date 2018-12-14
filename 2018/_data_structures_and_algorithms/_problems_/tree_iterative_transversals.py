@@ -73,14 +73,15 @@ def pre_order_iterative(node):
 class PreOrderIterator(Iterator):
     def __init__(self, node):
         self.stack = []
-        self.current = None
+        self.current = node
 
     def __next__(self):
         while self.current or len(self.stack) > 0:
             if self.current:
+                visit =self.current.value
                 self.stack.append(self.current)
                 self.current = self.current.left
-                return self.current.value
+                return visit
             else:
                 element = self.stack.pop()
                 self.current = element.right
