@@ -32,7 +32,7 @@ def same_direction(statues):
 
 def shortest_path(statues, moves):
     step_queue = deque()
-    cache = set()
+    seen = set()
 
     step_queue.append((statues, 0, [statues], []))
 
@@ -47,13 +47,13 @@ def shortest_path(statues, moves):
 
         for m in moves:
             next_step = move(step, m)
-            if next_step not in cache:
+            if next_step not in seen:
                 step_queue.append(
                     (next_step, 
                      distance + 1,
                      copy(path) + [next_step],
                      copy(past_moves) + [m]))
-                cache.add(next_step)
+                seen.add(next_step)
 
     return (-1, None, None)
 
