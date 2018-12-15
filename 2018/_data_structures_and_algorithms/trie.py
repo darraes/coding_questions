@@ -33,10 +33,10 @@ class CompressedTrie(object):
                     # face      facebook
                     #     ^     ^   ^
                     #     j   idx   i
-                    
+
                     current_node = current_node.children[word[idx]]
                     if i == len(word):
-                        # Case 3: Label and word are the same 
+                        # Case 3: Label and word are the same
                         # face      face
                         #     ^     ^   ^
                         #     j   idx   i
@@ -86,10 +86,102 @@ class CompressedTrie(object):
                     return
 
     def search(self, word):
-        return False
+        current_node = self.root
+        i = 0
 
-    def starts_with(self, prefix):
-        return []
+        while i < len(word):
+            if word[i] not in current_node.edges:
+                # Case 1: No path starting with that letter (New)
+                return False
+
+            else:
+                idx = i
+                j = 0
+                label = current_node.edges[word[i]]
+                while j < len(label) and i < len(word) and word[i] == label[j]:
+                    j += 1
+                    i += 1
+
+                if j == len(label):
+                    # Case 2: label is at least a prefix for the word
+                    # E.g. label=face, word=facebook
+                    # face      facebook
+                    #     ^     ^   ^
+                    #     j   idx   i
+                    current_node = current_node.children[word[idx]]
+                    if i == len(word):
+                        # Case 3: label == word
+                        # face      face
+                        #     ^     ^   ^
+                        #     j   idx   i
+                        return current_node.is_end
+
+                else:
+                    return False
+
+    def starts_with(self, word):
+        ans = []
+
+        def _all_under(node, path):
+            nonlocal ans
+            if node.is_end:
+                ans.append(path)
+
+            for key, next_node in node.children.items():
+                _all_under(next_node, path + node.edges[key])
+
+            return ans
+
+        current_node = self.root
+        i = 0
+
+        while i < len(word):
+            if word[i] not in current_node.edges:
+                # Case 1: No path starting with that letter (New)
+                return []
+
+            else:
+                idx = i
+                j = 0
+                label = current_node.edges[word[i]]
+                while j < len(label) and i < len(word) and word[i] == label[j]:
+                    j += 1
+                    i += 1
+
+                if j == len(label):
+                    # Case 2: label is at least a prefix for the word
+                    # E.g. label=face, word=facebook
+                    # face      facebook
+                    #     ^     ^   ^
+                    #     j   idx   i
+                    current_node = current_node.children[word[idx]]
+                    if i == len(word):
+                        # Case 3: label == word
+                        # face      face
+                        #     ^     ^   ^
+                        #     j   idx   i
+                        return _all_under(current_node, word)
+
+                else:
+                    if i == len(word):
+                        # Case 4: word is a prefix of the label
+                        # E.g. label=facebook, word=face
+                        # State:
+                        # facebook      face
+                        #     ^         ^   ^
+                        #     j       idx   i
+                        return _all_under(
+                            current_node.children[word[idx]], word + label[j:]
+                        )
+                    else:
+                        # Case 5: word is partial match of label.
+                        # E.g. label=facebook, word=facing
+                        # State:
+                        # facebook      facing
+                        #    ^          ^  ^
+                        #    j        idx  i
+
+                        return []
 
     def print_trie(self):
         def _print_trie(node, level):
@@ -125,29 +217,22 @@ class TestFunctions(unittest.TestCase):
 
         trie.print_trie()
 
-        # self.assertTrue(trie.search("there"))
-        # self.assertFalse(trie.search("therein"))
-        # self.assertTrue(trie.startsWith("th"))
-        # self.assertFalse(trie.startsWith("fab"))
-
-    def test_2(self):
-        trie = CompressedTrie()
-
-        trie.insert("factory")
-        trie.insert("facing")
-        trie.insert("the")
-        trie.insert("then")
-        trie.insert("there")
-        trie.insert("this")
-        trie.insert("face")
-        trie.insert("facebook")
-
-        trie.print_trie()
-
-        # self.assertTrue(trie.search("there"))
-        # self.assertFalse(trie.search("therein"))
-        # self.assertTrue(trie.startsWith("th"))
-        # self.assertFalse(trie.startsWith("fab"))
+        self.assertTrue(trie.search("there"))
+        self.assertTrue(trie.search("face"))
+        self.assertTrue(trie.search("facebook"))
+        self.assertTrue(trie.search("facing"))
+        self.assertTrue(trie.search("factory"))
+        self.assertFalse(trie.search("they"))
+        self.assertFalse(trie.search("fac"))
+        self.assertFalse(trie.search("faceb"))
+        self.assertFalse(trie.search("therein"))
+        self.assertEqual(["facing"], trie.starts_with("faci"))
+        self.assertEqual(["this", "the", "there", "then"], trie.starts_with("th"))
+        self.assertEqual([], trie.starts_with("fab"))
+        self.assertEqual(["face", "facebook"], trie.starts_with("face"))
+        self.assertEqual(
+            ["face", "facebook", "facing", "factory"], trie.starts_with("fac")
+        )
 
 
 if __name__ == "__main__":
