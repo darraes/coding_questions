@@ -105,12 +105,11 @@ class SpinLock(object):
 
     def compare_exchange(self, val, comparand):
         with self.cs:
+            previous = self.flag
             if self.flag == comparand:
-                old = self.flag
                 self.flag = val
-                return old
 
-            return self.flag
+            return previous
 
 
 ###############################################################
