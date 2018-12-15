@@ -85,6 +85,12 @@ class CompressedTrie(object):
                         new_child.children[word[i]] = CompressedTrieNode(is_end=True)
                     return
 
+    def search(self, word):
+        return False
+
+    def starts_with(self, prefix):
+        return []
+
     def print_trie(self):
         def _print_trie(node, level):
             for i, edge in node.edges.items():

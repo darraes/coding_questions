@@ -35,13 +35,11 @@ class Solution:
         while e_window < len(chars):
             if chars[e_window] not in window \
                     or window[chars[e_window]] < b_window:
-                window[chars[e_window]] = e_window
-                e_window += 1
-                res = max(res, e_window - b_window)
+                res = max(res, e_window - b_window + 1)
             else:
                 b_window = window[chars[e_window]] + 1
-                window[chars[e_window]] = e_window
-                e_window += 1
+            window[chars[e_window]] = e_window
+            e_window += 1
 
         return res
 
