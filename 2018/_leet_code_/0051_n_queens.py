@@ -6,16 +6,7 @@ class Solution:
         """
         res = []
         self._solve([-1] * n, 0, n, res)
-
-        ans = []
-        for r in res:
-            ans.append([])
-            for e in r:
-                code = ["."] * n
-                code[e] = "Q"
-                ans[-1].append("".join(code))
-
-        return ans
+        return self._encode(res, n)
 
     def _solve(self, board, i, n, results):
         if i == len(board):
@@ -25,6 +16,17 @@ class Solution:
         for c in self._candidates(board, i, n):
             board[i] = c
             self._solve(board, i + 1, n, results)
+
+    def _encode(self, res, n):
+        ans = []
+        for r in res:
+            ans.append([])
+            for e in r:
+                code = ["."] * n
+                code[e] = "Q"
+                ans[-1].append("".join(code))
+
+        return ans
 
     def _candidates(self, board, i, n):
         candidates = set([c for c in range(n)])
@@ -47,7 +49,7 @@ import unittest
 class TestFunctions(unittest.TestCase):
     def test_1(self):
         s = Solution()
-        self.assertEqual([], s.solveNQueens(0))
+        self.assertEqual([[]], s.solveNQueens(0))
         self.assertEqual([["Q"]], s.solveNQueens(1))
         self.assertEqual([], s.solveNQueens(2))
         self.assertEqual([], s.solveNQueens(3))
