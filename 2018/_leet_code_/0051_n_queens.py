@@ -17,7 +17,6 @@ class Solution:
 
         return ans
 
-
     def _solve(self, board, i, n, results):
         if i == len(board):
             results.append([] + board)
@@ -48,9 +47,28 @@ import unittest
 class TestFunctions(unittest.TestCase):
     def test_1(self):
         s = Solution()
+        self.assertEqual([], s.solveNQueens(0))
+        self.assertEqual([["Q"]], s.solveNQueens(1))
+        self.assertEqual([], s.solveNQueens(2))
+        self.assertEqual([], s.solveNQueens(3))
         self.assertEqual(
             [[".Q..", "...Q", "Q...", "..Q."], ["..Q.", "Q...", "...Q", ".Q.."]],
             s.solveNQueens(4),
+        )
+        self.assertEqual(
+            [
+                ["Q....", "..Q..", "....Q", ".Q...", "...Q."],
+                ["Q....", "...Q.", ".Q...", "....Q", "..Q.."],
+                [".Q...", "...Q.", "Q....", "..Q..", "....Q"],
+                [".Q...", "....Q", "..Q..", "Q....", "...Q."],
+                ["..Q..", "Q....", "...Q.", ".Q...", "....Q"],
+                ["..Q..", "....Q", ".Q...", "...Q.", "Q...."],
+                ["...Q.", "Q....", "..Q..", "....Q", ".Q..."],
+                ["...Q.", ".Q...", "....Q", "..Q..", "Q...."],
+                ["....Q", ".Q...", "...Q.", "Q....", "..Q.."],
+                ["....Q", "..Q..", "Q....", "...Q.", ".Q..."],
+            ],
+            s.solveNQueens(5),
         )
 
 
