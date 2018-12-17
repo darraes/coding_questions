@@ -3,8 +3,10 @@ from collections import Iterator
 
 ########## IN ORDER ###########################
 
+
 def in_order(node, ans):
-    if node is None: return
+    if node is None:
+        return
 
     in_order(node.left, ans)
     ans.append(node.value)
@@ -46,11 +48,13 @@ class InOrderIterator(Iterator):
 
 ########## PRE ORDER #########################
 
+
 def pre_order(node, ans):
-    if node is None: return
+    if node is None:
+        return
 
     ans.append(node.value)
-    pre_order(node.left, ans)    
+    pre_order(node.left, ans)
     pre_order(node.right, ans)
 
 
@@ -78,7 +82,7 @@ class PreOrderIterator(Iterator):
     def __next__(self):
         while self.current or len(self.stack) > 0:
             if self.current:
-                visit =self.current.value
+                visit = self.current.value
                 self.stack.append(self.current)
                 self.current = self.current.left
                 return visit
@@ -87,14 +91,17 @@ class PreOrderIterator(Iterator):
                 self.current = element.right
         raise StopIteration
 
+
 ########## END PRE ORDER ######################
 
 ########## POST ORDER #########################
 
+
 def post_order(node, ans):
-    if node is None: return
-    
-    post_order(node.left, ans)    
+    if node is None:
+        return
+
+    post_order(node.left, ans)
     post_order(node.right, ans)
     ans.append(node.value)
 
@@ -136,7 +143,7 @@ class TestFunctions(unittest.TestCase):
 
         ite_res = []
         ite = InOrderIterator(root)
-        for value in ite: 
+        for value in ite:
             ite_res.append(value)
 
         self.assertEqual(in_buf, ite_res)
@@ -157,11 +164,10 @@ class TestFunctions(unittest.TestCase):
 
         ite_res = []
         ite = PreOrderIterator(root)
-        for value in ite: 
+        for value in ite:
             ite_res.append(value)
 
         self.assertEqual(pre_buf, ite_res)
-
 
     def test_post_order(self):
         return
@@ -177,8 +183,6 @@ class TestFunctions(unittest.TestCase):
         post_buf = []
         post_order(root, post_buf)
         self.assertEqual(post_buf, post_order_iterative(root))
-
-        
 
 
 if __name__ == "__main__":
