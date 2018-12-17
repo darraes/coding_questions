@@ -24,43 +24,6 @@ class Solution:
 
         return -1
 
-    def search2(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-        return self._rotated_seach(nums, target, 0, len(nums))
-
-    def _rotated_seach(self, nums, target, i, j):
-        def _search(nums, target, s, e):
-            res_i = bisect.bisect(nums, target, s, e)
-            if res_i > 0 and nums[res_i - 1] == target:
-                return res_i - 1
-            return -1
-
-        if i > j or i >= len(nums):
-            return -1
-
-        if nums[i] <= nums[j - 1]:
-            res = _search(nums, target, i, j)
-            return res if res >= 0 else -1
-
-        mid = int(i + (j - i) / 2)
-
-        if nums[i] <= nums[mid]:
-            res = _search(nums, target, i, mid + 1)
-            if res >= 0:
-                return res
-            else:
-                return self._rotated_seach(nums, target, mid + 1, j)
-        else:
-            res = _search(nums, target, mid, j)
-            if res >= 0:
-                return res
-            else:
-                return self._rotated_seach(nums, target, i, mid)
-
 
 ###############################################################
 
