@@ -23,7 +23,7 @@ class SimpleLinkedList(object):
     def evict_last_if_full(self):
         if self.size == self.capacity:
             self.size -= 1
-            return self._advance_tail()
+            return self._retreat_tail()
 
     def move_to_head(self, n):
         if n.key == self.head.key:
@@ -38,16 +38,17 @@ class SimpleLinkedList(object):
             my_next.prev = my_prev
 
         if n.key == self.tail.key:
-            self._advance_tail()
+            self._retreat_tail()
 
         self._add_as_head(n)
 
-    def _advance_tail(self):
+    def _retreat_tail(self):
         tail = None
         if self.tail:
             tail = self.tail
             new_tail = self.tail.prev
-            new_tail.next = None
+            if new_tail:
+                new_tail.next = None
             self.tail.prev = None
             self.tail = new_tail
         return tail
