@@ -19,7 +19,6 @@ class Solution:
 
 ###############################################################
 import unittest
-import sys
 
 
 class TestFunctions(unittest.TestCase):

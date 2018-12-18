@@ -50,8 +50,8 @@ def friendly_build(lines):
         return TreeNode(None, None, int(value))
 
     parents = deque()
-    next = deque()
-    next.append(build_node(lines[0][0]))
+    children = deque()
+    children.append(build_node(lines[0][0]))
     root = None
 
     for i in range(len(lines)):
@@ -67,15 +67,15 @@ def friendly_build(lines):
             j += 1
 
             if current_parent.left:
-                next.append(current_parent.left)
+                children.append(current_parent.left)
             if current_parent.right:
-                next.append(current_parent.right)
+                children.append(current_parent.right)
 
         if i != 0 and j != len(lines[i]):
             raise
 
-        parents = next
-        next = deque()
+        parents = children
+        children = deque()
 
     return root
 
