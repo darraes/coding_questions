@@ -103,7 +103,7 @@ class LRUCache(object):
             self.store.move_to_head(n)
 
     def get(self, key):
-        if key in lookup:
+        if key in self.lookup:
             n = self.lookup[key]
             self.store.move_to_head(n)
             return n.val
@@ -120,25 +120,58 @@ import unittest
 
 
 class TestFunctions(unittest.TestCase):
-    def test_1(self):
+    def test_new_insertions(self):
+        cache = LRUCache(3)
+        cache.put("k1", "v1")
+        self.assertEqual("v1", cache.get("k1"))
+        cache.put("k2", "v2")
+        self.assertEqual("v2", cache.get("k2"))
+        cache.put("k3", "v3")
+        self.assertEqual("v3", cache.get("k3"))
+        cache.put("k4", "v4")
+        self.assertEqual("v4", cache.get("k4"))
+        self.assertEqual("v3", cache.get("k3"))
+        self.assertEqual("v2", cache.get("k2"))
+        self.assertEqual(None, cache.get("k1"))
+
+    def test_tail_to_head(self):
         cache = LRUCache(3)
         cache.put("k1", "v1")
         cache.put("k2", "v2")
         cache.put("k3", "v3")
-        cache.put("k2", "v2")
+        cache.put("k1", "v11")
         cache.put("k4", "v4")
-        cache.put("k2", "v5")
+        self.assertEqual(None, cache.get("k2"))
+
+        self.assertEqual("v3", cache.get("k3"))
         cache.put("k5", "v5")
-        cache.put("k2", "v5")
-        cache.put("k6", "v5")
-        cache.put("k7", "v5")
-        cache.put("k8", "v5")
-        cache.put("k9", "v5")
-        cache.put("k9", "v5")
-        cache.put("k10", "v5")
-        cache.put("k11", "v5")
-        cache.put("k12", "v5")
-        cache.print()
+        self.assertEqual(None, cache.get("k1"))
+
+    def test_middle_to_head(self):
+        cache = LRUCache(3)
+        cache.put("k1", "v1")
+        cache.put("k2", "v2")
+        cache.put("k3", "v3")
+        cache.put("k2", "v22")
+        cache.put("k4", "v4")
+        self.assertEqual(None, cache.get("k1"))
+
+        self.assertEqual("v22", cache.get("k2"))
+        cache.put("k5", "v5")
+        self.assertEqual(None, cache.get("k3"))
+
+    def test_head_to_head(self):
+        cache = LRUCache(3)
+        cache.put("k1", "v1")
+        cache.put("k2", "v2")
+        cache.put("k3", "v3")
+        cache.put("k3", "v4")
+        cache.put("k4", "v4")
+        self.assertEqual(None, cache.get("k1"))
+
+        self.assertEqual("v4", cache.get("k4"))
+        cache.put("k5", "v5")
+        self.assertEqual(None, cache.get("k2"))
 
 
 if __name__ == "__main__":

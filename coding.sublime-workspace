@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"is",
+				"is_end"
+			],
+			[
+				"per",
+				"permuteUnique"
+			],
+			[
+				"_",
+				"_match"
+			],
+			[
+				"a",
+				"append"
+			],
+			[
+				"assert",
+				"assertEquals\tstatement"
+			],
+			[
 				"not",
 				"not_full\tstatement"
 			],
@@ -46,10 +66,6 @@
 			[
 				"get_m",
 				"get_manifest\tfunction"
-			],
-			[
-				"assert",
-				"assertFalse\tfunction"
 			],
 			[
 				"_mani",
@@ -498,75 +514,41 @@
 			[
 				"qpsC",
 				"qpsClientThread"
-			],
-			[
-				"Thr",
-				"Throttling"
-			],
-			[
-				"qpsc",
-				"qpsClientThread"
-			],
-			[
-				"skip",
-				"skipKeyValidation_"
-			],
-			[
-				"make",
-				"makeGuard"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "2014/Tree/rebuild_from_inorder_preorder.py",
+			"file": "2018/_leet_code_/0062_unique_paths.py",
 			"settings":
 			{
-				"buffer_size": 1158,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "2018/_data_structures_and_algorithms/lcs_stuff.py",
-			"settings":
-			{
-				"buffer_size": 4789,
+				"buffer_size": 714,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "2018/_data_structures_and_algorithms/levenshtein_distance.py",
+			"file": "2018/_leet_code_/0064_mininum_path_sum.py",
 			"settings":
 			{
-				"buffer_size": 1454,
+				"buffer_size": 1941,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "2018/_data_structures_and_algorithms/diff.py",
+			"file": "2018/_interviews_/interval/merge_interval.py",
 			"settings":
 			{
-				"buffer_size": 1495,
-				"encoding": "UTF-8",
+				"buffer_size": 2505,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "2014/Tree/tree_transversal.py",
+			"file": "2018/_interviews_/interval/collapse_intervals.py",
 			"settings":
 			{
-				"buffer_size": 6916,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/Users/darraes/Dropbox (Facebook)/ThingsImWorking",
-			"settings":
-			{
-				"buffer_size": 21667,
-				"encoding": "UTF-8",
+				"buffer_size": 1647,
 				"line_ending": "Unix"
 			}
 		}
@@ -582,6 +564,18 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"identa",
+				"Indexing Status"
+			],
+			[
+				"reloa",
+				"Reload All Files"
+			],
+			[
+				"side",
+				"View: Toggle Side Bar"
+			],
 			[
 				"b",
 				"Black: Format"
@@ -609,10 +603,6 @@
 			[
 				"proj",
 				"Project: Save As"
-			],
-			[
-				"reloa",
-				"Reload All Files"
 			],
 			[
 				"form",
@@ -792,16 +782,83 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/Users/darraes/Documents/Problems/coding_questions/2018",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_career_cup_",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/_problems_",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/array",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/dp",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/graph",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/interval",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/search",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/trie",
+		"/Users/darraes/Documents/Problems/coding_questions/2014",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/DynamicProgramming",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Matrix",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Search",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Tree"
+	],
 	"file_history":
 	[
-		"/Users/darraes/Documents/Problems/coding_questions/2014/Strings/lcs.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/trie/in_memory_file_system.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/__TODO/max_area.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/sorting.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0055_jump_game.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/interval/insert_interval.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/interval/collapse_intervals.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/04/tree_utils.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0056_merge_intervals.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/interval/merge_interval.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0031_next_permutation.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0053_max_sub_array.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/dp/longest_path.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/graph/count_islands.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/graph/flood_fill_borders.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/search/longest_path.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0033_search_rotated_array.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/_problems_/tree_iterative_transversals.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/10/10.5_search_string_sorted_with_empty.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/10/10.6_search_on_sorted_matrix.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Search/search_gexe_2_paint_edge.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/10/10.3_search_on_rotated_sorted_array.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/lru_cache.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_career_cup_/bfs_statue_rotations.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0049_group_anagrams.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Matrix/rotate_90_degrees.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0051_n_queens.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0052_n_queens2.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0048_rotate_image.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0043_multiply_strings.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/lcs_stuff.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0045_jump_game.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0046_permutations.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_career_cup_/tree_sink_zeros.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0003_medium_longest_unique_substring.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0047_permutations_2.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/trie.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/my_threading.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/_problems_/tree_serialization.py",
+		"/Users/darraes/Dropbox (Facebook)/ThingsImWorking",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0044_wildcard_matching.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0004_median_sorted_arrays.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/sorting.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/_problems_/autocomplete.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0041_finding_missing_positive.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0208_implement_trie.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Tree/tree_transversal.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0013_roman_to_int.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Tree/rebuild_from_inorder_preorder.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Tree/tree_deserialize.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/_problems_/tree_utils.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/04/4.3_sorted_array_to_bst.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/levenshtein_distance.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/_problems_/largest_square_submatrix.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/diff.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2018/_interviews_/trie/in_memory_file_system.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/Strings/lcs.py",
+		"/Users/darraes/Documents/Problems/coding_questions/2014/__TODO/max_area.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/heap.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0040_combination_sum.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/Tree/tree_deserialize.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0042_trapping_rain_water.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0039_combination_sum.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2014/Threading/SpinLock.py",
@@ -814,12 +871,8 @@
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/09/9.8_represent_n_cents.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/04/4.7_tree_common_ancestor.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/04/4.2_graph_find_route.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/04/tree_utils.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/04/4.3_sorted_array_to_bst.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/04/4.1_tree_is_balanced.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/Tree/tree_transversal.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2014/Tree/in_order_listfy.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/Tree/rebuild_from_inorder_preorder.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/03/3.2_stack_with_min.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/03/3.1_three_stacks_single_array.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/03/3.5_queue_using_two_stacks.py",
@@ -835,18 +888,13 @@
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/01/1.1_unique_characteres.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0037_sudoku_solver.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0036_valid_sudoku.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_career_cup_/bfs_statue_rotations.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_career_cup_/dfs_task_allocation.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_career_cup_/tree_sink_zeros.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0038_count_say.py",
-		"/Users/darraes/Dropbox (Facebook)/ThingsImWorking",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and_algorithms/quick_select.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/17/17.13_bst_to_list.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0033_search_rotated_array.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0035_search_insert.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0034_find_first_last.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/17/17.14_unconcatenate_words.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0031_next_permutation.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0032_longest_valid_parenthesis.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0029_divide_integers.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_data_structures_and _algorithms/a_star.py",
@@ -876,56 +924,17 @@
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/17/17.1_in_place_swap.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0014_longest_common_prefix.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0016_closets3Sum.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0013_roman_to_int.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/12_integer_to_roman.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/13_roman_to_int.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0079_medium_word_exist_on_board.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/10/10.1_merge_sorted_arrays.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/10/10.2_sort_by_anagrams.py",
 		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/07/7.4_all_methods_from_add.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/DynamicProgramming/dy_find_ips.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/07/7.7_kth_uggly_number.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/05/5.2_decimal_binary_representation.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/05/5.1_m_in_n.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/06/6.5_egg_drop.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/Graph/graph_multithreading_build.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/Graph/graph_shield_agents_msgs.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/Graph/statue_rotations.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/Graph/wine_bottle_pouring.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0011_container_with_most_water.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0009_is_n_palindrome.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0011_max_area_on_chart.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/Search/find_tickets.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/01/1.3_is_permutation.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0004_median_sorted_arrays.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0007_reverse_integer.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0008_atoi.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0006_medium_zig_zag_conversion.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/Math/nth_uggly_number.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/DynamicProgramming/dy_egg_drop.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0001_easy_two_sum.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/10_hard_regular_expression_matching.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0003_longest_unique_substring.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0005_longest_palindromic_sbstring.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/0104_easy_max_depth_binary_tree.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_cracking_code_/01/1.5_string_compress_string.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/linked_list/linked_list_number_sum.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/easy_two_sum.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/medium_add_two_numbers.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/medium_word_exist_on_board.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/easy_valid_parentheses.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/_leet_code_/easy_max_depth_binary_tree.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/path_finding/task_allocation.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/DynamicProgramming/dy_linkedin_paint_houses.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2014/Search/servers_capacity.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/tree/tree_utils.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/graph/graph_multithreading_build.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/linked_list/replace_interval.py",
-		"/Users/darraes/Documents/Problems/coding_questions/2018/path_finding/a_star.py"
+		"/Users/darraes/Documents/Problems/coding_questions/2014/DynamicProgramming/dy_find_ips.py"
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -939,6 +948,80 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"next",
+			"s.merge",
+			".e",
+			".s",
+			"[8",
+			"[5",
+			"[1",
+			"[1]",
+			"insert_interval",
+			"IntervalNode",
+			"]",
+			"[",
+			"before",
+			"insertInterval",
+			"upper_interset",
+			"lower_interset",
+			"cur_y",
+			"cur_x",
+			"start_y",
+			"start_x",
+			"count",
+			"res",
+			"(2",
+			"jump",
+			"0",
+			"_advance_tail",
+			"search",
+			"s.search",
+			"cache.print()",
+			"old",
+			"solveNQueens",
+			"+",
+			"first",
+			"last - i",
+			"solution1",
+			"problem1",
+			"first",
+			"=",
+			"max_reached",
+			"-1",
+			"cache",
+			"word",
+			"# ",
+			"window[chars[e_window]] = e_window\n                e_window += 1",
+			"e_window += 1",
+			"window[chars[e_window]] = e_window",
+			"PreOrderIterator",
+			"stack",
+			"node",
+			"stack",
+			"node",
+			"_right",
+			"_left",
+			"_value",
+			"word",
+			"assertFalse",
+			"assertTrue",
+			"startsWith",
+			"print",
+			"print(nums)",
+			"word",
+			"search",
+			"obj",
+			"assertTrue",
+			"# ",
+			"None",
+			"serialize_pre",
+			"buffer",
+			"TNode",
+			"lps_length",
+			"//",
+			";",
+			"}",
+			"{",
 			"distance_rec",
 			"- 1",
 			"print",
@@ -992,66 +1075,7 @@
 			"valid",
 			"isValidSudoku",
 			"board[i][j]",
-			"[5, 7, 7, 8, 8, 10]",
-			"search",
-			"maintainers USER",
-			"maintainers",
-			"#        ",
-			"-1",
-			"mid",
-			"pivot",
-			"enable_soft_authorization",
-			"left",
-			"100",
-			"errors",
-			"1000",
-			"print(",
-			"# print",
-			"print",
-			"##",
-			"sidx, val",
-			"enforce_authorization",
-			"set_dflag",
-			"enable_soft_authorization",
-			"Soft ",
-			"enable_soft_authorization --value 1",
-			"Soft ",
-			"manifold_global_prn_2",
-			"&&",
-			"carry",
-			" ",
-			"#",
-			"start",
-			"#",
-			"_sum",
-			"divisor",
-			"dividend",
-			"numbers",
-			"print",
-			"swapPairs",
-			"# ",
-			"Node(",
-			"#",
-			"node",
-			"head",
-			" +",
-			"sub_res",
-			"n_res",
-			"value",
-			"print",
-			"base_convert",
-			"# ",
-			"#",
-			"sub_dir",
-			"file_watcher_callbacks",
-			"split_path",
-			"print",
-			"#",
-			"continue",
-			"multiply",
-			"subtraction",
-			"assertTrue",
-			"None"
+			"[5, 7, 7, 8, 8, 10]"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1066,19 +1090,28 @@
 		"whole_word": false,
 		"wrap": true
 	},
+	"folders":
+	[
+		{
+			"path": "/Users/darraes/Documents/Problems/coding_questions/2018"
+		},
+		{
+			"path": "/Users/darraes/Documents/Problems/coding_questions/2014"
+		}
+	],
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "2014/Tree/rebuild_from_inorder_preorder.py",
+					"file": "2018/_leet_code_/0062_unique_paths.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1158,
+						"buffer_size": 714,
 						"regions":
 						{
 						},
@@ -1086,106 +1119,13 @@
 						[
 							[
 								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"show_definitions": false,
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "2018/_data_structures_and_algorithms/lcs_stuff.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4789,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								52,
-								0
+								714
 							]
 						],
 						"settings":
 						{
 							"show_definitions": false,
 							"syntax": "Packages/Python/Python.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 61.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "2018/_data_structures_and_algorithms/levenshtein_distance.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1454,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								739,
-								739
-							]
-						],
-						"settings":
-						{
-							"show_definitions": false,
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 285.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "2018/_data_structures_and_algorithms/diff.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1495,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								939,
-								939
-							]
-						],
-						"settings":
-						{
-							"show_definitions": false,
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1195,12 +1135,41 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "2014/Tree/tree_transversal.py",
+					"buffer": 1,
+					"file": "2018/_leet_code_/0064_mininum_path_sum.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6916,
+						"buffer_size": 1941,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								748,
+								81
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "2018/_interviews_/interval/merge_interval.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2505,
 						"regions":
 						{
 						},
@@ -1214,43 +1183,42 @@
 						"settings":
 						{
 							"show_definitions": false,
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Python/Python.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2814.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "/Users/darraes/Dropbox (Facebook)/ThingsImWorking",
-					"semi_transient": false,
+					"buffer": 3,
+					"file": "2018/_interviews_/interval/collapse_intervals.py",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 21667,
+						"buffer_size": 1647,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								19156,
-								19156
+								781,
+								781
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 5026.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1262,7 +1230,7 @@
 	},
 	"input":
 	{
-		"height": 39.0
+		"height": 40.0
 	},
 	"layout":
 	{
@@ -1317,6 +1285,22 @@
 		"selected_items":
 		[
 			[
+				"interva",
+				"2018/_interviews_/interval/merge_interval.py"
+			],
+			[
+				"_leet_code_/0031_next_permutation.py",
+				"2018/_leet_code_/0031_next_permutation.py"
+			],
+			[
+				"paint_edge.",
+				"2014/Search/search_gexe_2_paint_edge.py"
+			],
+			[
+				"rotat",
+				"2018/_career_cup_/bfs_statue_rotations.py"
+			],
+			[
 				"",
 				"zippydb/server/QuickStackManager.h"
 			]
@@ -1348,8 +1332,8 @@
 	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
-	"side_bar_width": 218.0,
+	"side_bar_visible": true,
+	"side_bar_width": 304.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
