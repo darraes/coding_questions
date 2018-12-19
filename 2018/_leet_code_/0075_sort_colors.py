@@ -33,6 +33,7 @@ class Solution:
 ###############################################################
 import unittest
 
+
 def permute(nums):
     def _permute(nums, i):
         if i == len(nums):
@@ -46,9 +47,8 @@ def permute(nums):
             for j in range(len(perm) + 1):
                 results.append(perm[:j] + [current] + perm[j:])
         return results
+
     return _permute(nums, 0)
-
-
 
 
 class TestFunctions(unittest.TestCase):
