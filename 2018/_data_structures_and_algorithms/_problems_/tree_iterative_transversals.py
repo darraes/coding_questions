@@ -107,16 +107,41 @@ def post_order(node, ans):
 
 
 def post_order_iterative(node):
-    pass
+    ans = []
+    stack = []
+    last_visited = None
+
+    while node or len(stack) > 0:
+        if node:
+            stack.append(node)
+            node = node.left
+        else:
+            if stack[-1].right == last_visited:
+                last_visited = stack.pop()
+                ans.append(last_visited.value)
+            else:
+                node = node.right
+
+    return ans
 
 
 class PostOrderIterator(Iterator):
     def __init__(self, node):
         self.stack = []
         self.current = None
+        self.last_visited = None
 
-    def next(self):
-        pass
+    def __next__(self):
+        while self.current or len(self.stack) > 0:
+            if self.current:
+                self.stack.append(self.current)
+                self.current = self.current.left
+            else:
+                if self.stack[-1].right == self.last_visited:
+                    self.last_visited = self.stack.pop()
+                    return self.last_visited.value
+                else:
+                    self.current = self.current.right
 
 
 ########## END POST ORDER ######################
@@ -183,6 +208,13 @@ class TestFunctions(unittest.TestCase):
         post_buf = []
         post_order(root, post_buf)
         self.assertEqual(post_buf, post_order_iterative(root))
+
+        ite_res = []
+        ite = PostOrderIterator(root)
+        for value in ite:
+            ite_res.append(value)
+
+        self.assertEqual(post_buf, ite_res)
 
 
 if __name__ == "__main__":
