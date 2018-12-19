@@ -7,22 +7,25 @@ class Heap(object):
         if i > self.heap_size:
             return
 
-        largest = i
+        while i <= self.heap_size // 2:
+            largest = i
 
-        left = self._left(i)
-        right = self._right(i)
+            left = self._left(i)
+            right = self._right(i)
 
-        if left <= self.heap_size and self.store[left] > self.store[largest]:
-            largest = left
-        if right <= self.heap_size and self.store[right] > self.store[largest]:
-            largest = right
+            if left <= self.heap_size and self.store[left] > self.store[largest]:
+                largest = left
+            if right <= self.heap_size and self.store[right] > self.store[largest]:
+                largest = right
 
-        if largest != i:
-            tmp = self.store[largest]
-            self.store[largest] = self.store[i]
-            self.store[i] = tmp
+            if largest != i:
+                tmp = self.store[largest]
+                self.store[largest] = self.store[i]
+                self.store[i] = tmp
 
-            self.max_heapify(largest)
+                i = largest
+            else:
+                break
 
     def build_max_heap(self, array):
         array = [-1] + array
