@@ -20,25 +20,41 @@ def flood_fill(full_map, x, y, new_color):
         cur_x, cur_y = to_visit.popleft()
         visited.add((cur_x, cur_y))
 
-        if full_map[cur_x][cur_y] != color:
-            full_map[cur_x][cur_y] = new_color
-        else:
-            for neighbor in [
+        vh_neighbors = [
+            (x, y)
+            for (x, y) in [
                 (cur_x + 1, cur_y),
                 (cur_x, cur_y + 1),
                 (cur_x - 1, cur_y),
                 (cur_x, cur_y - 1),
+            ]
+            if in_bounds(full_map, x, y)
+        ]
+        d_neighbors = [
+            (x, y)
+            for (x, y) in [
                 (cur_x - 1, cur_y - 1),
                 (cur_x + 1, cur_y - 1),
                 (cur_x - 1, cur_y + 1),
                 (cur_x + 1, cur_y + 1),
-            ]:
-                if (
-                    in_bounds(full_map, neighbor[0], neighbor[1])
-                    and (neighbor[0], neighbor[1]) not in visited
-                ):
-                    to_visit.append((neighbor[0], neighbor[1]))
+            ]
+            if in_bounds(full_map, x, y)
+        ]
 
+        for neighbor in vh_neighbors:
+            if full_map[neighbor[0]][neighbor[1]] != color:
+                full_map[neighbor[0]][neighbor[1]] = new_color
+            elif (
+                full_map[neighbor[0]][neighbor[1]] == color
+                and (neighbor[0], neighbor[1]) not in visited
+            ):
+                to_visit.append((neighbor[0], neighbor[1]))
+        for neighbor in d_neighbors:
+            if (
+                full_map[neighbor[0]][neighbor[1]] == color
+                and (neighbor[0], neighbor[1]) not in visited
+            ):
+                to_visit.append((neighbor[0], neighbor[1]))
 
 
 ###############################################################
@@ -64,12 +80,12 @@ class TestFunctions(unittest.TestCase):
             [0, 0, 0, 0, 0, 0, 1, 1],
             [0, 0, 0, 0, 0, 0, 1, 1],
             [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 5, 5, 5, 0, 0],
-            [0, 0, 5, 5, 1, 5, 5, 0],
+            [0, 0, 0, 0, 5, 0, 0, 0],
+            [0, 0, 0, 5, 1, 5, 0, 0],
             [0, 1, 5, 1, 1, 1, 5, 0],
-            [0, 1, 5, 5, 5, 1, 5, 0],
-            [0, 1, 0, 0, 5, 5, 5, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 1, 0, 5, 5, 1, 5, 0],
+            [0, 1, 0, 0, 0, 5, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]
         ]
         print_lines(full_map)
         self.assertEqual(solution, full_map)
