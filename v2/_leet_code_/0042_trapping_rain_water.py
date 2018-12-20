@@ -15,7 +15,7 @@ class Solution:
             max_left[i] = max(max_left[i - 1], heights[i])
 
         i = len(heights) - 1
-        max_right[i] = heights[i]
+        max_right[len(heights) - 1] = heights[len(heights) - 1]
         i -= 1
         while i >= 0:
             max_right[i] = max(max_right[i + 1], heights[i])
@@ -23,7 +23,7 @@ class Solution:
 
         res = 0
         for i in range(len(heights)):
-            res += min(max_left[i], max_right[i]) - heights[i]
+            res += max(0, min(max_left[i], max_right[i]) - heights[i])
 
         return res
 
