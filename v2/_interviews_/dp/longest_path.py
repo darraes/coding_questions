@@ -28,7 +28,7 @@ def longest_path_impl(word, words, anagrams, cache):
     ans = 0
     for i in range(len(word)):
         ans = max(
-            ans, longest_path_impl(word[:i] + word[i + 1 :], words, anagrams, cache)
+            ans, longest_path_impl(word[:i] + word[i + 1:], words, anagrams, cache)
         )
 
     ans += anagrams[get_key(word)]

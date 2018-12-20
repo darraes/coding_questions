@@ -70,7 +70,7 @@ class FileSystem(object):
 
 
     def list_files(self, dir_path, recurse):
-        node = self.ensure_directory(dir_path)
+        node = self.ensure_directory(dir_path) # Fix this: Should not create a Dir
         results = []
         queue = deque()
         queue.append((dir_path, node))
