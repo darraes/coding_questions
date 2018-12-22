@@ -1,3 +1,11 @@
+from collections import deque
+
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
 # Calculates the depth of the tree
 def depth(node):
     if node is None:
@@ -38,7 +46,7 @@ def pretty_print(node):
         print("".join(l))
 
 
-def serialize(self, root):
+def serialize(root):
     """Encodes a tree to a single string.
     
     :type root: TreeNode
@@ -60,7 +68,7 @@ def serialize(self, root):
         ans.pop()
     return ans
 
-def deserialize(self, data):
+def deserialize(data):
     """Decodes your encoded data to tree.
     
     :type data: str
