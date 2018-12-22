@@ -28,4 +28,13 @@ class Solution:
         :type S: int
         :rtype: int
         """
+        pass
+
+    def findTargetSumWays(self, nums, S, i):
+        """
+        :type nums: List[int]
+        :type S: int
+        :rtype: int
+        """
+        pass
         

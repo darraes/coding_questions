@@ -1,27 +1,3 @@
-# Given a non-empty string s and a dictionary wordDict containing a list of
-# non-empty words, determine if s can be segmented into a space-separated
-# sequence of one or more dictionary words.
-# 
-# Note:
-# 
-# The same word in the dictionary may be reused multiple times in the segmentation.
-# You may assume the dictionary does not contain duplicate words.
-# Example 1:
-# 
-# Input: s = "leetcode", wordDict = ["leet", "code"]
-# Output: true
-# Explanation: Return true because "leetcode" can be segmented as "leet code".
-# Example 2:
-# 
-# Input: s = "applepenapple", wordDict = ["apple", "pen"]
-# Output: true
-# Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
-             # Note that you are allowed to reuse a dictionary word.
-# Example 3:
-# 
-# Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
-# Output: false
-
 class Solution:
     def wordBreak(self, s, wordDict):
         """
@@ -29,4 +5,41 @@ class Solution:
         :type wordDict: List[str]
         :rtype: bool
         """
-        
+
+        def word_break(s, word_dict, start, lookup):
+            if start == len(s):
+                return True
+
+            if start in lookup:
+                return lookup[start]
+
+            for i in range(start, len(s) + 1):
+                if s[start:i] in word_dict:
+                    if word_break(s, word_dict, i, lookup):
+                        lookup[start] = True
+                        return lookup[start]
+                        
+            lookup[start] = False
+            return lookup[start]
+
+        return word_break(s, wordDict, 0, {})
+
+
+###############################################################
+import unittest
+
+
+class TestFunctions(unittest.TestCase):
+    def test_1(self):
+        s = Solution()
+        self.assertEqual(True, s.wordBreak("applepenapple", ["apple", "pen"]))
+        self.assertEqual(True, s.wordBreak("leetcode", ["leet", "code"]))
+        self.assertEqual(False, s.wordBreak("leetcod", ["leet", "code"]))
+        self.assertEqual(False, s.wordBreak("leecode", ["leet", "code"]))
+        self.assertEqual(
+            False, s.wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"])
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()
