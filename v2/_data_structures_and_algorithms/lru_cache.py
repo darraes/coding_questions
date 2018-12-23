@@ -108,7 +108,7 @@ class LRUCache(object):
             self.store.move_to_head(n)
             return n.val
 
-        return None
+        return -1
 
     def print(self):
         print([k for k, v in self.lookup.items()])
@@ -132,7 +132,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual("v4", cache.get("k4"))
         self.assertEqual("v3", cache.get("k3"))
         self.assertEqual("v2", cache.get("k2"))
-        self.assertEqual(None, cache.get("k1"))
+        self.assertEqual(-1, cache.get("k1"))
 
     def test_tail_to_head(self):
         cache = LRUCache(3)
@@ -141,11 +141,11 @@ class TestFunctions(unittest.TestCase):
         cache.put("k3", "v3")
         cache.put("k1", "v11")
         cache.put("k4", "v4")
-        self.assertEqual(None, cache.get("k2"))
+        self.assertEqual(-1, cache.get("k2"))
 
         self.assertEqual("v3", cache.get("k3"))
         cache.put("k5", "v5")
-        self.assertEqual(None, cache.get("k1"))
+        self.assertEqual(-1, cache.get("k1"))
 
     def test_middle_to_head(self):
         cache = LRUCache(3)
@@ -154,11 +154,11 @@ class TestFunctions(unittest.TestCase):
         cache.put("k3", "v3")
         cache.put("k2", "v22")
         cache.put("k4", "v4")
-        self.assertEqual(None, cache.get("k1"))
+        self.assertEqual(-1, cache.get("k1"))
 
         self.assertEqual("v22", cache.get("k2"))
         cache.put("k5", "v5")
-        self.assertEqual(None, cache.get("k3"))
+        self.assertEqual(-1, cache.get("k3"))
 
     def test_head_to_head(self):
         cache = LRUCache(3)
@@ -167,11 +167,11 @@ class TestFunctions(unittest.TestCase):
         cache.put("k3", "v3")
         cache.put("k3", "v4")
         cache.put("k4", "v4")
-        self.assertEqual(None, cache.get("k1"))
+        self.assertEqual(-1, cache.get("k1"))
 
         self.assertEqual("v4", cache.get("k4"))
         cache.put("k5", "v5")
-        self.assertEqual(None, cache.get("k2"))
+        self.assertEqual(-1, cache.get("k2"))
 
 
 if __name__ == "__main__":
