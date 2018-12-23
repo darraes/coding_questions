@@ -1,26 +1,3 @@
-# You are given a list of non-negative integers, a1, a2, ..., an, and a target,
-# S. Now you have 2 symbols + and -. For each integer, you should choose one
-# from + and - as its new symbol.
-# 
-# Find out how many ways to assign symbols to make sum of integers equal to target S.
-# 
-# Example 1:
-# Input: nums is [1, 1, 1, 1, 1], S is 3. 
-# Output: 5
-# Explanation: 
-# 
-# -1+1+1+1+1 = 3
-# +1-1+1+1+1 = 3
-# +1+1-1+1+1 = 3
-# +1+1+1-1+1 = 3
-# +1+1+1+1-1 = 3
-# 
-# There are 5 ways to assign symbols to make the sum of nums be target 3.
-# Note:
-# The length of the given array is positive and will not exceed 20.
-# The sum of elements in the given array will not exceed 1000.
-# Your output answer is guaranteed to be fitted in a 32-bit integer
-
 class Solution:
     def findTargetSumWays(self, nums, S):
         """
@@ -28,13 +5,41 @@ class Solution:
         :type S: int
         :rtype: int
         """
-        pass
+        return self._findTargetSumWays(nums, S, 0, {})
 
-    def findTargetSumWays(self, nums, S, i):
+    def _findTargetSumWays(self, nums, S, i, lookup):
         """
         :type nums: List[int]
         :type S: int
         :rtype: int
         """
-        pass
-        
+        if S == 0 and i == len(nums):
+            return 1
+        if i == len(nums):
+            return 0
+
+        if (S, i) in lookup:
+            return lookup[(S, i)]
+
+        count = 0
+        count += self._findTargetSumWays(nums, S - nums[i], i + 1, lookup)
+        count += self._findTargetSumWays(nums, S + nums[i], i + 1, lookup)
+
+        lookup[(S, i)] = count
+        return count
+
+
+
+###############################################################
+import unittest
+
+
+class TestFunctions(unittest.TestCase):
+    def test_1(self):
+        s = Solution()
+        self.assertEqual(5, s.findTargetSumWays([1, 1, 1, 1, 1], 3))
+        self.assertEqual(2, s.findTargetSumWays([1, 7, 2, 1, -4], 5))
+
+
+if __name__ == "__main__":
+    unittest.main()
