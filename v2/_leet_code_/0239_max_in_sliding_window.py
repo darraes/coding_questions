@@ -38,6 +38,9 @@ class Solution:
         :rtype: List[int]
         """
         ans = []
+        if k == 0 or len(nums) == 0:
+            return []
+
         queue = MQueue()
         for i in range(len(nums)):
             if i < k - 1:
@@ -60,6 +63,15 @@ class TestFunctions(unittest.TestCase):
         s = Solution()
         self.assertEqual(
             [3, 3, 5, 5, 6, 7], s.maxSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7], 3)
+        )
+        self.assertEqual(
+            [1, 3, -1, -3, 5, 3, 6, 7], s.maxSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7], 1)
+        )
+        self.assertEqual(
+            [], s.maxSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7], 0)
+        )
+        self.assertEqual(
+            [], s.maxSlidingWindow([], 1)
         )
 
 
