@@ -28,8 +28,7 @@ class Solution:
         transversed.add(current)
 
         for req in graph[current]:
-            res = self.dfs(graph, req, visiting, transversed)
-            if not res:
+            if not self.dfs(graph, req, visiting, transversed):
                 return False
 
         visiting.remove(current)
