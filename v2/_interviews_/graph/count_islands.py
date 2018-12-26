@@ -14,6 +14,7 @@ def flood_fill(full_map, start_x, start_y):
         return
 
     to_visit = deque([(start_x, start_y)])
+    visited = set((start_x, start_y))
     while len(to_visit) > 0:
         cur_x, cur_y = to_visit.popleft()
 
@@ -31,7 +32,9 @@ def flood_fill(full_map, start_x, start_y):
             if (
                 in_bounds(full_map, neighbor[0], neighbor[1])
                 and full_map[neighbor[0]][neighbor[1]] == 1
+                and (neighbor[0], neighbor[1]) not in visited
             ):
+                visited.add((neighbor[0], neighbor[1]))
                 to_visit.append(neighbor)
 
 def count_islands(full_map):

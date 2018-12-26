@@ -1,10 +1,12 @@
 from collections import deque
 
+
 class TreeNode:
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
+
 
 # Calculates the depth of the tree
 def depth(node):
@@ -68,6 +70,7 @@ def serialize(root):
         ans.pop()
     return ans
 
+
 def deserialize(data):
     """Decodes your encoded data to tree.
     
@@ -99,3 +102,15 @@ def deserialize(data):
                 consumers.append(current.right)
 
     return root
+
+
+# Compares 2 TreeNodes for equality
+def tree_equals(node1, node2):
+    if not node1 and not node2:
+        return True
+
+    if (node1 and not node2) or (node2 and not node1) or node1.val != node2.val:
+        print(node1.val, node2.val)
+        return False
+
+    return tree_equals(node1.left, node2.left) and tree_equals(node1.right, node2.right)
