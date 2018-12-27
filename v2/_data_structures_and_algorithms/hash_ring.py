@@ -237,15 +237,15 @@ class TestFunctions(unittest.TestCase):
             moves,  
         )
 
-        self.assertEqual("shard_1", ring._find_partition(100000000).data)
+        self.assertEqual("shard_2", ring._find_partition(100000000).data)
         self.assertEqual("shard_0", ring._find_partition(200000000).data)
         self.assertEqual("shard_0", ring._find_partition(300000000).data)
         self.assertEqual("shard_1", ring._find_partition(400000000).data)
         self.assertEqual("shard_1", ring._find_partition(500000000).data)
-        self.assertEqual("shard_1", ring._find_partition(600000000).data)
-        self.assertEqual("shard_1", ring._find_partition(700000000).data)
-        self.assertEqual("shard_1", ring._find_partition(800000000).data)
-        self.assertEqual("shard_1", ring._find_partition(900000000).data)
+        self.assertEqual("shard_2", ring._find_partition(600000000).data)
+        self.assertEqual("shard_2", ring._find_partition(700000000).data)
+        self.assertEqual("shard_2", ring._find_partition(800000000).data)
+        self.assertEqual("shard_2", ring._find_partition(900000000).data)
 
     def test_insert_on_idx_zero(self):
         ring = HashRing()
