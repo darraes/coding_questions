@@ -49,6 +49,8 @@ class HashRing(object):
         new_nodes = []
         moves = []
         for _ in range(self.spreading_factor):
+            # TODO: The generator can create a node with the same hash.
+            # If that happens, we should generate a new hash
             node = Node(start=generator(), data=data)
             new_nodes.append(node)
 
@@ -57,12 +59,12 @@ class HashRing(object):
 
             from_node_idx = self._find_partition_idx(node.start)
 
-            if from_node_idx > 0 and from_node_idx < len(self.ring) - 1:
+            if from_node_idx > 0 and from_node_idx < len(self.ring):
                 moves.append(
                     MoveRequest(
-                        from_node=self.ring[from_node_idx],
+                        from_node=self.ring[from_node_idx - 1],
                         to_node=node,
-                        ranges=[Range(node.start, self.ring[from_node_idx + 1].start)],
+                        ranges=[Range(node.start, self.ring[from_node_idx].start)],
                     )
                 )
             elif from_node_idx == 0:
@@ -73,8 +75,8 @@ class HashRing(object):
                         ranges=[Range(node.start, self.ring[from_node_idx].start)],
                     )
                 )
-            elif from_node_idx == len(self.ring) - 1:
-                moves.append(
+            else:  # from_node_idx == len(self.ring) {New last entry}
+                 moves.append(
                     MoveRequest(
                         from_node=self.ring[from_node_idx],
                         to_node=node,
@@ -109,6 +111,75 @@ import unittest
 
 
 class TestFunctions(unittest.TestCase):
+    def test_insert_on_middle(self):
+        vertexes = [200000000, 500000000, 800000000]
+        idx = -1
+
+        def generator():
+            nonlocal vertexes, idx
+            idx += 1
+            return vertexes[idx]
+
+        ring = HashRing(spreading_factor=3)
+        ring.add("shard_0", generator=generator)
+        ring.spreading_factor = 1
+
+        self.assertEqual("shard_0", ring._find_partition(100000000).data)
+        self.assertEqual("shard_0", ring._find_partition(200000000).data)
+        self.assertEqual("shard_0", ring._find_partition(300000000).data)
+        self.assertEqual("shard_0", ring._find_partition(400000000).data)
+        self.assertEqual("shard_0", ring._find_partition(500000000).data)
+        self.assertEqual("shard_0", ring._find_partition(600000000).data)
+        self.assertEqual("shard_0", ring._find_partition(700000000).data)
+        self.assertEqual("shard_0", ring._find_partition(800000000).data)
+        self.assertEqual("shard_0", ring._find_partition(900000000).data)
+
+        moves = ring.add("shard_1", generator=lambda: 300000000)
+        self.assertEqual(
+            [
+                MoveRequest(
+                    Node(200000000, "shard_0"),
+                    Node(300000000, "shard_1"),
+                    [Range(300000000, 500000000)],
+                )
+            ],
+            moves,
+        )
+
+        self.assertEqual("shard_0", ring._find_partition(100000000).data)
+        self.assertEqual("shard_0", ring._find_partition(200000000).data)
+        self.assertEqual("shard_1", ring._find_partition(300000000).data)
+        self.assertEqual("shard_1", ring._find_partition(400000000).data)
+        self.assertEqual("shard_0", ring._find_partition(500000000).data)
+        self.assertEqual("shard_0", ring._find_partition(600000000).data)
+        self.assertEqual("shard_0", ring._find_partition(700000000).data)
+        self.assertEqual("shard_0", ring._find_partition(800000000).data)
+        self.assertEqual("shard_0", ring._find_partition(900000000).data)
+
+        moves = ring.add("shard_1", generator=lambda: 600000000)
+        self.assertEqual(
+            [
+                MoveRequest(
+                    Node(500000000, "shard_0"),
+                    Node(600000000, "shard_1"),
+                    [Range(600000000, 800000000)],
+                )
+            ],
+            moves,
+        )
+
+        self.assertEqual("shard_0", ring._find_partition(100000000).data)
+        self.assertEqual("shard_0", ring._find_partition(200000000).data)
+        self.assertEqual("shard_1", ring._find_partition(300000000).data)
+        self.assertEqual("shard_1", ring._find_partition(400000000).data)
+        self.assertEqual("shard_0", ring._find_partition(500000000).data)
+        self.assertEqual("shard_1", ring._find_partition(600000000).data)
+        self.assertEqual("shard_1", ring._find_partition(700000000).data)
+        self.assertEqual("shard_0", ring._find_partition(800000000).data)
+        self.assertEqual("shard_0", ring._find_partition(900000000).data)
+
+
+
     def test_insert_on_idx_zero(self):
         ring = HashRing()
         ring.add("shard_0", generator=lambda: 500000000)
@@ -122,7 +193,8 @@ class TestFunctions(unittest.TestCase):
                     Node(250000000, "shard_1"),
                     [Range(250000000, 500000000)],
                 )
-            ], moves
+            ],
+            moves,
         )
 
         self.assertEqual("shard_0", ring._find_partition(500000001).data)
@@ -146,7 +218,8 @@ class TestFunctions(unittest.TestCase):
                     Node(100000000, "shard_2"),
                     [Range(100000000, 250000000)],
                 )
-            ], moves
+            ],
+            moves,
         )
 
         self.assertEqual("shard_2", ring._find_partition(100000000).data)
