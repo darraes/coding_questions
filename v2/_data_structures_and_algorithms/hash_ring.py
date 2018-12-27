@@ -224,6 +224,29 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual("shard_1", ring._find_partition(800000000).data)
         self.assertEqual("shard_1", ring._find_partition(900000000).data)
 
+        # Test for when the ring has multiple node
+        moves = ring.add("shard_2", generator=lambda: 600000000)
+        self.assertEqual(
+            [
+                MoveRequest(
+                    Node(400000000, "shard_1"),
+                    Node(600000000, "shard_2"),
+                    [Range(0, 200000000), Range(600000000, 1000000000 - 600000000)],
+                )
+            ],
+            moves,  
+        )
+
+        self.assertEqual("shard_1", ring._find_partition(100000000).data)
+        self.assertEqual("shard_0", ring._find_partition(200000000).data)
+        self.assertEqual("shard_0", ring._find_partition(300000000).data)
+        self.assertEqual("shard_1", ring._find_partition(400000000).data)
+        self.assertEqual("shard_1", ring._find_partition(500000000).data)
+        self.assertEqual("shard_1", ring._find_partition(600000000).data)
+        self.assertEqual("shard_1", ring._find_partition(700000000).data)
+        self.assertEqual("shard_1", ring._find_partition(800000000).data)
+        self.assertEqual("shard_1", ring._find_partition(900000000).data)
+
     def test_insert_on_idx_zero(self):
         ring = HashRing()
         ring.add("shard_0", generator=lambda: 500000000)
