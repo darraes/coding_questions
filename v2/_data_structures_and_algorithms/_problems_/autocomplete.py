@@ -21,11 +21,8 @@ class Trie:
         current_node = self.root
         while i < len(word):
             if word[i] not in current_node.edges:
-                child = TrieNode(is_end=False)
-                current_node.edges[word[i]] = child
-                current_node = child
-            else:
-                current_node = current_node.edges[word[i]]
+                current_node.edges[word[i]] = TrieNode(is_end=False)
+            current_node = current_node.edges[word[i]]
             i += 1
         current_node.is_end = True
 

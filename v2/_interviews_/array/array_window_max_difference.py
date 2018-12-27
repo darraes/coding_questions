@@ -1,73 +1,83 @@
 # Given an integer array and a window size, calculate the max different
 # between the integer of all windows
-# 
+#
 # ### ====== requires Python 3
 from collections import deque
 
-def update_window(window, to_add, to_remove = None):
-    ''' For simplicity we are using a deque as a sorted list that allows us
-        to add and remove on O(n) and compute the distance in O(1)
-        A structure like a B-Tree or an AVL Tree would allow allow everything to
-        be computed on O(log(n))
-    '''
-    # will remove the first occurence
-    if to_remove:
-        window.remove(to_remove)
-
-    # Does a sorted insertion
-    idx = 0
-    while idx < len(window):
-        element = window[idx]
-        if element > to_add:
-            break
-        idx += 1
-
-    window.insert(idx, to_add)
+from collections import deque
 
 
-def compute_diff(window):
-    return window[-1] - window[0]
+class MQueue(object):
+    class Element:
+        def __init__(self, val, tail_count):
+            self.val = val
+            self.tail_count = tail_count
+
+    def __init__(self, compare):
+        self.store = deque()
+        self.compare = compare
+
+    def enqueue(self, val):
+        count = 0
+        while len(self.store) > 0 and self.compare(self.store[-1].val, val):
+            count += 1 + self.store[-1].tail_count
+            self.store.pop()
+        self.store.append(MQueue.Element(val, count))
+
+    def next(self):
+        if len(self.store) > 0:
+            return self.store[0].val
+        return None
+
+    def dequeue(self):
+        if len(self.store) > 0:
+            if self.store[0].tail_count > 0:
+                self.store[0].tail_count -= 1
+            else:
+                self.store.popleft()
 
 
-def compute_max_diff(input, window_size):
-    max_distance = None
+def compute_max_distance(nums, k):
+    """
+    :type nums: List[int]
+    :type k: int
+    :rtype: List[int]
+    """
+    ans = []
+    if k == 0 or len(nums) == 0:
+        return []
 
-    rm_idx = 0
-    add_idx = window_size - 1
-    window = deque()
+    max_queue = MQueue(lambda o, n: n > o)
+    min_queue = MQueue(lambda o, n: n < o)
+    for i in range(len(nums)):
+        if i < k - 1:
+            max_queue.enqueue(nums[i])
+            min_queue.enqueue(nums[i])
+            continue
 
-    if len(input) < window_size:
-        raise ValueError()
+        max_queue.enqueue(nums[i])
+        min_queue.enqueue(nums[i])
 
-    for i in range(window_size):
-        update_window(window, input[i])
-
-    max_distance = compute_diff(window)
-
-    add_idx += 1
-    while add_idx < len(input):
-        update_window(window, input[add_idx], input[rm_idx])
-        rm_idx += 1
-        add_idx += 1
-
-        cur_distance = compute_diff(window)
-        max_distance = max_distance if max_distance > cur_distance \
-                                    else cur_distance
-
-    return max_distance
-
+        ans.append(max_queue.next() - min_queue.next())
         
+        max_queue.dequeue()
+        min_queue.dequeue()
+
+    return max(ans)
+
+
 ###############################################################
 import unittest
 
+
 class TestFunctions(unittest.TestCase):
     def test_1(self):
-        distance = compute_max_diff([1, 14, 12, 17, 8, 9, 45, 12, 16, 8], 5)
+        distance = compute_max_distance([1, 14, 12, 17, 8, 9, 45, 12, 16, 8], 5)
         self.assertEqual(37, distance)
 
-        distance = compute_max_diff([2, 1, 1, 1, 1, 3, 1, 2, 1, 1], 5)
+        distance = compute_max_distance([2, 1, 1, 1, 1, 3, 1, 2, 1, 1], 5)
         self.assertEqual(2, distance)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

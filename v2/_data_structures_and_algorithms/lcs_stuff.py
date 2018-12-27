@@ -96,8 +96,6 @@ def lcsubstring_length(X, Y):
             if X[i - 1] == Y[j - 1]:
                 lookup[i][j] = lookup[i - 1][j - 1] + 1
                 max_len = max(max_len, lookup[i][j])
-            else:
-                lookup[i][j] = 0
 
     return max_len
 
@@ -135,12 +133,15 @@ def lps_length_rec(X, i, j, cache):
     if (i, j) in cache:
         return cache[(i, j)]
 
+    cost = 0
     if X[i] == X[j]:
-        cache[(i, j)] = 2 + lps_length_rec(X, i + 1, j - 1, cache)
-    else:
-        cache[(i, j)] = max(
-            lps_length_rec(X, i + 1, j, cache), lps_length_rec(X, i, j - 1, cache)
-        )
+        cost = 2
+
+    cache[(i, j)] = max(
+        cost + lps_length_rec(X, i + 1, j - 1, cache),
+        lps_length_rec(X, i + 1, j, cache),
+        lps_length_rec(X, i, j - 1, cache),
+    )
 
     return cache[(i, j)]
 

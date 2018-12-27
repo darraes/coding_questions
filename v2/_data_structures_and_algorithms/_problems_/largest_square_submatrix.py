@@ -6,7 +6,7 @@ def print_lines(X):
 def largest_square_submatrix(M):
     m = len(M)
     n = len(M[0])
-    lookup = [[0 for y in range(len(M[0]) + 1)] for x in range(len(M) + 1)]
+    lookup = [[0 for y in range(n + 1)] for x in range(m + 1)]
     max_area = 0
 
     for i in range(1, m + 1):

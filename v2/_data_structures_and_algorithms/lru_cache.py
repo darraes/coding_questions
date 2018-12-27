@@ -43,15 +43,15 @@ class SimpleLinkedList(object):
         self._add_as_head(n)
 
     def _retreat_tail(self):
-        tail = None
+        old_tail = None
         if self.tail:
-            tail = self.tail
+            old_tail = self.tail
             new_tail = self.tail.prev
+            old_tail.prev = None
             if new_tail:
                 new_tail.next = None
-            self.tail.prev = None
             self.tail = new_tail
-        return tail
+        return old_tail
 
     def _add_as_head(self, n):
         n.next = self.head
