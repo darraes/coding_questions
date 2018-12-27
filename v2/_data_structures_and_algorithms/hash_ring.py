@@ -2,7 +2,7 @@ from random import randint
 from bisect import bisect_left, bisect_right
 from collections import namedtuple
 
-Range = namedtuple("Range", ["start", "end"])
+Range = namedtuple("Range", ["start", "count"])
 
 
 class Node(object):
@@ -64,7 +64,11 @@ class HashRing(object):
                     MoveRequest(
                         from_node=self.ring[from_node_idx - 1],
                         to_node=node,
-                        ranges=[Range(node.start, self.ring[from_node_idx].start)],
+                        ranges=[
+                            Range(
+                                node.start, self.ring[from_node_idx].start - node.start
+                            )
+                        ],
                     )
                 )
             elif from_node_idx == 0:
@@ -72,17 +76,17 @@ class HashRing(object):
                     MoveRequest(
                         from_node=self.ring[-1],
                         to_node=node,
-                        ranges=[Range(node.start, self.ring[from_node_idx].start)],
+                        ranges=[Range(node.start, self.ring[from_node_idx].start - node.start)],
                     )
                 )
             else:  # from_node_idx == len(self.ring) {New last entry}
-                 moves.append(
+                moves.append(
                     MoveRequest(
-                        from_node=self.ring[from_node_idx],
+                        from_node=self.ring[from_node_idx - 1],
                         to_node=node,
                         ranges=[
-                            Range(0, node.start),
-                            Range(self.ring[0].start, HashRing.RING_SIZE),
+                            Range(0, node[0].start),
+                            Range(node.start, HashRing.RING_SIZE),
                         ],
                     )
                 )
@@ -140,7 +144,7 @@ class TestFunctions(unittest.TestCase):
                 MoveRequest(
                     Node(200000000, "shard_0"),
                     Node(300000000, "shard_1"),
-                    [Range(300000000, 500000000)],
+                    [Range(300000000, 500000000 - 300000000)],
                 )
             ],
             moves,
@@ -162,7 +166,7 @@ class TestFunctions(unittest.TestCase):
                 MoveRequest(
                     Node(500000000, "shard_0"),
                     Node(600000000, "shard_1"),
-                    [Range(600000000, 800000000)],
+                    [Range(600000000, 800000000 - 600000000)],
                 )
             ],
             moves,
@@ -178,8 +182,6 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual("shard_0", ring._find_partition(800000000).data)
         self.assertEqual("shard_0", ring._find_partition(900000000).data)
 
-
-
     def test_insert_on_idx_zero(self):
         ring = HashRing()
         ring.add("shard_0", generator=lambda: 500000000)
@@ -191,7 +193,7 @@ class TestFunctions(unittest.TestCase):
                 MoveRequest(
                     Node(500000000, "shard_0"),
                     Node(250000000, "shard_1"),
-                    [Range(250000000, 500000000)],
+                    [Range(250000000, 500000000 - 250000000)],
                 )
             ],
             moves,
@@ -216,7 +218,7 @@ class TestFunctions(unittest.TestCase):
                 MoveRequest(
                     Node(500000000, "shard_0"),
                     Node(100000000, "shard_2"),
-                    [Range(100000000, 250000000)],
+                    [Range(100000000, 250000000 - 100000000)],
                 )
             ],
             moves,
