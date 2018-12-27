@@ -85,7 +85,7 @@ class HashRing(object):
                         from_node=self.ring[from_node_idx - 1],
                         to_node=node,
                         ranges=[
-                            Range(0, node[0].start),
+                            Range(0, self.ring[0].start),
                             Range(node.start, HashRing.RING_SIZE - node.start),
                         ],
                     )
@@ -187,22 +187,42 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual("shard_0", ring._find_partition(800000000).data)
         self.assertEqual("shard_0", ring._find_partition(900000000).data)
 
-     def test_insert_new_last(self):
+    def test_insert_new_last(self):
         ring = HashRing()
         ring.add("shard_0", generator=lambda: 200000000)
+
+        self.assertEqual("shard_0", ring._find_partition(100000000).data)
+        self.assertEqual("shard_0", ring._find_partition(200000000).data)
+        self.assertEqual("shard_0", ring._find_partition(300000000).data)
+        self.assertEqual("shard_0", ring._find_partition(400000000).data)
+        self.assertEqual("shard_0", ring._find_partition(500000000).data)
+        self.assertEqual("shard_0", ring._find_partition(600000000).data)
+        self.assertEqual("shard_0", ring._find_partition(700000000).data)
+        self.assertEqual("shard_0", ring._find_partition(800000000).data)
+        self.assertEqual("shard_0", ring._find_partition(900000000).data)
 
         # Test for when the ring has a single node
         moves = ring.add("shard_1", generator=lambda: 400000000)
         self.assertEqual(
             [
                 MoveRequest(
-                    Node(500000000, "shard_0"),
-                    Node(250000000, "shard_1"),
+                    Node(200000000, "shard_0"),
+                    Node(400000000, "shard_1"),
                     [Range(0, 200000000), Range(400000000, 1000000000 - 400000000)],
                 )
             ],
-            moves,
+            moves,  
         )
+
+        self.assertEqual("shard_1", ring._find_partition(100000000).data)
+        self.assertEqual("shard_0", ring._find_partition(200000000).data)
+        self.assertEqual("shard_0", ring._find_partition(300000000).data)
+        self.assertEqual("shard_1", ring._find_partition(400000000).data)
+        self.assertEqual("shard_1", ring._find_partition(500000000).data)
+        self.assertEqual("shard_1", ring._find_partition(600000000).data)
+        self.assertEqual("shard_1", ring._find_partition(700000000).data)
+        self.assertEqual("shard_1", ring._find_partition(800000000).data)
+        self.assertEqual("shard_1", ring._find_partition(900000000).data)
 
     def test_insert_on_idx_zero(self):
         ring = HashRing()
