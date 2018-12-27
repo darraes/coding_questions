@@ -133,6 +133,7 @@ class TestFunctions(unittest.TestCase):
         ring.add("shard_0", generator=generator)
         ring.spreading_factor = 1
 
+        self.assertEqual("shard_0", ring._find_partition(0).data)
         self.assertEqual("shard_0", ring._find_partition(100000000).data)
         self.assertEqual("shard_0", ring._find_partition(200000000).data)
         self.assertEqual("shard_0", ring._find_partition(300000000).data)
@@ -155,6 +156,7 @@ class TestFunctions(unittest.TestCase):
             moves,
         )
 
+        self.assertEqual("shard_0", ring._find_partition(0).data)
         self.assertEqual("shard_0", ring._find_partition(100000000).data)
         self.assertEqual("shard_0", ring._find_partition(200000000).data)
         self.assertEqual("shard_1", ring._find_partition(300000000).data)
@@ -177,6 +179,7 @@ class TestFunctions(unittest.TestCase):
             moves,
         )
 
+        self.assertEqual("shard_0", ring._find_partition(0).data)
         self.assertEqual("shard_0", ring._find_partition(100000000).data)
         self.assertEqual("shard_0", ring._find_partition(200000000).data)
         self.assertEqual("shard_1", ring._find_partition(300000000).data)
@@ -191,6 +194,7 @@ class TestFunctions(unittest.TestCase):
         ring = HashRing()
         ring.add("shard_0", generator=lambda: 200000000)
 
+        self.assertEqual("shard_0", ring._find_partition(0).data)
         self.assertEqual("shard_0", ring._find_partition(100000000).data)
         self.assertEqual("shard_0", ring._find_partition(200000000).data)
         self.assertEqual("shard_0", ring._find_partition(300000000).data)
@@ -214,6 +218,7 @@ class TestFunctions(unittest.TestCase):
             moves,  
         )
 
+        self.assertEqual("shard_1", ring._find_partition(0).data)
         self.assertEqual("shard_1", ring._find_partition(100000000).data)
         self.assertEqual("shard_0", ring._find_partition(200000000).data)
         self.assertEqual("shard_0", ring._find_partition(300000000).data)
@@ -237,6 +242,7 @@ class TestFunctions(unittest.TestCase):
             moves,  
         )
 
+        self.assertEqual("shard_2", ring._find_partition(0).data)
         self.assertEqual("shard_2", ring._find_partition(100000000).data)
         self.assertEqual("shard_0", ring._find_partition(200000000).data)
         self.assertEqual("shard_0", ring._find_partition(300000000).data)
@@ -251,30 +257,40 @@ class TestFunctions(unittest.TestCase):
         ring = HashRing()
         ring.add("shard_0", generator=lambda: 500000000)
 
+        self.assertEqual("shard_0", ring._find_partition(0).data)
+        self.assertEqual("shard_0", ring._find_partition(100000000).data)
+        self.assertEqual("shard_0", ring._find_partition(200000000).data)
+        self.assertEqual("shard_0", ring._find_partition(300000000).data)
+        self.assertEqual("shard_0", ring._find_partition(400000000).data)
+        self.assertEqual("shard_0", ring._find_partition(500000000).data)
+        self.assertEqual("shard_0", ring._find_partition(600000000).data)
+        self.assertEqual("shard_0", ring._find_partition(700000000).data)
+        self.assertEqual("shard_0", ring._find_partition(800000000).data)
+        self.assertEqual("shard_0", ring._find_partition(900000000).data)
+
         # Test for when the ring has a single node
-        moves = ring.add("shard_1", generator=lambda: 250000000)
+        moves = ring.add("shard_1", generator=lambda: 200000000)
         self.assertEqual(
             [
                 MoveRequest(
                     Node(500000000, "shard_0"),
-                    Node(250000000, "shard_1"),
-                    [Range(250000000, 500000000 - 250000000)],
+                    Node(200000000, "shard_1"),
+                    [Range(200000000, 500000000 - 200000000)],
                 )
             ],
             moves,
         )
 
-        self.assertEqual("shard_0", ring._find_partition(500000001).data)
-        self.assertEqual("shard_0", ring._find_partition(999999999).data)
-        self.assertEqual("shard_0", ring._find_partition(240000000).data)
         self.assertEqual("shard_0", ring._find_partition(0).data)
-        self.assertEqual("shard_0", ring._find_partition(249999999).data)
+        self.assertEqual("shard_0", ring._find_partition(100000000).data)
+        self.assertEqual("shard_1", ring._find_partition(200000000).data)
+        self.assertEqual("shard_1", ring._find_partition(300000000).data)
+        self.assertEqual("shard_1", ring._find_partition(400000000).data)
         self.assertEqual("shard_0", ring._find_partition(500000000).data)
-
-        self.assertEqual("shard_1", ring._find_partition(250000000).data)
-        self.assertEqual("shard_1", ring._find_partition(250000001).data)
-        self.assertEqual("shard_1", ring._find_partition(350000000).data)
-        self.assertEqual("shard_1", ring._find_partition(499999999).data)
+        self.assertEqual("shard_0", ring._find_partition(600000000).data)
+        self.assertEqual("shard_0", ring._find_partition(700000000).data)
+        self.assertEqual("shard_0", ring._find_partition(800000000).data)
+        self.assertEqual("shard_0", ring._find_partition(900000000).data)
 
         # Test for when the ring has multiple nodes
         moves = ring.add("shard_2", generator=lambda: 100000000)
@@ -283,26 +299,22 @@ class TestFunctions(unittest.TestCase):
                 MoveRequest(
                     Node(500000000, "shard_0"),
                     Node(100000000, "shard_2"),
-                    [Range(100000000, 250000000 - 100000000)],
+                    [Range(100000000, 200000000 - 100000000)],
                 )
             ],
             moves,
         )
 
-        self.assertEqual("shard_2", ring._find_partition(100000000).data)
-        self.assertEqual("shard_2", ring._find_partition(240000000).data)
-        self.assertEqual("shard_2", ring._find_partition(249999999).data)
-
         self.assertEqual("shard_0", ring._find_partition(0).data)
-        self.assertEqual("shard_0", ring._find_partition(99999999).data)
+        self.assertEqual("shard_2", ring._find_partition(100000000).data)
+        self.assertEqual("shard_1", ring._find_partition(200000000).data)
+        self.assertEqual("shard_1", ring._find_partition(300000000).data)
+        self.assertEqual("shard_1", ring._find_partition(400000000).data)
         self.assertEqual("shard_0", ring._find_partition(500000000).data)
-        self.assertEqual("shard_0", ring._find_partition(500000001).data)
-        self.assertEqual("shard_0", ring._find_partition(999999999).data)
-
-        self.assertEqual("shard_1", ring._find_partition(250000000).data)
-        self.assertEqual("shard_1", ring._find_partition(250000001).data)
-        self.assertEqual("shard_1", ring._find_partition(350000000).data)
-        self.assertEqual("shard_1", ring._find_partition(499999999).data)
+        self.assertEqual("shard_0", ring._find_partition(600000000).data)
+        self.assertEqual("shard_0", ring._find_partition(700000000).data)
+        self.assertEqual("shard_0", ring._find_partition(800000000).data)
+        self.assertEqual("shard_0", ring._find_partition(900000000).data)
 
 
 if __name__ == "__main__":
