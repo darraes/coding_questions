@@ -46,6 +46,14 @@ class HashRing(object):
         self.ring = []
 
     def add(self, data, generator=lambda: randint(0, HashRing.RING_SIZE - 1)):
+        '''
+        Adds @self.spreading_factor new nodes to the ring. All new nodes will point
+        to @data.
+
+        :data: str         The data handing on the nodes being added. E.g. Shard name
+        :generator: int()  The function to generate the new nodes ring locations
+                           Must return a number in interval [0 - 1B)
+        '''
         new_nodes = []
         moves = []
         for _ in range(self.spreading_factor):
@@ -60,6 +68,7 @@ class HashRing(object):
             from_node_idx = self._find_partition_idx(node.start)
 
             if from_node_idx > 0 and from_node_idx < len(self.ring):
+                # Default case. The new node will be in between 2 nodes.
                 moves.append(
                     MoveRequest(
                         from_node=self.ring[from_node_idx - 1],
@@ -72,14 +81,22 @@ class HashRing(object):
                     )
                 )
             elif from_node_idx == 0:
+                # New node must be the new index 0. It's hash is smaller than the hash
+                # of the current node at index 0
                 moves.append(
                     MoveRequest(
                         from_node=self.ring[-1],
                         to_node=node,
-                        ranges=[Range(node.start, self.ring[from_node_idx].start - node.start)],
+                        ranges=[
+                            Range(
+                                node.start, self.ring[from_node_idx].start - node.start
+                            )
+                        ],
                     )
                 )
-            else:  # from_node_idx == len(self.ring) {New last entry}
+            else:
+                # from_node_idx == len(self.ring)
+                # The new node will be the new last node
                 moves.append(
                     MoveRequest(
                         from_node=self.ring[from_node_idx - 1],
@@ -106,6 +123,9 @@ class HashRing(object):
 
     def _find_partition(self, partition_hash):
         node_idx = self._find_partition_idx(partition_hash)
+        # If node_idx is 0, that means the current hash is smaller than the hash of the
+        # node at index 0 therefore we need to grab the last node of the ring
+        # (cicle to the back)
         return self.ring[node_idx - 1] if node_idx > 0 else self.ring[-1]
 
     def _find_partition_idx(self, partition_hash):
@@ -215,7 +235,7 @@ class TestFunctions(unittest.TestCase):
                     [Range(0, 200000000), Range(400000000, 1000000000 - 400000000)],
                 )
             ],
-            moves,  
+            moves,
         )
 
         self.assertEqual("shard_1", ring._find_partition(0).data)
@@ -239,7 +259,7 @@ class TestFunctions(unittest.TestCase):
                     [Range(0, 200000000), Range(600000000, 1000000000 - 600000000)],
                 )
             ],
-            moves,  
+            moves,
         )
 
         self.assertEqual("shard_2", ring._find_partition(0).data)

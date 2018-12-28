@@ -8,7 +8,7 @@ class Interval:
         return self.start == that.start and self.end == that.end
 
 
-def collapse(intervals):
+def collapse2(intervals):
     """
     :type intervals: List[Interval]
     :rtype: List[Interval]
@@ -29,6 +29,33 @@ def collapse(intervals):
                 ans.append(current)
                 current = None
                 i -= 1
+        i += 1
+
+    if current:
+        ans.append(current)
+    return ans
+
+
+def collapse(intervals):
+    """
+    :type intervals: List[Interval]
+    :rtype: List[Interval]
+    """
+    ans = []
+    current = None
+
+    intervals.sort(key=lambda interval: interval.start)
+
+    i = 0
+    while i < len(intervals):
+        if not current:
+            current = intervals[i]
+        else:
+            if current.end >= intervals[i].start:
+                current.end = max(current.end, intervals[i].end)
+            else:
+                ans.append(current)
+                current = intervals[i]
         i += 1
 
     if current:

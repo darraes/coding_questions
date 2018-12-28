@@ -48,6 +48,43 @@ def pretty_print(node):
         print("".join(l))
 
 
+def friendly_build(lines):
+    def build_node(value):
+        if value == "N":
+            return None
+        return TreeNode(int(value))
+
+    parents = deque()
+    children = deque()
+    children.append(build_node(lines[0][0]))
+    root = None
+
+    for i in range(len(lines)):
+        j = 0
+        while len(parents) > 0:
+            current_parent = parents.popleft()
+            if root is None:
+                root = current_parent
+
+            current_parent.left = build_node(lines[i][j])
+            j += 1
+            current_parent.right = build_node(lines[i][j])
+            j += 1
+
+            if current_parent.left:
+                children.append(current_parent.left)
+            if current_parent.right:
+                children.append(current_parent.right)
+
+        if i != 0 and j != len(lines[i]):
+            raise
+
+        parents = children
+        children = deque()
+
+    return root
+
+
 def serialize(root):
     """Encodes a tree to a single string.
     
