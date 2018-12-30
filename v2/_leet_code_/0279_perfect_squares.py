@@ -1,26 +1,26 @@
 class Solution:
-    def __init__(self):
-        self.lookup = []
+    lookup = []
 
-    def numSquares(self, n):
+    @classmethod
+    def numSquares(cls, n):
         """
         :type n: int
         :rtype: int
         """
-        if n < len(self.lookup):
-            return self.lookup[n]
+        if n < len(cls.lookup):
+            return cls.lookup[n]
 
-        start = max(2, len(self.lookup))
-        self.lookup.extend([2 ** 64 - 1] * (n + 1 - len(self.lookup)))
-        self.lookup[0] = 0
-        self.lookup[1] = 1
+        start = max(2, len(cls.lookup))
+        cls.lookup.extend([2 ** 64 - 1] * (n + 1 - len(cls.lookup)))
+        cls.lookup[0] = 0
+        cls.lookup[1] = 1
 
         for i in range(start, n + 1):
             j = 1
             while j * j <= n:
-                self.lookup[i] = min(self.lookup[i], self.lookup[i - j * j] + 1)
+                cls.lookup[i] = min(cls.lookup[i], cls.lookup[i - j * j] + 1)
                 j += 1
-        return self.lookup[-1]
+        return cls.lookup[-1]
 
 
 ###############################################################

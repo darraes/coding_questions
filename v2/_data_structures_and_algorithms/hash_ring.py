@@ -54,33 +54,33 @@ class HashRing(object):
         :generator: int()  The function to generate the new nodes ring locations
                            Must return a number in interval [0 - 1B)
         '''
-        new_nodes = []
         moves = []
+        is_first = len(self.ring) == 0
         for _ in range(self.spreading_factor):
             # TODO: The generator can create a node with the same hash.
             # If that happens, we should generate a new hash
             node = Node(start=generator(), data=data)
-            new_nodes.append(node)
 
-            if len(self.ring) == 0:
+            if is_first:
+                self.ring.append(node)
                 continue
 
-            from_node_idx = self._find_partition_idx(node.start)
+            new_node_idx = self._find_partition_idx(node.start)
 
-            if from_node_idx > 0 and from_node_idx < len(self.ring):
+            if new_node_idx > 0 and new_node_idx < len(self.ring):
                 # Default case. The new node will be in between 2 nodes.
                 moves.append(
                     MoveRequest(
-                        from_node=self.ring[from_node_idx - 1],
+                        from_node=self.ring[new_node_idx - 1],
                         to_node=node,
                         ranges=[
                             Range(
-                                node.start, self.ring[from_node_idx].start - node.start
+                                node.start, self.ring[new_node_idx].start - node.start
                             )
                         ],
                     )
                 )
-            elif from_node_idx == 0:
+            elif new_node_idx == 0:
                 # New node must be the new index 0. It's hash is smaller than the hash
                 # of the current node at index 0
                 moves.append(
@@ -89,17 +89,17 @@ class HashRing(object):
                         to_node=node,
                         ranges=[
                             Range(
-                                node.start, self.ring[from_node_idx].start - node.start
+                                node.start, self.ring[new_node_idx].start - node.start
                             )
                         ],
                     )
                 )
             else:
-                # from_node_idx == len(self.ring)
+                # new_node_idx == len(self.ring)
                 # The new node will be the new last node
                 moves.append(
                     MoveRequest(
-                        from_node=self.ring[from_node_idx - 1],
+                        from_node=self.ring[new_node_idx - 1],
                         to_node=node,
                         ranges=[
                             Range(0, self.ring[0].start),
@@ -108,13 +108,13 @@ class HashRing(object):
                     )
                 )
 
-        self.ring.extend(new_nodes)
-        self.ring.sort()
+            # This is an expensive operation as it will shift elements on every new
+            # node. If the spreading is too large, this can be very time consuming
+            self.ring.insert(new_node_idx, node)
 
-        return self._collapse_intersecting_moves(moves)
+        if is_first:
+            self.ring.sort()
 
-    def _collapse_intersecting_moves(self, moves):
-        # TODO
         return moves
 
     def find(self, partition_key):
