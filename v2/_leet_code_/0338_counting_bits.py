@@ -20,6 +20,8 @@ class TestFunctions(unittest.TestCase):
 
         self.assertEqual([0, 1, 1], s.countBits(2))
         self.assertEqual([0, 1, 1, 2, 1, 2], s.countBits(5))
+        self.assertEqual([0], s.countBits(0))
+        self.assertEqual([0, 1], s.countBits(1))
 
 
 if __name__ == "__main__":
