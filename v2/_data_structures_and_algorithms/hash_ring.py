@@ -10,6 +10,9 @@ class Node(object):
         self.start = start
         self.data = data
 
+    def __str__(self):
+        return "{} ({})".format(self.start, self.data)
+
     def __lt__(self, other):
         return self.start < other.start
 
@@ -76,8 +79,42 @@ class HashRing(object):
         # move
         for n in new_nodes:
             from_node = HashRing._find_partition(old_ring, n.start)
-            left_node_idx = HashRing._find_partition_idx(self.ring, n.start)
-            right_node_idx = left_node_idx + 1
+            start_node_idx = HashRing._find_partition_idx(self.ring, n.start) - 1
+            end_node_idx = start_node_idx + 1
+
+            if end_node_idx < len(self.ring):
+                moves.append(
+                    MoveRequest(
+                        from_node=from_node,
+                        to_node=self.ring[start_node_idx],
+                        ranges=[
+                            Range(
+                                start=self.ring[start_node_idx].start,
+                                count=self.ring[end_node_idx].start
+                                - self.ring[start_node_idx].start,
+                            )
+                        ],
+                    )
+                )
+            else:
+                # We are looping on the ring therefore we need two ranges to be moved
+                moves.append(
+                    MoveRequest(
+                        from_node=from_node,
+                        to_node=self.ring[start_node_idx],
+                        ranges=[
+                            Range(
+                                start=self.ring[start_node_idx].start,
+                                count=HashRing.RING_SIZE
+                                - self.ring[start_node_idx].start,
+                            ),
+                            Range(
+                                start=0,
+                                count=self.ring[0].start,
+                            )
+                        ],
+                    )
+                )
 
         return moves
 
@@ -131,16 +168,17 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual("shard_0", HashRing._find_partition(ring.ring, 900000000).data)
 
         moves = ring.add("shard_1", generator=lambda: 300000000)
-        #        self.assertEqual(
-        #            [
-        #                MoveRequest(
-        #                    Node(200000000, "shard_0"),
-        #                    Node(300000000, "shard_1"),
-        #                    [Range(300000000, 500000000 - 300000000)],
-        #                )
-        #            ],
-        #            moves,
-        #        )
+
+        self.assertEqual(
+            [
+                MoveRequest(
+                    Node(200000000, "shard_0"),
+                    Node(300000000, "shard_1"),
+                    [Range(300000000, 500000000 - 300000000)],
+                )
+            ],
+            moves,
+        )
 
         self.assertEqual("shard_0", HashRing._find_partition(ring.ring, 0).data)
         self.assertEqual("shard_0", HashRing._find_partition(ring.ring, 100000000).data)
@@ -154,16 +192,16 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual("shard_0", HashRing._find_partition(ring.ring, 900000000).data)
 
         moves = ring.add("shard_1", generator=lambda: 600000000)
-        #        self.assertEqual(
-        #            [
-        #                MoveRequest(
-        #                    Node(500000000, "shard_0"),
-        #                    Node(600000000, "shard_1"),
-        #                    [Range(600000000, 800000000 - 600000000)],
-        #                )
-        #            ],
-        #            moves,
-        #        )
+        self.assertEqual(
+            [
+                MoveRequest(
+                    Node(500000000, "shard_0"),
+                    Node(600000000, "shard_1"),
+                    [Range(600000000, 800000000 - 600000000)],
+                )
+            ],
+            moves,
+        )
 
         self.assertEqual("shard_0", HashRing._find_partition(ring.ring, 0).data)
         self.assertEqual("shard_0", HashRing._find_partition(ring.ring, 100000000).data)
@@ -193,16 +231,17 @@ class TestFunctions(unittest.TestCase):
 
         # Test for when the ring has a single node
         moves = ring.add("shard_1", generator=lambda: 400000000)
-        #        self.assertEqual(
-        #            [
-        #                MoveRequest(
-        #                    Node(200000000, "shard_0"),
-        #                    Node(400000000, "shard_1"),
-        #                    [Range(0, 200000000), Range(400000000, 1000000000 - 400000000)],
-        #                )
-        #            ],
-        #            moves,
-        #        )
+
+        self.assertEqual(
+            [
+                MoveRequest(
+                    Node(200000000, "shard_0"),
+                    Node(400000000, "shard_1"),
+                    [Range(400000000, 1000000000 - 400000000), Range(0, 200000000)],
+                )
+            ],
+            moves,
+        )
 
         self.assertEqual("shard_1", HashRing._find_partition(ring.ring, 0).data)
         self.assertEqual("shard_1", HashRing._find_partition(ring.ring, 100000000).data)
@@ -217,16 +256,16 @@ class TestFunctions(unittest.TestCase):
 
         # Test for when the ring has multiple node
         moves = ring.add("shard_2", generator=lambda: 600000000)
-        #        self.assertEqual(
-        #            [
-        #                MoveRequest(
-        #                    Node(400000000, "shard_1"),
-        #                    Node(600000000, "shard_2"),
-        #                    [Range(0, 200000000), Range(600000000, 1000000000 - 600000000)],
-        #                )
-        #            ],
-        #            moves,
-        #        )
+        self.assertEqual(
+            [
+                MoveRequest(
+                    Node(400000000, "shard_1"),
+                    Node(600000000, "shard_2"),
+                    [Range(600000000, 1000000000 - 600000000), Range(0, 200000000)],
+                )
+            ],
+            moves,
+        )
 
         self.assertEqual("shard_2", HashRing._find_partition(ring.ring, 0).data)
         self.assertEqual("shard_2", HashRing._find_partition(ring.ring, 100000000).data)
@@ -256,16 +295,16 @@ class TestFunctions(unittest.TestCase):
 
         # Test for when the ring has a single node
         moves = ring.add("shard_1", generator=lambda: 200000000)
-        #        self.assertEqual(
-        #            [
-        #                MoveRequest(
-        #                    Node(500000000, "shard_0"),
-        #                    Node(200000000, "shard_1"),
-        #                    [Range(200000000, 500000000 - 200000000)],
-        #                )
-        #            ],
-        #            moves,
-        #        )
+        self.assertEqual(
+            [
+                MoveRequest(
+                    Node(500000000, "shard_0"),
+                    Node(200000000, "shard_1"),
+                    [Range(200000000, 500000000 - 200000000)],
+                )
+            ],
+            moves,
+        )
 
         self.assertEqual("shard_0", HashRing._find_partition(ring.ring, 0).data)
         self.assertEqual("shard_0", HashRing._find_partition(ring.ring, 100000000).data)
@@ -280,16 +319,16 @@ class TestFunctions(unittest.TestCase):
 
         # Test for when the ring has multiple nodes
         moves = ring.add("shard_2", generator=lambda: 100000000)
-        #        self.assertEqual(
-        #            [
-        #                MoveRequest(
-        #                    Node(500000000, "shard_0"),
-        #                    Node(100000000, "shard_2"),
-        #                    [Range(100000000, 200000000 - 100000000)],
-        #                )
-        #            ],
-        #            moves,
-        #        )
+        self.assertEqual(
+            [
+                MoveRequest(
+                    Node(500000000, "shard_0"),
+                    Node(100000000, "shard_2"),
+                    [Range(100000000, 200000000 - 100000000)],
+                )
+            ],
+            moves,
+        )
 
         self.assertEqual("shard_0", HashRing._find_partition(ring.ring, 0).data)
         self.assertEqual("shard_2", HashRing._find_partition(ring.ring, 100000000).data)
