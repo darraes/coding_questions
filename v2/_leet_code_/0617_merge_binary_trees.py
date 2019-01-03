@@ -47,6 +47,23 @@ class TestFunctions(unittest.TestCase):
             ),
         )
 
+        self.assertEqual(
+            [3],
+            serialize(
+                s.mergeTrees(
+                    deserialize([3]), deserialize([])
+                )
+            ),
+        )
+        self.assertEqual(
+            [3],
+            serialize(
+                s.mergeTrees(
+                    deserialize([]), deserialize([3])
+                )
+            ),
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

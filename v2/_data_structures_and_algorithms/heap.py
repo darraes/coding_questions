@@ -33,7 +33,7 @@ class Heap(object):
         self.store = array
         self.heap_size = len(array) - 1
 
-        i = int(self.heap_size / 2)
+        i = self.heap_size // 2
 
         while i >= 1:
             self.max_heapify(i)
