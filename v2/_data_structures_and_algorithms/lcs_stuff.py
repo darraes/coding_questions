@@ -113,8 +113,6 @@ def lcsubstring(X, Y):
                 if lookup[i][j] > max_len:
                     max_len = lookup[i][j]
                     end_m, end_n = i, j
-            else:
-                lookup[i][j] = 0
 
     return X[end_m - max_len : end_m]
 

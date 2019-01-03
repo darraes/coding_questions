@@ -31,6 +31,9 @@ class DirNode(object):
             self.sub_dirs[dir_name] = DirNode(dir_name, self)
         return self.sub_dirs[dir_name]
 
+    def has_sub_dir(self, dir_name):
+        return dir_name in self.sub_dirs
+
     def remove_dir(self, dir_name):
         if dir_name in self.sub_dirs:
             del self.sub_dirs[dir_name]
@@ -68,10 +71,25 @@ class FileSystem(object):
 
         return node
 
+    def goto_directory(self, dir_path):
+        dir_parts = self.split_path(dir_path)
+
+        node = self.root
+        for sub_dir in dir_parts:
+            if node.has_sub_dir(sub_dir):
+                node = node.ensure_sub_dir(sub_dir)
+            else:
+                return None
+
+        return node
+
 
     def list_files(self, dir_path, recurse):
-        node = self.ensure_directory(dir_path) # Fix this: Should not create a Dir
         results = []
+        node = self.goto_directory(dir_path) # Fix this: Should not create a Dir
+        if not node:
+            return results
+
         queue = deque()
         queue.append((dir_path, node))
 

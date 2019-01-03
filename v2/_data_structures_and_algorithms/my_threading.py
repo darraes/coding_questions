@@ -48,11 +48,11 @@ class MPMCSQueue(object):
         self.buffer = deque(maxlen=max_size)
         self.max_size = max_size
         self.lock = RLock()
-        self.used = Semaphore(value=0)
-        self.available = Semaphore(value=max_size)
+        self.ready_to_read = Semaphore(value=0)
+        self.available_slots = Semaphore(value=max_size)
 
     def put(self, task, blocking=True):
-        if not self.available.acquire(blocking):
+        if not self.available_slots.acquire(blocking):
             return False
 
         self.lock.acquire()
@@ -60,18 +60,18 @@ class MPMCSQueue(object):
         print("putting ", task)
         self.lock.release()
 
-        self.used.release()
+        self.ready_to_read.release()
         return True
 
     def get(self, blocking=True):
-        if not self.used.acquire(blocking):
+        if not self.ready_to_read.acquire(blocking):
             return None
 
         self.lock.acquire()
         task = self.buffer.popleft()
         self.lock.release()
 
-        self.available.release()
+        self.available_slots.release()
         print("getting ", task)
         return task
 
