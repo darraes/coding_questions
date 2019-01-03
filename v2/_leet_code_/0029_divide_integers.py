@@ -18,7 +18,7 @@ class Solution:
             count = 1
 
             while div <= _dividend:
-                div = div << 1
+                div *= 2
                 count *= 2
 
             count /= 2
