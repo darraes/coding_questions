@@ -43,8 +43,8 @@ import unittest
 class TestFunctions(unittest.TestCase):
     def test_1(self):
         s = Solution()
-        self.assertEqual(2, s.subarraySum([1, 1, 1], 2))
         self.assertEqual(4, s.subarraySum([3, -1, 1, 1, -2, 4], 2))
+        self.assertEqual(2, s.subarraySum([1, 1, 1], 2))
         self.assertEqual(
             1023,
             s.subarraySum(
