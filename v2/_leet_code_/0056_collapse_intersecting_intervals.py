@@ -28,8 +28,7 @@ class Solution:
                     current.end = max(current.end, intervals[i].end)
                 else:
                     ans.append(current)
-                    current = None
-                    i -= 1
+                    current = intervals[i]
             i += 1
 
         if current:
