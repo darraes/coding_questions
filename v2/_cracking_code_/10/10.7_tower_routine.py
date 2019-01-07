@@ -12,14 +12,14 @@ def max_possible_tower(artists):
     gmax = 0
     dp = [0] * len(artists)
     dp[0] = 1
-    for i in range(len(dp)):
+    for i in range(1, len(dp)):
         for j in range(i):
             cur_max = 1
             if artists[i].weight > artists[j].weight:
                 cur_max = 1 + dp[j]
             dp[i] = max(dp[i], cur_max)
         gmax = max(gmax, dp[i])
-    print(dp)
+
     return gmax
 
 
