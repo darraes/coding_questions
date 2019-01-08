@@ -35,8 +35,6 @@ class TestFunctions(unittest.TestCase):
             ),
         )
 
-        return
-
         self.assertEqual(
             [
                 "JFK",
