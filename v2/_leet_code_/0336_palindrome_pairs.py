@@ -13,8 +13,8 @@ def is_palindrome(letters):
 class TrieNode:
     def __init__(self, is_end):
         self.edges = {}
-        self.is_end = is_end
-        self.word_idx = set([])
+        self.end_word_idxs = set([])
+        self.words = []
 
 
 class Trie:
@@ -26,13 +26,14 @@ class Trie:
 
         idx = 0
         while idx < len(term):
+            current.words.append((term, word_idx))
             if term[idx] not in current.edges:
                 current.edges[term[idx]] = TrieNode(is_end=False)
             current = current.edges[term[idx]]
             idx += 1
 
-        current.is_end = True
-        current.word_idx.add(word_idx)
+        current.end_word_idxs.add(word_idx)
+        current.words.append((term, word_idx))
 
     def search(self, term, my_idx):
         current = self.root
@@ -40,8 +41,8 @@ class Trie:
 
         idx = 0
         while idx < len(term):
-            if current.is_end and is_palindrome(list(term[idx:])):
-                for word_idx in current.word_idx:
+            if current.end_word_idxs and is_palindrome(list(term[idx:])):
+                for word_idx in current.end_word_idxs:
                     answer.append([my_idx, word_idx])
 
             if term[idx] not in current.edges:
@@ -49,25 +50,8 @@ class Trie:
             current = current.edges[term[idx]]
             idx += 1
 
-        def get_all(current, start):
-            nonlocal my_idx
-            ans = []
-            if current.is_end:
-                for word_idx in current.word_idx:
-                    if my_idx != word_idx:
-                        ans.append(([start], word_idx))
-
-            for edge, node in current.edges.items():
-                sub_ans = get_all(node, edge)
-                for sub in sub_ans:
-                    if start != "":
-                        sub[0].append(start)
-                    ans.append(sub)
-
-            return ans
-
-        for (letters, word_idx) in get_all(current, ""):
-            if is_palindrome(letters):
+        for (letters, word_idx) in current.words:
+            if word_idx != my_idx and is_palindrome(letters[idx:]):
                 answer.append([my_idx, word_idx])
         return answer
 
