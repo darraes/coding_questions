@@ -1,8 +1,20 @@
+def is_palindrome(letters):
+    s = 0
+    e = len(letters) - 1
+
+    while s < e:
+        if letters[s] != letters[e]:
+            return False
+        s += 1
+        e -= 1
+    return True
+
+
 class TrieNode:
     def __init__(self, is_end):
         self.edges = {}
         self.is_end = is_end
-        self.word_idx = -1
+        self.word_idx = set([])
 
 
 class Trie:
@@ -20,23 +32,30 @@ class Trie:
             idx += 1
 
         current.is_end = True
-        current.word_idx = word_idx
+        current.word_idx.add(word_idx)
 
-    def list_tails(self, term, my_idx):
+    def search(self, term, my_idx):
         current = self.root
+        answer = []
 
         idx = 0
         while idx < len(term):
+            if current.is_end and is_palindrome(list(term[idx:])):
+                for word_idx in current.word_idx:
+                    answer.append([my_idx, word_idx])
+
             if term[idx] not in current.edges:
-                return False, []
+                return answer
             current = current.edges[term[idx]]
             idx += 1
 
         def get_all(current, start):
             nonlocal my_idx
             ans = []
-            if current.is_end and my_idx != current.word_idx:
-                ans.append(([start], current.word_idx))
+            if current.is_end:
+                for word_idx in current.word_idx:
+                    if my_idx != word_idx:
+                        ans.append(([start], word_idx))
 
             for edge, node in current.edges.items():
                 sub_ans = get_all(node, edge)
@@ -47,7 +66,10 @@ class Trie:
 
             return ans
 
-        return True, get_all(current, "")
+        for (letters, word_idx) in get_all(current, ""):
+            if is_palindrome(letters):
+                answer.append([my_idx, word_idx])
+        return answer
 
 
 class Solution:
@@ -63,24 +85,9 @@ class Solution:
             trie.insert(word[::-1], i)
 
         for i, word in enumerate(words):
-            has_results, results = trie.list_tails(word, i)
-            if has_results:
-                for (letters, word_idx) in results:
-                    if self.isPalindrome(letters):
-                        ans.append([i, word_idx])
+            ans.extend(trie.search(word, i))
+
         return ans
-
-
-    def isPalindrome(self, letters):
-        s = 0
-        e = len(letters) - 1
-
-        while s < e:
-            if letters[s] != letters[e]:
-                return False
-            s += 1
-            e -= 1
-        return True
 
 
 ###############################################################
@@ -91,10 +98,23 @@ class TestFunctions(unittest.TestCase):
     def test_1(self):
         s = Solution()
 
+        self.assertEqual([[1, 0]], s.palindromePairs(["a", "abb"]))
+        self.assertEqual([[0, 1]], s.palindromePairs(["a", "bba"]))
+
+        self.assertEqual([[0, 1], [1, 0]], s.palindromePairs(["a", ""]))
+
+        self.assertEqual([[0, 1], [1, 0]], s.palindromePairs(["a", "a"]))
+
         self.assertEqual(
             [[0, 1], [1, 0], [2, 4], [3, 2]],
             s.palindromePairs(["abcd", "dcba", "lls", "s", "sssll"]),
         )
+
+        self.assertEqual([], s.palindromePairs(["abcd", "sssll"]))
+
+        self.assertEqual([], s.palindromePairs([]))
+
+        self.assertEqual([[0, 1], [1, 0]], s.palindromePairs(["bat", "tab", "cat"]))
 
 
 if __name__ == "__main__":
