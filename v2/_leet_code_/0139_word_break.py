@@ -39,6 +39,9 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(
             False, s.wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"])
         )
+        self.assertEqual(
+            True, s.wordBreak("catsanddog", ["cats", "dog", "sand", "and", "cat"])
+        )
 
 
 if __name__ == "__main__":
