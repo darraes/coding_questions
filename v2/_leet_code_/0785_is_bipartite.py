@@ -10,7 +10,7 @@ class Solution:
         painted = {}
         for n in range(len(graph)):
             if n not in painted:
-                # Beginning of a transversal. We can paint in any way
+                # Beginning of a transversal. We can paint it any way
                 painted[n] = 0
                 queue = deque([n])
                 while len(queue) > 0:

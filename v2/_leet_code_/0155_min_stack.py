@@ -17,7 +17,7 @@ class MinStack:
         """
         cur_min = self.getMin()
         self.store.append(
-            MinStack.Item(x, min(x, cur_min) if cur_min is not None else x)
+            MinStack.Item(x, (min(x, cur_min) if cur_min is not None else x))
         )
 
     def pop(self):
