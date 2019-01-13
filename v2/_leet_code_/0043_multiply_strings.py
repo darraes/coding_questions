@@ -13,11 +13,10 @@ class Solution:
             for j in reversed(range(len(num2))):
                 mul = int(num1[i]) * int(num2[j])
                 digits[p1] += mul % 10
+                digits[p2] += mul // 10
                 if digits[p1] >= 10:
                     digits[p2] += digits[p1] // 10
                     digits[p1] %= 10
-
-                digits[p2] += mul // 10
 
                 p1 += 1
                 p2 += 1
