@@ -4,13 +4,13 @@ from heapq import heappush, heappop
 
 class Solution:
     def alienOrder2(self, words):
-        iam_bigger = defaultdict(int)
-        iam_smaller = defaultdict(set)
+        indegree = defaultdict(int)
+        dependencies = defaultdict(set)
 
         for i in range(len(words)):
             for letter in list(words[i]):
-                if letter not in iam_bigger:
-                    iam_bigger[letter] = 0
+                if letter not in indegree:
+                    indegree[letter] = 0
 
             for j in range(i + 1, len(words)):
                 i_idx = j_idx = 0
@@ -19,22 +19,22 @@ class Solution:
                     after = words[j][j_idx]
 
                     if before != after:
-                        if after in iam_smaller and before in iam_smaller[after]:
+                        if after in dependencies and before in dependencies[after]:
                             return ""
 
                         if (
-                            before not in iam_smaller
-                            or after not in iam_smaller[before]
+                            before not in dependencies
+                            or after not in dependencies[before]
                         ):
-                            iam_smaller[before].add(after)
-                            iam_bigger[after] += 1
+                            dependencies[before].add(after)
+                            indegree[after] += 1
                         break
 
                     i_idx += 1
                     j_idx += 1
 
         queue = deque()
-        for letter, degree in iam_bigger.items():
+        for letter, degree in indegree.items():
             if degree == 0:
                 queue.append(letter)
 
@@ -43,10 +43,10 @@ class Solution:
             next_letter = queue.popleft()
             ans.append(next_letter)
 
-            for neighbor in iam_smaller[next_letter]:
-                if iam_bigger[neighbor] > 0:
-                    iam_bigger[neighbor] -= 1
-                    if iam_bigger[neighbor] == 0:
+            for neighbor in dependencies[next_letter]:
+                if indegree[neighbor] > 0:
+                    indegree[neighbor] -= 1
+                    if indegree[neighbor] == 0:
                         queue.append(neighbor)
 
         return "".join(ans)
