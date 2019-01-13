@@ -9,9 +9,9 @@ from collections import deque
 
 class MQueue(object):
     class Element:
-        def __init__(self, val, tail_count):
+        def __init__(self, val, ignored):
             self.val = val
-            self.tail_count = tail_count
+            self.ignored = ignored
 
     def __init__(self, compare):
         self.store = deque()
@@ -20,7 +20,7 @@ class MQueue(object):
     def enqueue(self, val):
         count = 0
         while len(self.store) > 0 and self.compare(self.store[-1].val, val):
-            count += 1 + self.store[-1].tail_count
+            count += 1 + self.store[-1].ignored
             self.store.pop()
         self.store.append(MQueue.Element(val, count))
 
@@ -31,8 +31,8 @@ class MQueue(object):
 
     def dequeue(self):
         if len(self.store) > 0:
-            if self.store[0].tail_count > 0:
-                self.store[0].tail_count -= 1
+            if self.store[0].ignored > 0:
+                self.store[0].ignored -= 1
             else:
                 self.store.popleft()
 
