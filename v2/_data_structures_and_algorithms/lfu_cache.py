@@ -102,7 +102,7 @@ class CacheNode:
 class FrequencyNode:
     def __init__(self, f):
         self.f = f
-        self.clist = DoubleLinkedList(lambda k, v: CacheNode(None, None, None))
+        self.c_list = DoubleLinkedList(lambda k, v: CacheNode(None, None, None))
         self.next = None
         self.prev = None
 
@@ -114,7 +114,7 @@ class LFUCache:
     def __init__(self, cap):
         self.cap = cap
         self.cache_map = {}
-        self.frequencies = DoubleLinkedList(lambda k, v: FrequencyNode(v))
+        self.f_list = DoubleLinkedList(lambda k, v: FrequencyNode(v))
 
     def put(self, key, val):
         if len(self.cache_map) == self.cap and key not in self.cache_map:
@@ -127,18 +127,16 @@ class LFUCache:
             return None
 
         cnode = self.cache_map[key]
-        v = cnode.val
-        self._update(key, v)
-
-        return v
+        self._update(key, cnode.val)
+        return cnode.val
 
     def _evict_lfu(self):
-        fnode = self.frequencies.true_head()
-        cnode = fnode.clist.popleft()
+        fnode = self.f_list.true_head()
+        cnode = fnode.c_list.popleft()
         del self.cache_map[cnode.key]
 
-        if self.frequencies.size == 0:
-            self.frequencies.unlink(fnode)
+        if self.f_list.size == 0:
+            self.f_list.unlink(fnode)
 
     def _update(self, key, val):
         if key in self.cache_map:
@@ -149,34 +147,34 @@ class LFUCache:
             f = fnode.f + 1
             fnext = fnode.next
 
-            fnode.clist.unlink(cnode)
-            if fnode.clist.size == 0:
-                self.frequencies.unlink(fnode)
+            fnode.c_list.unlink(cnode)
+            if fnode.c_list.size == 0:
+                self.f_list.unlink(fnode)
 
             if f == fnext.f:
-                fnext.clist.appendleft(cnode)
+                fnext.c_list.appendleft(cnode)
             else:
-                fnode = self.frequencies.appendbefore(FrequencyNode(f), fnext)
-                fnode.clist.appendleft(cnode)
+                fnode = self.f_list.appendbefore(FrequencyNode(f), fnext)
+                fnode.c_list.appendleft(cnode)
         else:
             fnode = FrequencyNode(1)
-            if self.frequencies.true_head().f == 1:
-                fnode = self.frequencies.true_head()
+            if self.f_list.true_head().f == 1:
+                fnode = self.f_list.true_head()
             else:
-                self.frequencies.appendleft(fnode)
+                self.f_list.appendleft(fnode)
 
             cnode = CacheNode(key, val, fnode)
-            fnode.clist.append(cnode)
+            fnode.c_list.append(cnode)
             self.cache_map[key] = cnode
 
     def print_cache(self):
-        print(self.cache_map)
+        print([k for k, v in self.cache_map.items()])
 
         buf = ""
-        node = self.frequencies.true_head()
-        while node != self.frequencies.tail:
+        node = self.f_list.true_head()
+        while node != self.f_list.tail:
             print("Freq:", node.f)
-            node.clist.print_f()
+            node.c_list.print_f()
             node = node.next
 
 
@@ -195,6 +193,7 @@ class TestFunctions(unittest.TestCase):
         cache.put("k5", "v5")
         cache.put("k2", "v2")
         cache.put("k3", "v3")
+        cache.put("k2", "v2")
         cache.print_cache()
 
     def test_2(self):
