@@ -54,11 +54,13 @@ class DoubleLinkedList:
 
     def pop(self):
         self.size -= 1
-        return self.unlink(self.tail.prev).val
+        n = self.unlink(self.tail.prev)
+        return (n.key, n.val)
 
     def popleft(self):
         self.size -= 1
-        return self.unlink(self.head.next).val
+        n = self.unlink(self.head.next)
+        return (n.key, n.val)
 
     def unlink(self, node):
         node.prev.next = node.next
@@ -135,41 +137,54 @@ class LFUCache:
 
     def _evict_lfu(self):
         fnode = self.f_list.true_head()
-        cnode = fnode.c_list.popleft()
-        del self.cache_map[cnode.key]
+        k, v = fnode.c_list.popleft()
+        del self.cache_map[k]
 
         if self.f_list.size == 0:
             self.f_list.unlink(fnode)
 
     def _update(self, key, val):
         if key in self.cache_map:
+            # Update the cache value
             cnode = self.cache_map[key]
             cnode.val = val
+
+            # We need the frequency node to unlink the cache node and move the latter
+            # to the next frequence (f + 1)
             fnode = cnode.freq_node
 
-            f = fnode.f + 1
+            # Frequency gets bump by one and the "next" node might or might not be
+            # the node for the new frequency
+            new_f = fnode.f + 1
             fnext = fnode.next
 
-            log("target f {}".format(f))
-
+            # Unlink the cache node from previous frequency
             fnode.c_list.unlink(cnode)
             if fnode.c_list.size == 0:
+                # If there are no more nodes left, remove the frequency node
                 self.f_list.unlink(fnode)
 
-            if f == fnext.f:
-                fnext.c_list.appendleft(cnode)
-                cnode.freq_node = fnext
+            if new_f == fnext.f:
+                # The next frequency node is responsible for the new frequency so use it
+                fnode = fnext
             else:
-                fnode = self.f_list.appendbefore(FrequencyNode(f), fnext)
-                fnode.c_list.appendleft(cnode)
-                cnode.freq_node = fnode
+                # We need to create a new frequency node as new_f is not represented
+                fnode = self.f_list.appendbefore(FrequencyNode(new_f), fnext)
+
+            # Add the cache node to its frequency node
+            cnode.freq_node = fnode
+            fnode.c_list.appendleft(cnode)
         else:
-            fnode = FrequencyNode(1)
+            # If it is brand new key, its frequency must be 1.
             if self.f_list.true_head().f == 1:
+                # 1 is already on the frequency list (If so, it must be the head)
                 fnode = self.f_list.true_head()
             else:
+                # Create the new frequency node
+                fnode = FrequencyNode(1)
                 self.f_list.appendleft(fnode)
 
+            # Connect the cache and frequency nodes and add the key to cache
             cnode = CacheNode(key, val, fnode)
             fnode.c_list.append(cnode)
             self.cache_map[key] = cnode
@@ -201,6 +216,7 @@ class TestFunctions(unittest.TestCase):
         cache.put("k2", "v2")
         cache.put("k3", "v3")
         cache.put("k2", "v2")
+        cache.put("k6", "v6")
         cache.print_cache()
 
     def test_2(self):
