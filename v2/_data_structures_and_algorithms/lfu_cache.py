@@ -1,3 +1,6 @@
+def log(s):
+    print(s)
+
 class DoubleLinkedList:
     def __init__(self, node_builder):
         self.builder = node_builder
@@ -146,6 +149,8 @@ class LFUCache:
 
             f = fnode.f + 1
             fnext = fnode.next
+
+            log("target f", f)
 
             fnode.c_list.unlink(cnode)
             if fnode.c_list.size == 0:
