@@ -150,7 +150,7 @@ class LFUCache:
             f = fnode.f + 1
             fnext = fnode.next
 
-            log("target f", f)
+            log("target f {}".format(f))
 
             fnode.c_list.unlink(cnode)
             if fnode.c_list.size == 0:
@@ -158,9 +158,11 @@ class LFUCache:
 
             if f == fnext.f:
                 fnext.c_list.appendleft(cnode)
+                cnode.freq_node = fnext
             else:
                 fnode = self.f_list.appendbefore(FrequencyNode(f), fnext)
                 fnode.c_list.appendleft(cnode)
+                cnode.freq_node = fnode
         else:
             fnode = FrequencyNode(1)
             if self.f_list.true_head().f == 1:
