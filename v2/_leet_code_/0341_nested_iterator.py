@@ -28,23 +28,6 @@ class NestedIterator(object):
         :type nestedList: List[NestedInteger]
         """
         self.iterator_stack = [Entry(-1, nestedList)]
-        self._wait_on_next()
-
-    def _wait_on_next(self):
-        while len(self.iterator_stack) > 0:
-            last = self.iterator_stack[-1]
-            last.cursor += 1
-
-            if last.cursor >= len(last.iterator):
-                self.iterator_stack.pop()
-                continue
-
-            if last.iterator[last.cursor].isInteger():
-                return
-            else:
-                self.iterator_stack.append(
-                    Entry(-1, last.iterator[last.cursor].getList())
-                )
 
     def next(self):
         """
@@ -52,7 +35,6 @@ class NestedIterator(object):
         """
         next_i = self.iterator_stack[-1]
         res = next_i.iterator[next_i.cursor].getInteger()
-        self._wait_on_next()
 
         return res
 
@@ -60,6 +42,25 @@ class NestedIterator(object):
         """
         :rtype: bool
         """
+
+        def wait_on_next():
+            while len(self.iterator_stack) > 0:
+                last = self.iterator_stack[-1]
+                last.cursor += 1
+
+                if last.cursor >= len(last.iterator):
+                    self.iterator_stack.pop()
+                    continue
+
+                if last.iterator[last.cursor].isInteger():
+                    return
+                else:
+                    self.iterator_stack.append(
+                        Entry(-1, last.iterator[last.cursor].getList())
+                    )
+
+        wait_on_next()
+
         return len(self.iterator_stack) > 0
 
 
