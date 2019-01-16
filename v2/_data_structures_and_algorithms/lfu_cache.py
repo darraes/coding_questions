@@ -1,6 +1,3 @@
-def log(s):
-    print(s)
-
 class DoubleLinkedList:
     def __init__(self, node_builder):
         self.builder = node_builder
@@ -53,18 +50,17 @@ class DoubleLinkedList:
         return n
 
     def pop(self):
-        self.size -= 1
         n = self.unlink(self.tail.prev)
         return (n.key, n.val)
 
     def popleft(self):
-        self.size -= 1
         n = self.unlink(self.head.next)
         return (n.key, n.val)
 
     def unlink(self, node):
         node.prev.next = node.next
         node.next.prev = node.prev
+        self.size -= 1
         return node
 
     def print(self):
@@ -122,6 +118,9 @@ class LFUCache:
         self.f_list = DoubleLinkedList(lambda k, v: FrequencyNode(v))
 
     def put(self, key, val):
+        if self.cap == 0:
+            return
+
         if len(self.cache_map) == self.cap and key not in self.cache_map:
             self._evict_lfu()
 
@@ -129,7 +128,7 @@ class LFUCache:
 
     def get(self, key):
         if key not in self.cache_map:
-            return None
+            return -1
 
         cnode = self.cache_map[key]
         self._update(key, cnode.val)
@@ -173,7 +172,7 @@ class LFUCache:
 
             # Add the cache node to its frequency node
             cnode.freq_node = fnode
-            fnode.c_list.appendleft(cnode)
+            fnode.c_list.append(cnode)
         else:
             # If it is brand new key, its frequency must be 1.
             if self.f_list.true_head().f == 1:
@@ -205,8 +204,29 @@ import unittest
 
 
 class TestFunctions(unittest.TestCase):
-    def test_1(self):
-        print("==============")
+    def test_4(self):
+        cache = LFUCache(0)
+
+        cache.put(0, 0)
+        self.assertEqual(-1, cache.get(0))
+
+    def test_3(self):
+        cache = LFUCache(2)
+
+        cache.put(1, 1)
+        cache.put(2, 2)
+        self.assertEqual(1, cache.get(1))
+
+        cache.put(3, 3)
+        self.assertEqual(-1, cache.get(2))
+        self.assertEqual(3, cache.get(3))
+
+        cache.put(4, 4)
+        self.assertEqual(-1, cache.get(1))
+        self.assertEqual(3, cache.get(3))
+        self.assertEqual(4, cache.get(4))
+
+    def test_2(self):
         cache = LFUCache(5)
         cache.put("k1", "v1")
         cache.put("k2", "v2")
@@ -217,9 +237,9 @@ class TestFunctions(unittest.TestCase):
         cache.put("k3", "v3")
         cache.put("k2", "v2")
         cache.put("k6", "v6")
-        cache.print_cache()
+        cache.put("k3", "v3")
 
-    def test_2(self):
+    def btest_1(self):
         print("==============")
         l = DoubleLinkedList(lambda k, v: CacheNode(None, None, None))
 
