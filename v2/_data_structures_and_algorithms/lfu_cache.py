@@ -136,6 +136,7 @@ class LFUCache:
 
     def _evict_lfu(self):
         fnode = self.f_list.true_head()
+        
         k, v = fnode.c_list.popleft()
         del self.cache_map[k]
 
