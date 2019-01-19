@@ -1,16 +1,10 @@
-# Definition for binary tree with next pointer.
-class TreeLinkNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
-        self.next = None
-
-
 class Solution:
     # @param root, a tree link node
     # @return nothing
     def connect(self, root):
+        if not root:
+            return
+
         parents = [root]
         children = []
 
@@ -34,21 +28,44 @@ import unittest
 from tree_utils import pretty_print, serialize, deserialize, tree_equals
 
 
+def print_ll(head):
+    buffer = ""
+    node = head
+    while node:
+        buffer += str(node.val)
+        buffer += " -> "
+        node = node.next
+    print(buffer)
+
+
+def in_order(node):
+    if not node:
+        return
+
+    in_order(node.left)
+    print_ll(node)
+    in_order(node.right)
+
+
 class TestFunctions(unittest.TestCase):
     def test_1(self):
         s = Solution()
 
-        problem = [-10, 9, 20, None, None, 15, 7]
-        s.connect(deserialize(problem))
+        root = deserialize([-10, 9, 20, None, None, 15, 7])
+        s.connect(root)
+        in_order(root)
 
-        problem = [-10]
-        s.connect(deserialize(problem))
+        root = deserialize([-10])
+        s.connect(root)
+        in_order(root)
 
-        problem = [-10, 9, 8]
-        s.connect(deserialize(problem))
+        root = deserialize([-10, 9, 8])
+        s.connect(root)
+        in_order(root)
 
-        problem = [-10, 9]
-        s.connect(deserialize(problem))
+        root = deserialize([-10, 9])
+        s.connect(root)
+        in_order(root)
 
 
 if __name__ == "__main__":

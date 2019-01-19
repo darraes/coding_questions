@@ -42,7 +42,7 @@ class MoveRequest(object):
 
 
 class HashRing(object):
-    RING_SIZE = 1000000000  # 1 Billion
+    RING_SIZE = 1* 1000 * 1000 * 1000  # 1 Billion
 
     def __init__(self, spreading_factor=1):
         self.spreading_factor = spreading_factor
