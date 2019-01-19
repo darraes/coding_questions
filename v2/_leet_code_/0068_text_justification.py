@@ -1,6 +1,3 @@
-from collections import namedtuple
-
-
 class Line:
     def __init__(self):
         self.length = 0
@@ -20,7 +17,7 @@ class Solution:
         lines = []
         cur_line = Line()
         for w in words:
-            if cur_line.length + len(w) > maxWidth:
+            if cur_line.length + len(w) >= maxWidth and cur_line.length > 0:
                 lines.append(cur_line)
                 cur_line = Line()
 
@@ -38,8 +35,8 @@ class Solution:
             for i in range(len(words)):
                 line += words[i]
                 if i < len(words) - 1:
-                    line += "".join([" "] * (s + r))
-                    r = r - 1 if r > 0 else 0
+                    line += "".join([" "] * (s + 1 if r > 0 else s))
+                    r -= 1
             return line
 
         def left_align(words):
@@ -70,6 +67,45 @@ import unittest
 class TestFunctions(unittest.TestCase):
     def test_1(self):
         s = Solution()
+        self.assertEqual(
+            ["Listen", "to    ", "many, ", "speak ", "to   a", "few.  "],
+            s.fullJustify(["Listen", "to", "many,", "speak", "to", "a", "few."], 6),
+        )
+
+        self.assertEqual(
+            [
+                "Science  is  what we",
+                "understand      well",
+                "enough to explain to",
+                "a  computer.  Art is",
+                "everything  else  we",
+                "do                  ",
+            ],
+            s.fullJustify(
+                [
+                    "Science",
+                    "is",
+                    "what",
+                    "we",
+                    "understand",
+                    "well",
+                    "enough",
+                    "to",
+                    "explain",
+                    "to",
+                    "a",
+                    "computer.",
+                    "Art",
+                    "is",
+                    "everything",
+                    "else",
+                    "we",
+                    "do",
+                ],
+                20,
+            ),
+        )
+
         self.assertEqual(
             ["This    is    an", "example  of text", "justification.  "],
             s.fullJustify(

@@ -1,11 +1,11 @@
-class CompressedTrieNode(object):
+class CompressedTrieNode:
     def __init__(self, is_end):
         self.children = {}
         self.edges = {}
         self.is_end = is_end
 
 
-class CompressedTrie(object):
+class CompressedTrie:
     def __init__(self):
         self.root = CompressedTrieNode(is_end=False)
 
