@@ -1,6 +1,4 @@
 class Solution:
-    # @param root, a tree link node
-    # @return nothing
     def connect(self, root):
         if not root:
             return
