@@ -42,21 +42,16 @@ class Solution:
         def search(node, i, j, used, path):
             nonlocal res, board
 
-            if node.is_end:
-                res.add("".join(path))
-
             if board[i][j] in node.edges:
                 used.add((i, j))
                 path.append(board[i][j])
 
+                next_node = node.edges[board[i][j]]
+                if next_node.is_end:
+                    res.add("".join(path))
+
                 for n_i, n_j in neighbors(i, j, used):
-                    search(
-                        node.edges[board[i][j]],
-                        n_i,
-                        n_j,
-                        used,
-                        path,
-                    )
+                    search(next_node, n_i, n_j, used, path)
 
                 del path[-1]
                 used.remove((i, j))
@@ -79,16 +74,59 @@ import unittest
 class TestFunctions(unittest.TestCase):
     def test_1(self):
         s = Solution()
+        self.assertEqual(set(["a"]), set(s.findWords([["a"]], ["a"])))
+
         self.assertEqual(
-            ["oath", "eat"],
+            set(["oath", "eat"]),
+            set(
+                s.findWords(
+                    [
+                        ["o", "a", "a", "n"],
+                        ["e", "t", "a", "e"],
+                        ["i", "h", "k", "r"],
+                        ["i", "f", "l", "v"],
+                    ],
+                    ["oath", "pea", "eat", "rain"],
+                )
+            ),
+        )
+
+        self.assertEqual(
+            [],
             s.findWords(
                 [
                     ["o", "a", "a", "n"],
-                    ["e", "t", "a", "e"],
-                    ["i", "h", "k", "r"],
+                    ["e", "t", "a", "r"],
+                    ["i", "h", "k", "a"],
                     ["i", "f", "l", "v"],
                 ],
-                ["oath", "pea", "eat", "rain"],
+                ["arara"],
+            ),
+        )
+
+        self.assertEqual(
+            [],
+            s.findWords(
+                [
+                    ["o", "a", "a", "n"],
+                    ["e", "t", "a", "r"],
+                    ["i", "h", "k", "a"],
+                    ["i", "f", "l", "r"],
+                ],
+                ["arara"],
+            ),
+        )
+
+        self.assertEqual(
+            ["arara"],
+            s.findWords(
+                [
+                    ["o", "a", "a", "n"],
+                    ["e", "t", "a", "r"],
+                    ["i", "h", "k", "a"],
+                    ["i", "f", "a", "r"],
+                ],
+                ["arara"],
             ),
         )
 
