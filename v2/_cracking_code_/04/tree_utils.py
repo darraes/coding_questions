@@ -3,9 +3,10 @@ from collections import deque
 
 class TreeNode:
     def __init__(self, left, right, value):
+        self.value = value
         self.left = left
         self.right = right
-        self.value = value
+        self.parent = None
 
 def tnode(value, left = None, right = None):
     return TreeNode(left, right, value)
@@ -62,8 +63,12 @@ def friendly_build(lines):
                 root = current_parent
 
             current_parent.left = build_node(lines[i][j])
+            if current_parent.left:
+                current_parent.left.parent = current_parent
             j += 1
             current_parent.right = build_node(lines[i][j])
+            if current_parent.right:
+                current_parent.right.parent = current_parent
             j += 1
 
             if current_parent.left:
