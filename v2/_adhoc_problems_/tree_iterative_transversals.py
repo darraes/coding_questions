@@ -1,5 +1,5 @@
 from tree_utils import TreeNode, pretty_print, friendly_build, tree_equals, tnode
-from collections import Iterator
+from collections.abc import Iterator
 
 ########## IN ORDER ###########################
 
@@ -116,11 +116,12 @@ def post_order_iterative(node):
             stack.append(node)
             node = node.left
         else:
-            if stack[-1].right == last_visited:
-                last_visited = stack.pop()
-                ans.append(last_visited.value)
+            element = stack[-1]
+            if element.right and element.right != last_visited:            
+                node = element.right
             else:
-                node = node.right
+                ans.append(element.value)
+                last_visited =  stack.pop()
 
     return ans
 
@@ -128,7 +129,7 @@ def post_order_iterative(node):
 class PostOrderIterator(Iterator):
     def __init__(self, node):
         self.stack = []
-        self.current = None
+        self.current = node
         self.last_visited = None
 
     def __next__(self):
@@ -137,11 +138,13 @@ class PostOrderIterator(Iterator):
                 self.stack.append(self.current)
                 self.current = self.current.left
             else:
-                if self.stack[-1].right == self.last_visited:
-                    self.last_visited = self.stack.pop()
-                    return self.last_visited.value
+                element = self.stack[-1]
+                if element.right and element.right != self.last_visited:            
+                    self.current = element.right
                 else:
-                    self.current = self.current.right
+                    self.last_visited =  self.stack.pop()
+                    return element.value
+        raise StopIteration
 
 
 ########## END POST ORDER ######################
@@ -195,7 +198,6 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(pre_buf, ite_res)
 
     def test_post_order(self):
-        return
         root = friendly_build(
             [
                 ["7"],
