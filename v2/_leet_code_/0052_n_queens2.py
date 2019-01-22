@@ -4,18 +4,20 @@ class Solution:
         :type n: int
         :rtype: List[List[str]]
         """
-        res = []
-        self._solve([-1] * n, 0, n, res)
-        return len(res)
+        res = 0
+        def _solve(board, i, n):
+            nonlocal res
+            if i == len(board):
+                res += 1
+                return
 
-    def _solve(self, board, i, n, results):
-        if i == len(board):
-            results.append([] + board)
-            return
+            for c in self._candidates(board, i, n):
+                board[i] = c
+                _solve(board, i + 1, n)
+        _solve([-1] * n, 0, n)
+        return res
 
-        for c in self._candidates(board, i, n):
-            board[i] = c
-            self._solve(board, i + 1, n, results)
+    
 
     def _candidates(self, board, i, n):
         candidates = set([c for c in range(n)])
