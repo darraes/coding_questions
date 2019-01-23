@@ -10,10 +10,10 @@ class Solution:
             used.add(board[row][i])
             used.add(board[i][col])
 
-        square_r = int(row / 3)
-        square_c = int(col / 3)
-        for row in range(3 * square_r, 3 * square_r + 3):
-            for col in range(3 * square_c, 3 * square_c + 3):
+        square_r = 3 * (row // 3)
+        square_c = 3 * (col // 3)
+        for row in range(square_r, square_r + 3):
+            for col in range(square_c, square_c + 3):
                 used.add(board[row][col])
 
         return [p for p in Solution.NUMBERS if p not in used]
