@@ -6,24 +6,24 @@ class Vector2D(object):
         """
         self.vec2d = vec2d
         self.cursor_i = 0
-        self.cursor_j = 0
+        self.cursor_j = -1
         self.wait_on_next()
 
     def wait_on_next(self):
-        while self.cursor_i < len(self.vec2d) and len(self.vec2d[self.cursor_i]) == 0:
+        self.cursor_j += 1
+
+        if self.cursor_j == len(self.vec2d[self.cursor_i]):
+            self.cursor_j = 0
             self.cursor_i += 1
+            while self.cursor_i < len(self.vec2d) and len(self.vec2d[self.cursor_i]) == 0:
+                self.cursor_i += 1
 
     def next(self):
         """
         :rtype: int
         """
         res = self.vec2d[self.cursor_i][self.cursor_j]
-        self.cursor_j += 1
-
-        if self.cursor_j == len(self.vec2d[self.cursor_i]):
-            self.cursor_j = 0
-            self.cursor_i += 1
-            self.wait_on_next()
+        self.wait_on_next()
 
         return res
 
