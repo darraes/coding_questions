@@ -21,7 +21,11 @@ class HitCounter:
         if self.count and self.window[last_idx].timestamp == timestamp:
             self.window[last_idx].bump()
         else:
-            self.count += 1
+            if self.count < HitCounter.WSIZE:
+                self.count += 1
+            else:
+                self._hits -= self.window[self.start].hits
+                self.start = (self.start + 1) % HitCounter.WSIZE
             self.window[self._last_idx()] = HitWindow(timestamp)
 
         self._hits += 1
@@ -38,10 +42,7 @@ class HitCounter:
         start = self.start
         for i in range(count):
             idx = calc_idx(start, i)
-            if (
-                self.window[idx].timestamp
-                <= timestamp - HitCounter.WSIZE
-            ):
+            if self.window[idx].timestamp <= timestamp - HitCounter.WSIZE:
                 self._hits -= self.window[idx].hits
                 self.window[idx] = None
                 self.count -= 1
@@ -89,6 +90,17 @@ class TestFunctions(unittest.TestCase):
             self.assertEqual(300, counter.getHits(i))
 
     def test_3(self):
+        counter = HitCounter()
+
+        for i in range(400):
+            counter.hit(i)
+
+        self.assertEqual(100, counter.start)
+        self.assertEqual(300, counter.count)
+        self.assertEqual(99, counter._last_idx())
+        self.assertEqual(300, counter.getHits(399))
+
+    def test_4(self):
         counter = HitCounter()
 
         for i in range(300):
