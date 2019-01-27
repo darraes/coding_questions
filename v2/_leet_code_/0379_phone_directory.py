@@ -10,7 +10,7 @@ class PhoneDirectory:
 
     def get(self):
         if len(self._available) == 0:
-            return None
+            return -1
 
         n = self._available.popleft()
         self._used.add(n)
@@ -41,6 +41,21 @@ class TestFunctions(unittest.TestCase):
 
         self.assertEqual(0, directory.get())
         self.assertEqual(1, directory.get())
+
+        self.assertTrue(directory.check(2))
+        self.assertEqual(2, directory.get())
+        self.assertFalse(directory.check(2))
+
+        directory.release(2)
+        self.assertTrue(directory.check(2))
+
+        directory.release(5)
+        self.assertTrue(directory.check(2))
+        self.assertFalse(directory.check(1))
+        directory.release(1)
+
+        self.assertTrue(directory.check(2))
+        self.assertTrue(directory.check(1))
 
 
 if __name__ == '__main__':
