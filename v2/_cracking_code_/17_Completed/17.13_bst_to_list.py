@@ -66,6 +66,37 @@ def convert(tree):
     return head
 
 
+def listify(node):
+    parents = [node]
+    children = []
+    tail = None
+
+    while parents:
+        for i, p in enumerate(parents):
+            if p.left:
+                children.append(p.left)
+            if p.right:
+                children.append(p.right)
+
+            p.left = None
+            p.right = None
+            if i < len(parents) - 1:
+                p.right = parents[i + 1]
+            if i > 0:
+                p.left = parents[i - 1]
+
+        if tail:
+            tail.right = parents[0]
+            parents[0].left = tail
+
+        tail = parents[-1]
+        parents = children
+        children = []
+
+    return node
+
+
+
 ###############################################################
 import unittest
 
@@ -93,6 +124,10 @@ class TestFunctions(unittest.TestCase):
     def test_1(self):
         tree = friendly_build([[10], [3, 15], [1, 4, 12, 16]])
         head = convert(tree)
+        print_ll(head)
+
+        tree = friendly_build([[10], [3, 15], [1, 4, 12, 16]])
+        head = listify(tree)
         print_ll(head)
 
 
