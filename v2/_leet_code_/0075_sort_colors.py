@@ -1,10 +1,5 @@
 class Solution:
     def sortColors(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: void Do not return anything, modify nums in-place instead.
-        """
-
         def swap(array, i, j):
             tmp = array[i]
             array[i] = array[j]
@@ -14,20 +9,19 @@ class Solution:
         kWhite = 1
         kBlue = 2
 
-        red_idx = 0
+        i = red_idx = 0
         blue_idx = len(nums) - 1
-        i = 0
 
         while i <= blue_idx:
-            if nums[i] == kRed:
+            if nums[i] < kWhite:
                 swap(nums, red_idx, i)
                 red_idx += 1
-            if nums[i] == kBlue:
+                i += 1
+            elif nums[i] > kWhite:
                 swap(nums, blue_idx, i)
                 blue_idx -= 1
-                i -= 1
-
-            i += 1
+            else:
+                i += 1
 
 
 ###############################################################
