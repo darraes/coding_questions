@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"_re",
+				"_ready_for_2"
+			],
+			[
+				"_",
+				"_used"
+			],
+			[
+				"a",
+				"_available"
+			],
+			[
 				"ap",
 				"append_left"
 			],
@@ -30,10 +42,6 @@
 			[
 				"pri",
 				"print_f"
-			],
-			[
-				"a",
-				"appendleft"
 			],
 			[
 				"fre",
@@ -102,10 +110,6 @@
 			[
 				"co",
 				"coinChangeRec"
-			],
-			[
-				"_",
-				"_max_coins_2"
 			],
 			[
 				"max",
@@ -510,63 +514,28 @@
 			[
 				"resp",
 				"response"
-			],
-			[
-				"print",
-				"printKeyHistory"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "v2/_leet_code_/0213_house_robber_2.py",
+			"file": "v2/_data_structures_and_algorithms/segment_tree.py",
 			"settings":
 			{
-				"buffer_size": 1137,
+				"buffer_size": 2081,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "v2/_leet_code_/0251_2d_vector_iterator.py",
+			"contents": "from random import shuffle\n\n\ndef mergesort(array):\n    if len(array) <= 1:\n        return array\n\n    mid = int(len(array) / 2)\n    left = mergesort(array[:mid])\n    right = mergesort(array[mid:])\n\n    # Merging\n    res = []\n    i = j = 0\n\n    while i < len(left) or j < len(right):\n        if i < len(left) and j < len(right):\n            if left[i] < right[j]:\n                res.append(left[i])\n                i += 1\n            else:\n                res.append(right[j])\n                j += 1\n        elif i < len(left):\n            res.append(left[i])\n            i += 1\n        else:\n            res.append(right[j])\n            j += 1\n\n    return res\n\n\ndef swap(array, i, j):\n    tmp = array[i]\n    array[i] = array[j]\n    array[j] = tmp\n\n\ndef quick_partition(array, i, j):\n    mid = int((i + j) / 2)\n    swap(array, mid, j - 1)\n    pivot = array[j - 1]\n\n    c = p = 0\n    while p < j:\n        if array[p] < pivot:\n            swap(array, c, p)\n            c += 1\n        p += 1\n\n    swap(array, c, j - 1)\n    return c\n\n\ndef quick_select(array, k):\n    c = quick_partition(array, 0, len(array))\n\n    if c == k - 1:\n        return array[k - 1]\n    elif c > k - 1:\n        return quick_select(array[:c], k)\n    else:\n        return quick_select(array[c:], k - c)\n\n\ndef quicksort(array):\n    def _quicksort(array, i, j):\n        if i >= j:\n            return\n\n        c = quick_partition(array, i, j)\n        _quicksort(array, i, c)\n        _quicksort(array, c + 1, j)\n\n    _quicksort(array, 0, len(array))\n    return array\n\n\ndef countingsort(array):\n    counting = [0] * 25  # 20 is the celing\n\n    for e in array:\n        counting[e] += 1\n\n    for i in range(1, len(counting)):\n        counting[i] += counting[i - 1]\n\n    res = [None] * len(array)\n    for i in reversed(range(len(array))):\n        res[counting[array[i]] - 1] = array[i]\n        counting[array[i]] -= 1\n\n    return res\n\n\n###############################################################\nimport unittest\n\n\nclass TestFunctions(unittest.TestCase):\n    def test_mergesort(self):\n        array = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]\n        shuffle(array)\n        self.assertEqual([11, 12, 13, 14, 15, 16, 17, 18, 19, 20], mergesort(array))\n\n    def test_quicksort(self):\n        array = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]\n        shuffle(array)\n        self.assertEqual([11, 12, 13, 14, 15, 16, 17, 18, 19, 20], quicksort(array))\n\n    def test_qcountingsort(self):\n        array = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]\n        shuffle(array)\n        self.assertEqual([11, 12, 13, 14, 15, 16, 17, 18, 19, 20], countingsort(array))\n\n        array = [11, 12, 13, 13, 14, 15, 16, 17, 18, 19, 20]\n        shuffle(array)\n        self.assertEqual(\n            [11, 12, 13, 13, 14, 15, 16, 17, 18, 19, 20], countingsort(array)\n        )\n\n    def test_quickselect(self):\n        array = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]\n        shuffle(array)\n        self.assertEqual(17, quick_select(array, 7))\n        self.assertEqual(11, quick_select(array, 1))\n        self.assertEqual(20, quick_select(array, 10))\n\n        array = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]\n        shuffle(array)\n        self.assertEqual(17, quick_select(array, 7))\n        self.assertEqual(11, quick_select(array, 1))\n        self.assertEqual(20, quick_select(array, 10))\n        self.assertEqual(21, quick_select(array, 11))\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n",
+			"file": "v2/_data_structures_and_algorithms/sorting.py",
+			"file_size": 3433,
+			"file_write_time": 131892367329325108,
 			"settings":
 			{
-				"buffer_size": 1733,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "v2/_leet_code_/0253_meeting_rooms_2.py",
-			"settings":
-			{
-				"buffer_size": 1744,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "v2/_leet_code_/0341_nested_iterator.py",
-			"settings":
-			{
-				"buffer_size": 2044,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/cache.py",
-			"settings":
-			{
-				"buffer_size": 4570,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "v2/_leet_code_/0236_common_ancestor.py",
-			"settings":
-			{
-				"buffer_size": 2221,
+				"buffer_size": 3431,
 				"line_ending": "Unix"
 			}
 		}
@@ -823,20 +792,52 @@
 	"expanded_folders":
 	[
 		"/Users/darraes/Documents/Problems/coding_questions/v2",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_"
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_data_structures_and_algorithms"
 	],
 	"file_history":
 	[
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0904_fruit_basket_window.py",
+		"/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/lists.py",
+		"/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/skip_list.py",
+		"/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/cache.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0010_hard_regular_expression_matching.py",
+		"/Users/darraes/Dropbox (Facebook)/disklogwriterbackup",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0635_log_storage_skiplist.py",
+		"/Users/darraes/Documents/coding/data_structures/phoenix/tests/test_skip_list.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0087_is_scrambled_string.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0814_binary_tree_pruning.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0324_wiggle_sort.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_cracking_code_/16/16.5_method_ordering.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0075_sort_colors.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_cracking_code_/17_Completed/17.13_bst_to_list.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_cracking_code_/02_Completed/2.7_is_linked_list_palindrome.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0051_n_queens.py",
+		"/Users/darraes/Documents/coding/data_structures/phoenix/tests/test_caches.py",
+		"/Users/darraes/Documents/coding/data_structures/phoenix/tests/test_workflow.py",
+		"/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/workflow.py",
+		"/Users/darraes/Dropbox (Personal)/Coding/Datashuttle/monitoring.py",
+		"/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/disjoint_sets.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0362_hit_counter.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_data_structures_and_algorithms/heap.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_data_structures_and_algorithms/levenshtein_distance.py",
+		"/Users/darraes/Dropbox (Personal)/Coding/Datashuttle/replication.thrift",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0379_phone_directory.py",
+		"/Users/darraes/Dropbox (Personal)/Coding/Datashuttle/replication_log.py",
+		"/Users/darraes/Dropbox (Personal)/Coding/Datashuttle/runner.py",
+		"/Users/darraes/Dropbox (Personal)/Coding/Datashuttle/dispatcher.py",
+		"/Users/darraes/Dropbox (Personal)/Coding/Datashuttle/locking.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0236_common_ancestor.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0341_nested_iterator.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0253_meeting_rooms_2.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0213_house_robber_2.py",
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0251_2d_vector_iterator.py",
 		"/Users/darraes/Documents/coding/data_structures/phoenix/tests/test_utils.py",
 		"/Users/darraes/Documents/coding/data_structures/phoenix/tests/test_hash_ring.py",
 		"/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/utils.py",
 		"/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/hash_ring.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0037_sudoku_solver.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0087_is_scrambled_string.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0054_spiral_matrix.py",
-		"/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/lists.py",
 		"/Users/darraes/Library/Application Support/Sublime Text 3/Packages/Colorsublime - Themes/My.tmTheme",
-		"/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/cache.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0532_k_diff_pairs_in_array.py",
 		"/Users/darraes/Library/Application Support/Sublime Text 3/Cache/Colorsublime - Themes/cache/Colorsublime-Themes-master/themes/tonic.tmTheme.cache",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0560_array_sum_k.py",
@@ -851,7 +852,6 @@
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_cracking_code_/17/17.8_sub_array_max_sum.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_interviews_/graph/count_islands.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_interviews_/graph/flood_fill_borders.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0051_n_queens.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0052_n_queens2.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0200_count_islands.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v1/Tree/in_order_listfy.py",
@@ -864,7 +864,6 @@
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_adhoc_problems_/tree_iterative_transversals.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v1/Tree/tree_transversal.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0297_serialize_deserialize_binary_tree.py",
-		"/Users/darraes/Documents/coding/data_structures/phoenix/tests/test_caches.py",
 		"/Users/darraes/Documents/coding/data_structures/phoenix/tests/test_trie.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_cracking_code_/10_Completed/10.3_search_on_rotated_sorted_array.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0033_search_rotated_array.py",
@@ -878,11 +877,8 @@
 		"/Users/darraes/Documents/coding/data_structures/phoenix/tests/test_disjoint_sets.py",
 		"/Users/darraes/Documents/coding/data_structures/phoenix/tests/test_heap.py",
 		"/Users/darraes/Documents/coding/data_structures/phoenix/tests/test_linked_lists.py",
-		"/Users/darraes/Documents/coding/data_structures/phoenix/tests/test_skip_list.py",
-		"/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/disjoint_sets.py",
 		"/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/heap.py",
 		"/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/trie.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0635_log_storage_skiplist.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0924_prevent_malware_spread.py",
 		"/Users/darraes/Documents/coding/data_structures/phoenix/lfu_cache.py",
 		"/Users/darraes/Documents/coding/data_structures/phoenix/lists.py",
@@ -898,7 +894,6 @@
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_adhoc_problems_/largest_square_submatrix.py",
 		"/Users/darraes/Documents/coding/data_structures/phoenix/__tests__/__init__.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_adhoc_problems_/autocomplete.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0010_hard_regular_expression_matching.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0069_sqrt.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0059_spiral_matrix_2.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0117_populate_next_right.py",
@@ -916,7 +911,6 @@
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0124_max_path_sum.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0060_next_permutation.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0063_unique_paths_2.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0341_nested_iterator.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0716_max_stack.py",
 		"/Users/darraes/Documents/tmp/pu",
 		"/Users/darraes/Documents/tmp/puf2",
@@ -929,32 +923,7 @@
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0098_is_bst.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_cracking_code_/09/9.6_create_valid_parenthesis.py",
 		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0127_word_ladder.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0780_reaching_points.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0043_multiply_strings.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0239_max_in_sliding_window.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_interviews_/array/array_window_max_difference.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0253_meeting_rooms_2.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0269_alien_dictionary.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_data_structures_and_algorithms/lcs_stuff.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0139_word_break.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0773_sliding_puzzle.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0044_wildcard_matching.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_data_structures_and_algorithms/levenshtein_distance.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0296_best_meeting_point.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0289_game_of_life.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0158_read4_2.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0785_is_bipartite.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0207_course_schedule_topological.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0251_2d_vector_iterator.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0155_min_stack.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0349_array_intersection.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0305_number_of_islands_2.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0336_palindrome_pairs.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0787_cheapest_flight_k_stops.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0346_moving_avg_stream.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0050_pow.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0609_find_duplicate_file.py",
-		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0735_asteroid_collision.py"
+		"/Users/darraes/Documents/Problems/coding_questions/v2/_leet_code_/0780_reaching_points.py"
 	],
 	"find":
 	{
@@ -972,6 +941,64 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"aggregator_helper",
+			"sum",
+			"sum_helper",
+			"build",
+			"mid",
+			"[",
+			"s = Solution()",
+			"isMatch2",
+			"4",
+			"3,",
+			"2,",
+			"inclusive",
+			", \"Hour\"",
+			", \"Month\"",
+			":",
+			"retrieve",
+			"put(",
+			"logdevice",
+			"LogSystem()",
+			"left",
+			"null",
+			"Condition",
+			"is_palindrome",
+			"left",
+			"on_stopping",
+			"add_workflow",
+			"clock",
+			"process_time",
+			"clock",
+			"-1",
+			"_evict_lfu",
+			"v2",
+			"v1",
+			"node",
+			".rank",
+			".parent",
+			".counts",
+			"O(1)",
+			"is_sentinel",
+			".prev",
+			".next",
+			"self.next",
+			"_last",
+			"self._last()",
+			"_last",
+			"self._last()",
+			"calc_idx(start, i)",
+			"idx",
+			"self._idx",
+			"_end",
+			"300",
+			"500",
+			"sleep",
+			"Workflow",
+			"END_WORKFLOW",
+			"__run",
+			"run_step",
+			"ThreadManagerWorker",
 			"self.capacity =",
 			"fourSum",
 			"now",
@@ -1041,65 +1068,7 @@
 			"s.isPalindrome",
 			"s.",
 			"setZeroes",
-			"target, nums, ",
-			"x",
-			"array",
-			"romanToInt",
-			"representative",
-			"unittest",
-			".start",
-			"start",
-			"partition(ring.ring,",
-			"find_partition(ring.ring",
-			"ring.ring",
-			"self.ring",
-			"bisect_left",
-			"find",
-			"_find_partition_idx",
-			"self.from_node",
-			"spread",
-			"groups",
-			"e",
-			"parent",
-			"rank",
-			"assertTrue",
-			"priority",
-			"trie",
-			"AutocompleteSystem",
-			"trie.starts_with",
-			"starts_with",
-			"ans",
-			"hits=None",
-			"insert",
-			"is_end",
-			"DisjointUnionSets",
-			"MoveRequest",
-			"_find_partition_idx",
-			"_find_partition",
-			"_find_partition_idx",
-			"problem",
-			"invertTree",
-			"left",
-			".children",
-			"execute",
-			"isMatch2",
-			"execute",
-			"self.head",
-			"l.words",
-			"a",
-			"plusOne",
-			"factorals",
-			"factoral",
-			"factorial",
-			"row",
-			"mnistore.flash:GlobalScope",
-			"whatsapp:follower_scope",
-			"whatsapp",
-			"follower_scope",
-			"insigh",
-			"zippydb.floop:follower_scope",
-			"floop",
-			";"
+			"target, nums, "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1129,53 +1098,55 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "v2/_leet_code_/0213_house_robber_2.py",
+					"file": "v2/_data_structures_and_algorithms/segment_tree.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1137,
+						"buffer_size": 2081,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								622,
-								622
+								913,
+								913
 							]
 						],
 						"settings":
 						{
+							"open_with_edit": true,
+							"scope_hunter.view_enable": false,
 							"show_definitions": false,
 							"syntax": "Packages/Python/Python.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 162.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "v2/_leet_code_/0251_2d_vector_iterator.py",
+					"file": "v2/_data_structures_and_algorithms/sorting.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1733,
+						"buffer_size": 3431,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1254,
-								1254
+								1959,
+								2212
 							]
 						],
 						"settings":
@@ -1184,126 +1155,10 @@
 							"syntax": "Packages/Python/Python.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 454.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "v2/_leet_code_/0253_meeting_rooms_2.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1744,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								576,
-								576
-							]
-						],
-						"settings":
-						{
-							"show_definitions": false,
-							"syntax": "Packages/Python/Python.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 10.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "v2/_leet_code_/0341_nested_iterator.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2044,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"show_definitions": false,
-							"syntax": "Packages/Python/Python.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 715.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/Users/darraes/Documents/coding/data_structures/phoenix/phoenix/cache.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4570,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								486,
-								486
-							]
-						],
-						"settings":
-						{
-							"show_definitions": false,
-							"syntax": "Packages/Python/Python.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 16.0,
+						"translation.y": 1408.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "v2/_leet_code_/0236_common_ancestor.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2221,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"show_definitions": false,
-							"syntax": "Packages/Python/Python.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 40.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1373,6 +1228,38 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"0010",
+				"v2/_leet_code_/0010_hard_regular_expression_matching.py"
+			],
+			[
+				"log",
+				"v2/_leet_code_/0635_log_storage_skiplist.py"
+			],
+			[
+				"skip",
+				"phoenix/phoenix/skip_list.py"
+			],
+			[
+				"cach",
+				"phoenix/phoenix/cache.py"
+			],
+			[
+				"scram",
+				"v2/_leet_code_/0087_is_scrambled_string.py"
+			],
+			[
+				"75",
+				"v2/_leet_code_/0075_sort_colors.py"
+			],
+			[
+				"queen",
+				"v2/_leet_code_/0051_n_queens.py"
+			],
+			[
+				"hit",
+				"v2/_leet_code_/0362_hit_counter.py"
+			],
 			[
 				"comm",
 				"v2/_leet_code_/0236_common_ancestor.py"
@@ -1486,10 +1373,6 @@
 				"v2/_leet_code_/0033_search_rotated_array.py"
 			],
 			[
-				"skip",
-				"v2/_leet_code_/0635_log_storage_skiplist.py"
-			],
-			[
 				"ma",
 				"v2/_leet_code_/0924_prevent_malware_spread.py"
 			],
@@ -1520,10 +1403,6 @@
 			[
 				"malw",
 				"v2/_leet_code_/0924_prevent_malware_spread.py"
-			],
-			[
-				"log",
-				"v2/_leet_code_/0635_log_storage_skiplist.py"
 			],
 			[
 				"_cracking_code_/10_Completed/10.8_number_rank_on_stream.py",

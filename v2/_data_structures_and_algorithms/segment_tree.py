@@ -1,8 +1,9 @@
+from typing import List
 import math
 
 
 class SegmentTree:
-    def __init__(self, arr, agg=lambda x, y: x + y):
+    def __init__(self, arr: List[int], agg=lambda x, y: x + y):
         x = math.ceil(math.log(len(arr), 2))
 
         self.tree = [None] * (2 * (2 ** x - 1))
@@ -11,8 +12,8 @@ class SegmentTree:
 
         self._build(arr)
 
-    def segment(self, s, e):
-        def segment_helper(idx, qs, qe, cs, ce):
+    def segment(self, s: int, e: int):
+        def segment_helper(idx: int, qs: int, qe: int, cs: int, ce: int):
             if cs >= qs and ce <= qe:
                 return self.tree[idx]
 
@@ -28,7 +29,7 @@ class SegmentTree:
         return segment_helper(0, s, e, 0, self.len - 1)
 
     def update(self, u_idx, old_value, new_value):
-        def update_helper(u_idx, diff, idx, cs, ce):
+        def update_helper(idx, diff, i, cs, ce):
             pass
 
         if not (0 <= u_idx < self.len):
@@ -37,11 +38,11 @@ class SegmentTree:
         update_helper(u_idx, new_value - old_value, 0, 0, self.len - 1)
 
     @staticmethod
-    def _mid(s, e):
+    def _mid(s: int, e: int) -> int:
         return s + (e - s) // 2
 
     def _build(self, arr):
-        def build_helper(idx, s, e):
+        def build_helper(idx: int, s: int, e: int):
             nonlocal arr
             if s == e:
                 self.tree[idx] = arr[s]
