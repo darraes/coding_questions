@@ -105,14 +105,14 @@ def lcsubstring(X, Y):
     n = len(Y)
     lookup = [[0 for y in range(len(Y) + 1)] for x in range(len(X) + 1)]
 
-    max_len = end_m = end_n = 0
+    max_len = end_m = 0
     for i in range(1, m + 1):
         for j in range(1, n + 1):
             if X[i - 1] == Y[j - 1]:
                 lookup[i][j] = lookup[i - 1][j - 1] + 1
                 if lookup[i][j] > max_len:
                     max_len = lookup[i][j]
-                    end_m, end_n = i, j
+                    end_m = i
 
     return X[end_m - max_len : end_m]
 
