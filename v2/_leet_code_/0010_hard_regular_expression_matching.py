@@ -88,7 +88,7 @@ class Solution:
         return state_machine.execute(s)
 
 
-class Solution:
+class Solution2:
     def isMatch(self, s, p):
         memo = {}
 
@@ -113,6 +113,21 @@ class Solution:
 
         return dp(0, 0)
 
+class Solution3(object):
+    def isMatch(self, text, pattern):
+        dp = [[False] * (len(pattern) + 1) for _ in range(len(text) + 1)]
+
+        dp[-1][-1] = True
+        for i in range(len(text), -1, -1):
+            for j in range(len(pattern) - 1, -1, -1):
+                first_match = i < len(text) and pattern[j] in {text[i], '.'}
+                if j+1 < len(pattern) and pattern[j+1] == '*':
+                    dp[i][j] = dp[i][j+2] or first_match and dp[i+1][j]
+                else:
+                    dp[i][j] = first_match and dp[i+1][j+1]
+
+        return dp[0][0]
+
 
 ###############################################################
 import unittest
@@ -129,13 +144,13 @@ class TestFunctions(unittest.TestCase):
         self.assertTrue(s.execute("a"))
         self.assertFalse(s.execute("bca"))
 
-        s = Solution()
-        self.assertTrue(s.isMatch2("abc", "a*b*."))
-        self.assertTrue(s.isMatch2("c", "a*b*."))
-        self.assertTrue(s.isMatch2("aabbbc", "a*b*."))
-        self.assertFalse(s.isMatch2("aabbbcd", "a*b*."))
-        self.assertTrue(s.isMatch2("a", "a*b*."))
-        self.assertFalse(s.isMatch2("bca", "a*b*."))
+        s = Solution3()
+        self.assertTrue(s.isMatch("abc", "a*b*."))
+        self.assertTrue(s.isMatch("c", "a*b*."))
+        self.assertTrue(s.isMatch("aabbbc", "a*b*."))
+        self.assertFalse(s.isMatch("aabbbcd", "a*b*."))
+        self.assertTrue(s.isMatch("a", "a*b*."))
+        self.assertFalse(s.isMatch("bca", "a*b*."))
 
     def test_2(self):
         s = StateMachine()
@@ -147,13 +162,13 @@ class TestFunctions(unittest.TestCase):
         self.assertTrue(s.execute("a"))
         self.assertFalse(s.execute("bca"))
 
-        s = Solution()
-        self.assertFalse(s.isMatch2("abc", "a"))
-        self.assertFalse(s.isMatch2("c", "a"))
-        self.assertFalse(s.isMatch2("aabbbc", "a"))
-        self.assertFalse(s.isMatch2("aabbbcd", "a"))
-        self.assertTrue(s.isMatch2("a", "a"))
-        self.assertFalse(s.isMatch2("bca", "a"))
+        s = Solution3()
+        self.assertFalse(s.isMatch("abc", "a"))
+        self.assertFalse(s.isMatch("c", "a"))
+        self.assertFalse(s.isMatch("aabbbc", "a"))
+        self.assertFalse(s.isMatch("aabbbcd", "a"))
+        self.assertTrue(s.isMatch("a", "a"))
+        self.assertFalse(s.isMatch("bca", "a"))
 
     def test_3(self):
         s = StateMachine()
@@ -165,13 +180,13 @@ class TestFunctions(unittest.TestCase):
         self.assertTrue(s.execute("a"))
         self.assertTrue(s.execute("bca"))
 
-        s = Solution()
-        self.assertTrue(s.isMatch2("abc", ".*"))
-        self.assertTrue(s.isMatch2("c", ".*"))
-        self.assertTrue(s.isMatch2("aabbbc", ".*"))
-        self.assertTrue(s.isMatch2("aabbbcd", ".*"))
-        self.assertTrue(s.isMatch2("a", ".*"))
-        self.assertTrue(s.isMatch2("bca", ".*"))
+        s = Solution3()
+        self.assertTrue(s.isMatch("abc", ".*"))
+        self.assertTrue(s.isMatch("c", ".*"))
+        self.assertTrue(s.isMatch("aabbbc", ".*"))
+        self.assertTrue(s.isMatch("aabbbcd", ".*"))
+        self.assertTrue(s.isMatch("a", ".*"))
+        self.assertTrue(s.isMatch("bca", ".*"))
 
     def test_4(self):
         s = StateMachine()
@@ -185,31 +200,31 @@ class TestFunctions(unittest.TestCase):
         self.assertTrue(s.execute("aaa"))
         self.assertFalse(s.execute("bca"))
 
-        s = Solution()
-        self.assertFalse(s.isMatch2("abc", "a*"))
-        self.assertFalse(s.isMatch2("c", "a*"))
-        self.assertFalse(s.isMatch2("aabbbc", "a*"))
-        self.assertFalse(s.isMatch2("aabbbcd", "a*"))
-        self.assertTrue(s.isMatch2("a", "a*"))
-        self.assertTrue(s.isMatch2("aa", "a*"))
-        self.assertTrue(s.isMatch2("aaa", "a*"))
-        self.assertFalse(s.isMatch2("bca", "a*"))
+        s = Solution3()
+        self.assertFalse(s.isMatch("abc", "a*"))
+        self.assertFalse(s.isMatch("c", "a*"))
+        self.assertFalse(s.isMatch("aabbbc", "a*"))
+        self.assertFalse(s.isMatch("aabbbcd", "a*"))
+        self.assertTrue(s.isMatch("a", "a*"))
+        self.assertTrue(s.isMatch("aa", "a*"))
+        self.assertTrue(s.isMatch("aaa", "a*"))
+        self.assertFalse(s.isMatch("bca", "a*"))
 
     def test_5(self):
         s = StateMachine()
         s.from_regex("mis*is*p*.")
         self.assertFalse(s.execute("mississippi"))
 
-        s = Solution()
-        self.assertFalse(s.isMatch2("mississippi", "mis*is*p*."))
+        s = Solution3()
+        self.assertFalse(s.isMatch("mississippi", "mis*is*p*."))
 
     def test_6(self):
         s = StateMachine()
         s.from_regex("ab*")
         self.assertTrue(s.execute("a"))
 
-        s = Solution()
-        self.assertTrue(s.isMatch2("a", "ab*"))
+        s = Solution3()
+        self.assertTrue(s.isMatch("a", "ab*"))
 
 
 if __name__ == "__main__":
