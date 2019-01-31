@@ -30,7 +30,7 @@ class SegmentTree:
 
     def update(self, u_idx, old_value, new_value):
         def update_helper(idx, diff, i, cs, ce):
-            pass
+            pass  # TODO (darraes)
 
         if not (0 <= u_idx < self.len):
             raise "TODO Exception"
