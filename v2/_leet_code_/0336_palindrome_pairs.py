@@ -10,6 +10,24 @@ def is_palindrome(letters):
     return True
 
 
+def find_pairs(words):
+    res = set()
+    index = set(words)
+    for w in words:
+        for i in range(len(w) + 1):
+            suffix = w[:i]
+            rsuffix = suffix[::-1]
+            prefix = w[i:]
+            rprefix = prefix[::-1]
+
+            if is_palindrome(prefix) and rsuffix in index:
+                res.add((w, rsuffix))
+            if is_palindrome(suffix) and rprefix in index:
+                res.add((rprefix, w))
+
+    return res
+
+
 class TrieNode:
     def __init__(self, is_end):
         self.edges = {}
@@ -100,6 +118,10 @@ class TestFunctions(unittest.TestCase):
 
         self.assertEqual([[0, 1], [1, 0]], s.palindromePairs(["bat", "tab", "cat"]))
 
+    def test_2(self):
+        print(find_pairs(["race", "car", "ag"]))
+        print(find_pairs(["bag", "gab", "ag"]))
+
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(exit=False)
