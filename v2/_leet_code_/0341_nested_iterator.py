@@ -27,7 +27,7 @@ class NestedIterator(object):
         Initialize your data structure here.
         :type nestedList: List[NestedInteger]
         """
-        self.iterator_stack = [Entry(-1, nestedList)]
+        self.iterator_stack = [Entry(cursor=-1, iterator=nestedList)]
 
     def next(self):
         """
@@ -39,10 +39,6 @@ class NestedIterator(object):
         return res
 
     def hasNext(self):
-        """
-        :rtype: bool
-        """
-
         def wait_on_next():
             while len(self.iterator_stack) > 0:
                 last = self.iterator_stack[-1]
@@ -83,4 +79,4 @@ class TestFunctions(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(exit=False)
