@@ -28,14 +28,21 @@ class SegmentTree:
 
         return segment_helper(0, s, e, 0, self.len - 1)
 
-    def update(self, u_idx, old_value, new_value):
+    def update(self, arr_i, diff):
         def update_helper(idx, diff, i, cs, ce):
-            pass  # TODO (darraes)
+            if i < cs or i > ce:
+                return
 
-        if not (0 <= u_idx < self.len):
+            self.tree[idx] = self.aggregator(self.tree[idx], diff)
+            if cs != ce:
+                m = SegmentTree._mid(cs, ce)
+                update_helper(2 * idx + 1, diff, i, cs, m)
+                update_helper(2 * idx + 2, diff, i, m + 1, ce)
+
+        if not (0 <= arr_i < self.len):
             raise "TODO Exception"
 
-        update_helper(u_idx, new_value - old_value, 0, 0, self.len - 1)
+        update_helper(0, diff, arr_i, 0, self.len - 1)
 
     @staticmethod
     def _mid(s: int, e: int) -> int:
@@ -70,6 +77,13 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(24, stree.segment(1, 4))
         self.assertEqual(35, stree.segment(1, 5))
         self.assertEqual(12, stree.segment(2, 3))
+
+        stree.update(arr_i=2, diff=+1)
+
+        self.assertEqual(16, stree.segment(1, 3))
+        self.assertEqual(25, stree.segment(1, 4))
+        self.assertEqual(36, stree.segment(1, 5))
+        self.assertEqual(13, stree.segment(2, 3))
 
 
 if __name__ == "__main__":

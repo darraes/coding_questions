@@ -95,7 +95,7 @@ class SpinLock(object):
                 print("Acquired by {}".format(self._owner_thread))
                 return
 
-            for i in range(SpinLock.SPIN_CYCLES):
+            for _ in range(SpinLock.SPIN_CYCLES):
                 pass
 
     def release(self):
@@ -113,8 +113,6 @@ class SpinLock(object):
 
 
 ###############################################################
-
-
 import unittest
 
 
