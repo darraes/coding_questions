@@ -8,12 +8,16 @@ HREF_RE = re.compile(r'href="(.*?)"')
 
 
 class HttpCrawler:
-    def __init__(self, queue: asyncio.Queue, workers: int = 5):
+    def __init__(self, queue: asyncio.Queue, start, workers: int = 5):
         self.queue = queue
         self.w_count = workers
         self.workers = []
         self.visited = set()
         self.crawled = []
+
+        for url in start:
+            self.queue.put_nowait((url, 0))
+            self.visited.add(url)
 
     async def craw(self):
         async with ClientSession() as session:
@@ -29,7 +33,6 @@ class HttpCrawler:
 
             if depth < 3:
                 for next_url in await self.crawl_url(url, session):
-                    self.visited.add(next_url)
                     await self.queue.put((next_url, depth + 1))
 
             self.queue.task_done()
@@ -43,13 +46,18 @@ class HttpCrawler:
 
         html = await self.fetch_html(url, session, **kwargs)
         for link in HREF_RE.findall(html):
-            if any(x in link for x in exclude) or link in self.visited:
+            if any(x in link for x in exclude):
                 continue
             try:
                 abslink = urllib.parse.urljoin(url, link)
+                abslink, _ = urllib.parse.urldefrag(abslink.strip("/"))
             except (urllib.error.URLError, ValueError):
                 print("Error parsing URL: %s", link)
             else:
+                if abslink in self.visited:
+                    continue
+
+                self.visited.add(abslink)
                 next_urls.add(abslink)
                 if len(next_urls) == 3:
                     break
@@ -64,8 +72,7 @@ class HttpCrawler:
 
 if __name__ == "__main__":
     queue = asyncio.Queue()
-    crawler = HttpCrawler(queue, workers=10)
-    queue.put_nowait(("https://www.nytimes.com/guides/", 0))
+    crawler = HttpCrawler(queue, {"https://www.nytimes.com/guides/"}, workers=10)
 
     loop = asyncio.get_event_loop()
     loop.run_until_complete(crawler.craw())
