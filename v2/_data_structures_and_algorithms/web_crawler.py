@@ -14,13 +14,23 @@ class HttpCrawler:
         queue: asyncio.Queue,
         start_urls,
         workers: int = 5,
-        exclude_extensions=["png", "ico", "xml", "css", "jpeg", "jpg"],
+        exclude_keys=[
+            "png",
+            "ico",
+            "xml",
+            "css",
+            "jpeg",
+            "jpg",
+            "mailto",
+            "android",
+            "tel",
+        ],
         max_depth=3,
         max_links_per_page=3,
     ):
         self.queue = queue
         self.w_count = workers
-        self.exclude_extensions = exclude_extensions
+        self.exclude_keys = exclude_keys
         self.max_depth = max_depth
         self.max_links_per_page = max_links_per_page
         self.workers = []
@@ -61,7 +71,7 @@ class HttpCrawler:
         try:
             html = await self.fetch_html(url, session, **kwargs)
             for link in HREF_RE.findall(html):
-                if any(x in link for x in self.exclude_extensions):
+                if any(x in link for x in self.exclude_keys):
                     continue
 
                 try:
@@ -104,7 +114,7 @@ if __name__ == "__main__":
 
     queue = asyncio.Queue()
     crawler = HttpCrawler(
-        queue, start_urls={"https://www.nytimes.com/guides/"}, workers=10
+        queue, start_urls={"https://www.nytimes.com/guides/"}, workers=10, max_depth=5
     )
 
     loop.run_until_complete(crawler.craw())
