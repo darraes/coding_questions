@@ -8,14 +8,25 @@ HREF_RE = re.compile(r'href="(.*?)"')
 
 
 class HttpCrawler:
-    def __init__(self, queue: asyncio.Queue, start, workers: int = 5):
+    def __init__(
+        self,
+        queue: asyncio.Queue,
+        start_urls,
+        workers: int = 5,
+        exclude_extensions=["png", "ico", "xml", "css", "jpeg", "jpg"],
+        max_depth=3,
+        max_links_per_page=3,
+    ):
         self.queue = queue
         self.w_count = workers
+        self.exclude_extensions = exclude_extensions
+        self.max_depth = max_depth
+        self.max_links_per_page = max_links_per_page
         self.workers = []
         self.visited = set()
         self.crawled = []
 
-        for url in start:
+        for url in start_urls:
             self.queue.put_nowait((url, 0))
             self.visited.add(url)
 
@@ -31,7 +42,7 @@ class HttpCrawler:
             url, depth = await self.queue.get()
             self.crawled.append((wid, depth, url))
 
-            if depth < 3:
+            if depth < self.max_depth:
                 for next_url in await self.crawl_url(url, session):
                     await self.queue.put((next_url, depth + 1))
 
@@ -41,13 +52,13 @@ class HttpCrawler:
                 break
 
     async def crawl_url(self, url: str, session: ClientSession, **kwargs):
-        exclude = ["png", "ico", "xml", "css"]
         next_urls = set()
 
         html = await self.fetch_html(url, session, **kwargs)
         for link in HREF_RE.findall(html):
-            if any(x in link for x in exclude):
+            if any(x in link for x in self.exclude_extensions):
                 continue
+
             try:
                 abslink = urllib.parse.urljoin(url, link)
                 abslink, _ = urllib.parse.urldefrag(abslink.strip("/"))
@@ -59,7 +70,7 @@ class HttpCrawler:
 
                 self.visited.add(abslink)
                 next_urls.add(abslink)
-                if len(next_urls) == 3:
+                if len(next_urls) == self.max_links_per_page:
                     break
         return next_urls
 
@@ -72,7 +83,9 @@ class HttpCrawler:
 
 if __name__ == "__main__":
     queue = asyncio.Queue()
-    crawler = HttpCrawler(queue, {"https://www.nytimes.com/guides/"}, workers=10)
+    crawler = HttpCrawler(
+        queue, start_urls={"https://www.nytimes.com/guides/"}, workers=10
+    )
 
     loop = asyncio.get_event_loop()
     loop.run_until_complete(crawler.craw())
