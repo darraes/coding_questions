@@ -2,6 +2,7 @@ import asyncio
 import re
 import urllib.error
 import urllib.parse
+import async_timeout
 from aiohttp import ClientSession
 from threading import Thread, currentThread
 
@@ -67,7 +68,6 @@ class HttpCrawler:
 
     async def crawl_url(self, url: str, session: ClientSession, **kwargs):
         next_urls = set()
-
         try:
             html = await self.fetch_html(url, session, **kwargs)
             for link in HREF_RE.findall(html):
@@ -92,10 +92,11 @@ class HttpCrawler:
         return next_urls
 
     async def fetch_html(self, url: str, session: ClientSession, **kwargs) -> str:
-        resp = await session.request(method="GET", url=url, **kwargs)
-        resp.raise_for_status()
-        html = await resp.text()
-        return html
+        with async_timeout.timeout(10):
+            resp = await session.request(method="GET", url=url, **kwargs)
+            resp.raise_for_status()
+            html = await resp.text()
+            return html
 
 
 if __name__ == "__main__":
