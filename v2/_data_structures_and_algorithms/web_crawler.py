@@ -3,6 +3,7 @@ import re
 import urllib.error
 import urllib.parse
 import async_timeout
+from time import sleep
 from aiohttp import ClientSession
 from threading import Thread, currentThread
 
@@ -25,6 +26,7 @@ class HttpCrawler:
             "mailto",
             "android",
             "tel",
+            "javascript",
         ],
         max_depth=3,
         max_links_per_page=3,
@@ -45,31 +47,33 @@ class HttpCrawler:
     async def craw(self):
         async with ClientSession() as session:
             for i in range(self.w_count):
-                self.workers.append(asyncio.create_task(self.worker(str(i), session)))
+                self.workers.append(asyncio.create_task(self._run(str(i), session)))
 
             await asyncio.gather(*self.workers)
 
-    async def worker(self, wid, session: ClientSession):
-        print("Starting worker ", wid)
-        while True:
-            url, depth = await self.queue.get()
-            self.crawled.append((currentThread().ident, wid, depth, url))
+    def cancel(self):
+        for worker in self.workers:
+            worker.cancel()
 
-            if depth < self.max_depth:
-                urls = await self.crawl_url(url, session)
-                for next_url in urls:
-                    await self.queue.put((next_url, depth + 1))
+    async def _run(self, wid, session: ClientSession):
+        try:
+            while True:
+                url, depth = await self.queue.get()
+                self.crawled.append((currentThread().ident, wid, depth, url))
 
-            self.queue.task_done()
-            await asyncio.sleep(0.001)
-            if self.queue.empty():
-                break
-        print("Stopping worker ", wid)
+                if depth < self.max_depth:
+                    urls = await self._crawl_url(url, session)
+                    for next_url in urls:
+                        await self.queue.put((next_url, depth + 1))
 
-    async def crawl_url(self, url: str, session: ClientSession, **kwargs):
+                self.queue.task_done()
+        except asyncio.CancelledError:
+            print("Worker cancelled")
+
+    async def _crawl_url(self, url: str, session: ClientSession, **kwargs):
         next_urls = set()
         try:
-            html = await self.fetch_html(url, session, **kwargs)
+            html = await self._fetch_html(url, session, **kwargs)
             for link in HREF_RE.findall(html):
                 if any(x in link for x in self.exclude_keys):
                     continue
@@ -91,7 +95,7 @@ class HttpCrawler:
             print("Error on", url, e)
         return next_urls
 
-    async def fetch_html(self, url: str, session: ClientSession, **kwargs) -> str:
+    async def _fetch_html(self, url: str, session: ClientSession, **kwargs) -> str:
         with async_timeout.timeout(10):
             resp = await session.request(method="GET", url=url, **kwargs)
             resp.raise_for_status()
@@ -100,26 +104,43 @@ class HttpCrawler:
 
 
 if __name__ == "__main__":
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
+    crawlers = []
 
-    queue = asyncio.Queue()
-    crawler = HttpCrawler(
-        queue, start_urls={"https://www.bloomberg.com/markets/economics"}, workers=10
-    )
+    def start_crawler(start_urls):
+        global crawlers
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
 
-    loop.run_until_complete(crawler.craw())
+        queue = asyncio.Queue()
+        crawler = HttpCrawler(queue, start_urls=start_urls, workers=10, max_depth=4)
+        crawlers.append(crawler)
 
-    for c in crawler.crawled:
-        print(c)
+        loop.run_until_complete(crawler.craw())
+        loop.stop()
 
-    queue = asyncio.Queue()
-    crawler = HttpCrawler(
-        queue, start_urls={"https://www.nytimes.com/guides/"}, workers=10, max_depth=5
-    )
+        for c in crawler.crawled:
+            print(c)
 
-    loop.run_until_complete(crawler.craw())
+    tasks = [
+        Thread(
+            target=start_crawler,
+            args=({"https://www.nytimes.com/guides/", "https://www.cnn.com/"},),
+        ),
+        Thread(
+            target=start_crawler,
+            args=({"https://www.bloomberg.com/markets/economics"},),
+        ),
+    ]
 
-    for c in crawler.crawled:
-        print(c)
+    for t in tasks:
+        t.start()
+
+    sleep(10)
+
+    for c in crawlers:
+        print("Canceling")
+        c.cancel()
+
+    for t in tasks:
+        t.join()
 
