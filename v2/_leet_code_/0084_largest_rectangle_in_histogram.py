@@ -55,7 +55,9 @@ class Solution:
             # Calculate the area with
             # histogram[top_of_stack]
             # stack as smallest bar
-            area = histogram[top_of_stack] * ((index - stack[-1] - 1) if stack else index)
+            area = histogram[top_of_stack] * (
+                (index - stack[-1] - 1) if stack else index
+            )
 
             # update max area, if needed
             max_area = max(max_area, area)
@@ -98,11 +100,10 @@ import unittest
 class TestFunctions(unittest.TestCase):
     def test_1(self):
         s = Solution()
-        #self.assertEqual(10, s.largestRectangleArea([2, 1, 5, 6, 2, 3]))
-        #self.assertEqual(3, s.largestRectangleArea([3]))
-        #self.assertEqual(8, s.largestRectangleArea([2, 1, 5, 2, 2, 3]))
+        self.assertEqual(10, s.largestRectangleArea([2, 1, 5, 6, 2, 3]))
+        self.assertEqual(3, s.largestRectangleArea([3]))
+        self.assertEqual(8, s.largestRectangleArea([2, 1, 5, 2, 2, 3]))
         self.assertEqual(30, s.largestRectangleArea([10, 10, 10, 9]))
-        
 
 
 if __name__ == "__main__":
