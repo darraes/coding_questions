@@ -2,10 +2,11 @@ import asyncio
 import re
 import urllib.error
 import urllib.parse
-import async_timeout
-from time import sleep
-from aiohttp import ClientSession
 from threading import Thread, currentThread
+from time import sleep
+
+import async_timeout
+from aiohttp import ClientSession
 
 HREF_RE = re.compile(r'href="(.*?)"')
 
@@ -144,4 +145,3 @@ if __name__ == "__main__":
 
     for t in tasks:
         t.join()
-
