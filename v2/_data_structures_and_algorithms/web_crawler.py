@@ -115,6 +115,7 @@ if __name__ == "__main__":
         crawler = HttpCrawler(queue, start_urls=start_urls, workers=10, max_depth=4)
         crawlers.append(crawler)
 
+        # asyncio.run(crawler.craw())
         loop.run_until_complete(crawler.craw())
         loop.stop()
 
