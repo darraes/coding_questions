@@ -15,8 +15,6 @@ class Solution:
         return max_rect
 
     def largest_rect_histogram(self, heights):
-        print(heights)
-
         def restricted_largest(heights, i, j):
             if i > j:
                 return 0
