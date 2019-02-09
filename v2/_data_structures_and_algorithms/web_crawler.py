@@ -33,7 +33,7 @@ class HttpCrawler:
         max_links_per_page=3,
     ):
         self.queue = queue
-        self.w_count = workers
+        self.workers_count = workers
         self.exclude_keys = exclude_keys
         self.max_depth = max_depth
         self.max_links_per_page = max_links_per_page
@@ -47,7 +47,7 @@ class HttpCrawler:
 
     async def craw(self):
         async with ClientSession() as session:
-            for i in range(self.w_count):
+            for i in range(self.workers_count):
                 self.workers.append(asyncio.create_task(self._run(str(i), session)))
 
             await asyncio.gather(*self.workers)
