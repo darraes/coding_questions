@@ -15,7 +15,7 @@ class Solution:
         :type root: TreeNode
         :rtype: void Do not return anything, modify root in-place instead.
         """
-        head, tail = self.flat_node(root)
+        self.flat_node(root)
 
     def flat_node(self, node):
         if not node:
@@ -30,7 +30,7 @@ class Solution:
         if l_head:
             tail.right = l_head
             tail = l_tail if l_tail else l_head
-        
+
         if r_head:
             tail.right = r_head
             tail = r_tail if r_tail else r_head
@@ -41,6 +41,7 @@ class Solution:
 
 ###############################################################
 import unittest
+
 
 def pre_order(node):
     if node is None:
