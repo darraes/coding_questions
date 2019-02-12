@@ -1,28 +1,24 @@
-from heapq import heappush, heappop
-from collections import namedtuple, defaultdict
+import unittest
+from collections import defaultdict, namedtuple
+from heapq import heappop, heappush
+from typing import List
 
-Cost = namedtuple("Cost", ["cost", "stops"])
+Cost = namedtuple("Cost", ["cost"])
 Connection = namedtuple("Connection", ["dst", "price"])
 Flight = namedtuple("Flight", ["acc_price", "stops", "local"])
 
 
 class Solution:
-    def findCheapestPrice(self, n, flights, src, dst, K):
-        """
-        :type n: int
-        :type flights: List[List[int]]
-        :type src: int
-        :type dst: int
-        :type K: int
-        :rtype: int
-        """
+    def findCheapestPrice(
+        self, n: int, flights: List[List[int]], src: int, dst: int, K: int
+    ) -> int:
         graph = defaultdict(list)
         for flight in flights:
             graph[flight[0]].append(Connection(dst=flight[1], price=flight[2]))
 
         frontier = []
         heappush(frontier, Flight(acc_price=0, stops=-1, local=src))
-        cost_so_far = {src: Cost(cost=0, stops=-1)}
+        cost_so_far = {(src, -1): Cost(cost=0)}
 
         while len(frontier) > 0:
             current = heappop(frontier)
@@ -33,27 +29,22 @@ class Solution:
             if current.stops < K:
                 for connection in graph[current.local]:
                     cost_to_next = current.acc_price + connection.price
+                    stops_to_next = current.stops + 1
                     if (
-                        connection.dst not in cost_so_far
-                        or cost_to_next < cost_so_far[connection.dst].cost
-                        or current.stops != cost_so_far[connection.dst].stops
+                        (connection.dst, stops_to_next) not in cost_so_far
+                        or cost_to_next
+                        < cost_so_far[(connection.dst, stops_to_next)].cost
                     ):
-                        cost_so_far[connection.dst] = Cost(
-                            cost=cost_to_next, stops=current.stops + 1
-                        )
+                        cost_so_far[connection.dst] = Cost(cost=cost_to_next)
                         heappush(
                             frontier,
                             Flight(
                                 acc_price=cost_to_next,
-                                stops=current.stops + 1,
+                                stops=stops_to_next,
                                 local=connection.dst,
                             ),
                         )
         return -1
-
-
-###############################################################
-import unittest
 
 
 class TestFunctions(unittest.TestCase):

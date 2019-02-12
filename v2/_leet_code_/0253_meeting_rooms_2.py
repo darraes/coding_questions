@@ -1,4 +1,5 @@
 import heapq
+from typing import List
 
 # Definition for an interval.
 class Interval:
@@ -8,11 +9,7 @@ class Interval:
 
 
 class Solution:
-    def minMeetingRooms(self, intervals):
-        """
-        :type intervals: List[Interval]
-        :rtype: int
-        """
+    def minMeetingRooms(self, intervals: List[Interval]) -> int:
         starts = []
         ends = []
 
@@ -34,21 +31,16 @@ class Solution:
 
         return max_rooms
 
-    def minMeetingRooms(self, intervals):
-        """
-        :type intervals: List[Interval]
-        :rtype: int
-        """
+    def minMeetingRooms2(self, intervals: List[Interval]) -> int:
         if not intervals:
             return 0
-        intervals.sort(key=lambda x:x.start)
+        intervals.sort(key=lambda x: x.start)
         heap = []
 
         for i in intervals:
             if heap and i.start >= heap[0]:
-                heapq.heapreplace(heap, i.end)
-            else:
-                heapq.heappush(heap, i.end)
+                heapq.heappop(heap)
+            heapq.heappush(heap, i.end)
         return len(heap)
 
 
@@ -62,15 +54,9 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(
             2, s.minMeetingRooms([Interval(0, 30), Interval(5, 10), Interval(15, 20)])
         )
-        self.assertEqual(
-            1, s.minMeetingRooms([Interval(7, 10), Interval(2, 4)])
-        )
-        self.assertEqual(
-            1, s.minMeetingRooms([Interval(0, 30)])
-        )
-        self.assertEqual(
-            0, s.minMeetingRooms([])
-        )
+        self.assertEqual(1, s.minMeetingRooms([Interval(7, 10), Interval(2, 4)]))
+        self.assertEqual(1, s.minMeetingRooms([Interval(0, 30)]))
+        self.assertEqual(0, s.minMeetingRooms([]))
 
 
 if __name__ == "__main__":

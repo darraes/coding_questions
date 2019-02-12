@@ -15,15 +15,13 @@ def find_pairs(words):
     index = set(words)
     for w in words:
         for i in range(len(w) + 1):
-            suffix = w[:i]
-            rsuffix = suffix[::-1]
-            prefix = w[i:]
-            rprefix = prefix[::-1]
+            prefix, suffix = w[:i], w[i:]
+            rprefix, rsuffix = prefix[::-1], suffix[::-1]
 
-            if is_palindrome(prefix) and rsuffix in index:
-                res.add((w, rsuffix))
             if is_palindrome(suffix) and rprefix in index:
-                res.add((rprefix, w))
+                res.add((w, rprefix))
+            if is_palindrome(prefix) and rsuffix in index:
+                res.add((rsuffix, w))
 
     return res
 
