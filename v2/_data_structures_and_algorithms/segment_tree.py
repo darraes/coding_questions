@@ -12,6 +12,22 @@ class SegmentTree:
 
         self._build(arr)
 
+    def _build(self, arr):
+        def build_helper(idx: int, s: int, e: int):
+            nonlocal arr
+            if s == e:
+                self.tree[idx] = arr[s]
+                return arr[s]
+
+            m = SegmentTree._mid(s, e)
+            self.tree[idx] = self.aggregator(
+                build_helper(2 * idx + 1, s, m), build_helper(2 * idx + 2, m + 1, e)
+            )
+
+            return self.tree[idx]
+
+        build_helper(0, 0, self.len - 1)
+
     def segment(self, s: int, e: int):
         def segment_helper(idx: int, qs: int, qe: int, cs: int, ce: int):
             if cs >= qs and ce <= qe:
@@ -47,22 +63,6 @@ class SegmentTree:
     @staticmethod
     def _mid(s: int, e: int) -> int:
         return s + (e - s) // 2
-
-    def _build(self, arr):
-        def build_helper(idx: int, s: int, e: int):
-            nonlocal arr
-            if s == e:
-                self.tree[idx] = arr[s]
-                return arr[s]
-
-            m = SegmentTree._mid(s, e)
-            self.tree[idx] = self.aggregator(
-                build_helper(2 * idx + 1, s, m), build_helper(2 * idx + 2, m + 1, e)
-            )
-
-            return self.tree[idx]
-
-        build_helper(0, 0, self.len - 1)
 
 
 #####################################################

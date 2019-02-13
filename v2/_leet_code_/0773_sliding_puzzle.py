@@ -46,7 +46,7 @@ class Solution:
         :rtype: int
         """
         current = tuple(chain(*board))
-        visited = set([current])
+        visited = {current: 0}
         zero_idx = None
         for i in range(len(current)):
             if current[i] == 0:
@@ -61,10 +61,11 @@ class Solution:
             if self.solved(current):
                 return moves
 
+            next_cost = moves + 1
             for z_idx, n_board in self.next((zero_idx, current)):
-                if n_board not in visited:
-                    visited.add(n_board)
-                    queue.append((z_idx, n_board, moves + 1))
+                if n_board not in visited or next_cost < visited[n_board]:
+                    visited[n_board] = next_cost
+                    queue.append((z_idx, n_board, next_cost))
 
         return -1
 
