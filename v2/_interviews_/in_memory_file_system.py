@@ -1,15 +1,15 @@
 # Develop an in-memory structure to store files given their paths.
 # The methods that should be present are:
-# 
+#
 # - save_file(dir_path, file_name, file_contents)
 # - create_directory(dir_path)
 # - list_files(dir_path, recurse)
 # - attach_watcher(dir_path, callback)
-# 
+#
 # For the watcher, if the trigger is on node A, we must callback on the watcher
-# of all parent directories of node A. Only file add/update/remove trigger
+# of all parent directories of node A. Only file add/update trigger
 # callbacks
-# 
+#
 # Note that the dir_path is a path to the directory with the format "a/b/c".
 # For simplicity we are not passing the file name as part of the path and
 # already dealing with the broken down directory/file
@@ -17,6 +17,7 @@
 from copy import copy
 from collections import deque
 from os import path
+
 
 class DirNode(object):
     def __init__(self, name, parent):
@@ -57,10 +58,8 @@ class FileSystem(object):
     def __init__(self):
         self.root = DirNode("/", parent=None)
 
-
     def split_path(self, path):
         return [d for d in path.split("/") if d != ""]
-
 
     def ensure_directory(self, dir_path):
         dir_parts = self.split_path(dir_path)
@@ -83,10 +82,9 @@ class FileSystem(object):
 
         return node
 
-
     def list_files(self, dir_path, recurse):
         results = []
-        node = self.goto_directory(dir_path) # Fix this: Should not create a Dir
+        node = self.goto_directory(dir_path)  # Fix this: Should not create a Dir
         if not node:
             return results
 
@@ -106,7 +104,6 @@ class FileSystem(object):
 
         return results
 
-
     def remove_directory(self, dir_path):
         dir_parts = self.split_path(dir_path)
 
@@ -118,12 +115,10 @@ class FileSystem(object):
 
         return node.parent.remove_dir(dir_parts[-1])
 
-
     def save_file(self, dir_path, file_name, file_contents):
         node = self.ensure_directory(dir_path)
         node.save_file(file_name, file_contents)
         self._fire_callback_chain(node, file_name)
-
 
     def remove_file(self, dir_path, file_name):
         dir_parts = self.split_path(dir_path)
@@ -138,24 +133,20 @@ class FileSystem(object):
         self._fire_callback_chain(node, file_name)
         return res
 
-
     def _fire_callback_chain(self, node, file_name):
         while node:
             if node.dir_watcher_callback:
                 node.dir_watcher_callback()
             node = node.parent
 
-
     def attach_dir_watcher(self, dir_path, callback):
         node = self.ensure_directory(dir_path)
         node.attach_dir_watcher(callback)
 
-
     def print_all(self):
         self._print_impl(self.root)
 
-
-    def _print_impl(self, node, level = 0, connectors = set(), is_last = set()):
+    def _print_impl(self, node, level=0, connectors=set(), is_last=set()):
         pad_count = 2 * level
         padding = [" "] * pad_count
 
@@ -196,10 +187,9 @@ class FileSystem(object):
             print("".join(file_line))
 
 
-
-
 ###############################################################
 import unittest
+
 
 class TestFunctions(unittest.TestCase):
     def test_1(self):
@@ -208,8 +198,8 @@ class TestFunctions(unittest.TestCase):
         file_system.save_file("a/b/c/d", "daniel2.pdf", "")
         file_system.save_file("a/b/e", "daniel3.pdf", "")
         file_system.ensure_directory("a/b/c/f")
-        file_system.attach_dir_watcher("a/b", lambda : print("in b"))
-        file_system.attach_dir_watcher("a", lambda : print("in a"))
+        file_system.attach_dir_watcher("a/b", lambda: print("in b"))
+        file_system.attach_dir_watcher("a", lambda: print("in a"))
         file_system.save_file("a/b/e", "daniel3.pdf", "")
         file_system.ensure_directory("a/g")
         file_system.ensure_directory("a/g/b")
@@ -224,5 +214,5 @@ class TestFunctions(unittest.TestCase):
             print(f)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
