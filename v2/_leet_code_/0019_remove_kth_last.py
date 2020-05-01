@@ -22,8 +22,8 @@ class Solution:
             node = node.next
             target -= 1
 
-        if previous.next:
-            previous.next = previous.next.next
+        if node:
+            previous.next = node.next
 
         return head
 

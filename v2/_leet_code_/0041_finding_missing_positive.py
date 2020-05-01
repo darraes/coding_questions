@@ -15,6 +15,7 @@ class Solution:
                 nums[i] = 0
             max_int = max(nums[i], max_int)
 
+        print(nums)
         for i in range(n):
             nums[nums[i] % n] += n
 
