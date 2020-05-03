@@ -36,9 +36,9 @@ import unittest
 
 class TestFunctions(unittest.TestCase):
     def test_1(self):
-        self.assertEquals(5, length_of_longest_substring("aabccbb", 2))
-        self.assertEquals(4, length_of_longest_substring("abbcb", 1))
-        self.assertEquals(3, length_of_longest_substring("abccde", 1))
+        self.assertEqual(5, length_of_longest_substring("aabccbb", 2))
+        self.assertEqual(4, length_of_longest_substring("abbcb", 1))
+        self.assertEqual(3, length_of_longest_substring("abccde", 1))
 
 
 if __name__ == "__main__":

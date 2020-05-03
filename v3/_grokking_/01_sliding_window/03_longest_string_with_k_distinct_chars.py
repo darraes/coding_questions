@@ -32,9 +32,9 @@ import unittest
 
 class TestFunctions(unittest.TestCase):
     def test_1(self):
-        self.assertEquals(4, longest_substring_with_k_distinct("araaci", 2))
-        self.assertEquals(2, longest_substring_with_k_distinct("araaci", 1))
-        self.assertEquals(5, longest_substring_with_k_distinct("cbbebi", 3))
+        self.assertEqual(4, longest_substring_with_k_distinct("araaci", 2))
+        self.assertEqual(2, longest_substring_with_k_distinct("araaci", 1))
+        self.assertEqual(5, longest_substring_with_k_distinct("cbbebi", 3))
 
 
 if __name__ == "__main__":

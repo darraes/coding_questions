@@ -18,8 +18,8 @@ import unittest
 
 class TestFunctions(unittest.TestCase):
     def test_1(self):
-        self.assertEquals(9, max_sub_array_of_size_k(3, [2, 1, 5, 1, 3, 2]))
-        self.assertEquals(7, max_sub_array_of_size_k(2, [2, 3, 4, 1, 5]))
+        self.assertEqual(9, max_sub_array_of_size_k(3, [2, 1, 5, 1, 3, 2]))
+        self.assertEqual(7, max_sub_array_of_size_k(2, [2, 3, 4, 1, 5]))
 
 
 if __name__ == "__main__":

@@ -23,8 +23,8 @@ import unittest
 
 class TestFunctions(unittest.TestCase):
     def test_1(self):
-        self.assertEquals(2, smallest_subarray_with_given_sum(7, [2, 1, 5, 2, 3, 2]))
-        self.assertEquals(1, smallest_subarray_with_given_sum(7, [2, 1, 5, 2, 8]))
+        self.assertEqual(2, smallest_subarray_with_given_sum(7, [2, 1, 5, 2, 3, 2]))
+        self.assertEqual(1, smallest_subarray_with_given_sum(7, [2, 1, 5, 2, 8]))
 
 
 if __name__ == "__main__":

@@ -32,8 +32,8 @@ import unittest
 
 class TestFunctions(unittest.TestCase):
     def test_1(self):
-        self.assertEquals(3, fruits_into_baskets(['A', 'B', 'C', 'A', 'C']))
-        self.assertEquals(5, fruits_into_baskets(['A', 'B', 'C', 'B', 'B', 'C']))
+        self.assertEqual(3, fruits_into_baskets(['A', 'B', 'C', 'A', 'C']))
+        self.assertEqual(5, fruits_into_baskets(['A', 'B', 'C', 'B', 'B', 'C']))
 
 
 if __name__ == "__main__":

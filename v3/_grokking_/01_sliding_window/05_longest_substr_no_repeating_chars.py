@@ -51,14 +51,14 @@ import unittest
 
 class TestFunctions(unittest.TestCase):
     def test_1(self):
-        self.assertEquals(3, non_repeat_substring("aabccbb"))
-        self.assertEquals(2, non_repeat_substring("abbbb"))
-        self.assertEquals(3, non_repeat_substring("abccde"))
+        self.assertEqual(3, non_repeat_substring("aabccbb"))
+        self.assertEqual(2, non_repeat_substring("abbbb"))
+        self.assertEqual(3, non_repeat_substring("abccde"))
 
     def test_2(self):
-        self.assertEquals(3, non_repeat_substring2("aabccbb"))
-        self.assertEquals(2, non_repeat_substring2("abbbb"))
-        self.assertEquals(3, non_repeat_substring2("abccde"))
+        self.assertEqual(3, non_repeat_substring2("aabccbb"))
+        self.assertEqual(2, non_repeat_substring2("abbbb"))
+        self.assertEqual(3, non_repeat_substring2("abccde"))
 
 
 if __name__ == "__main__":
