@@ -6,25 +6,19 @@ class TreeNode:
 
 
 def find_sum_of_path_numbers(root):
-    total = 0
-
     def go(root, path_sum):
-        nonlocal total
-
         if root is None:
-            return
+            return 0
 
         path_sum *= 10
         path_sum += root.val
 
         if root.left is None and root.right is None:
-            total += path_sum
+            return path_sum
 
-        go(root.left, path_sum)
-        go(root.right, path_sum)
+        return go(root.left, path_sum) + go(root.right, path_sum)
 
-    go(root, 0)
-    return total
+    return go(root, 0)
 
 
 def main():
