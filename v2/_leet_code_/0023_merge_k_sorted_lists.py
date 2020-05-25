@@ -1,12 +1,10 @@
+import heapq
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, x):
         self.val = x
         self.next = None
-
-
-import heapq
-from collections import deque
 
 
 class Solution:
@@ -86,9 +84,7 @@ class TestFunctions(unittest.TestCase):
         print_ll(l)
 
         s = Solution()
-        l = s.mergeKLists(
-            []
-        )
+        l = s.mergeKLists([])
 
 
 if __name__ == "__main__":
